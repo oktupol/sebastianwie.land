@@ -1,46 +1,5 @@
 @import "./variables.scss";
 @import "./fonts/fira-code.scss";
 
-html, body {
-    height: 100%;
-    margin: 0;
-}
-
-html {
-    padding: 0 .5em;
-}
-
-body {
-    background-color: $background-color;
-    font-family: $font-family;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-h1 {
-    position: relative;
-    display: inline-block;
-    font-variant: small-caps;
-    font-weight: normal;
-    font-size: $title-size;
-
-    &:before, &:after {
-        position: absolute;
-        height: 0;
-        border-bottom: 1px solid $title-detail-color;
-        top: .62em;
-        width: $title-detail-width;
-        content: "";
-    }
-
-    &:before {
-        right: 100%;
-        margin-right: $title-detail-distance;
-    }
-
-    &:after {
-        left: 100%;
-        margin-left: $title-detail-distance;
-    }
-}
+@import "./components/page.scss";
+@import "./components/title.scss";

@@ -1,6 +1,7 @@
 @import './mixins/font-face';
 
 $fira-code-base-path: '../fonts/fira-code/distr';
+
 @include font-face('Fira Code', $fira-code-base-path, 300, 'FiraCode-Light', normal);
 @include font-face('Fira Code', $fira-code-base-path, 400, 'FiraCode-Regular', normal);
 @include font-face('Fira Code', $fira-code-base-path, 500, 'FiraCode-Medium', normal);

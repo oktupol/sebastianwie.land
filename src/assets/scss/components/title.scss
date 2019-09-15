@@ -1,0 +1,53 @@
+#title {
+    .title-box {
+        display: inline-block;
+        position: relative;
+
+        a {
+            color: inherit;
+            text-decoration: inherit;
+            display: block;
+        }
+    }
+
+    .slider {
+        position: absolute;
+
+        transition-property: top;
+        transition-duration: 2400ms;
+
+        &.up {
+            top: 0;
+        }
+
+        &.down {
+            top: $line-height;
+        }
+    }
+
+    .label {
+        display: inline;
+        position: absolute;
+        right: 100%;
+        color: $title-detail-color;
+    }
+
+    .placeholder {
+        visibility: hidden;
+    }
+    
+    .static {
+        color: $title-highlight-color;
+    }
+
+    .dot {
+        color: $title-detail-color;
+        position: absolute;
+        left: 11.69ch;
+        margin-top: 1px;
+    }
+    
+    .land {
+        margin-left: .15em;
+    }
+}
