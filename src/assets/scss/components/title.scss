@@ -1,4 +1,7 @@
 #title {
+    font-size: $title-font-size;
+    line-height: $line-height;
+
     .title-box {
         display: inline-block;
         position: relative;
@@ -12,9 +15,11 @@
 
     .slider {
         position: absolute;
+        width: 100%;
+        text-align: right;
 
         transition-property: top;
-        transition-duration: 2400ms;
+        transition-duration: 240ms;
 
         &.up {
             top: 0;
@@ -26,9 +31,6 @@
     }
 
     .label {
-        display: inline;
-        position: absolute;
-        right: 100%;
         color: $title-detail-color;
     }
 
@@ -43,7 +45,7 @@
     .dot {
         color: $title-detail-color;
         position: absolute;
-        left: 11.69ch;
+        right: 3.53ch;
         margin-top: 1px;
     }
     
