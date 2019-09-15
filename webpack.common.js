@@ -15,4 +15,12 @@ module.exports = {
         filename: '[name].[hash].bundle.js',
         path: path.resolve(__dirname, 'docs')
     },
+    module: {
+        rules: [{
+            test: /\.(woff2?|eot|ttf|otf)$/,
+            use: [
+                'file-loader'
+            ],
+        }]
+    }
 };
