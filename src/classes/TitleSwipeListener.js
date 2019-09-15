@@ -13,7 +13,7 @@ export class TitleSwipeListener {
 
         if (!isProbablyMobile) {
             // we don't want any swipe action on non-touch-screen-browsers
-            //return;
+            return;
         }
 
         this.help = document.getElementById('help');
