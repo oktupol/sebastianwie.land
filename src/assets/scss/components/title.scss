@@ -19,7 +19,7 @@
         text-align: right;
 
         transition-property: top;
-        transition-duration: 240ms;
+        transition-duration: $title-slide-duration;
 
         &.up {
             top: 0;
@@ -32,6 +32,7 @@
 
     .label {
         color: $title-detail-color;
+        margin-right: $title-space;
     }
 
     .placeholder {
@@ -45,15 +46,15 @@
     .dot {
         color: $title-detail-color;
         position: absolute;
-        right: 3.53ch;
-        margin-top: 1px;
+        right: $title-tld-length - 0.47 * 1ch;
+        margin-top: $title-dot-vertical-offset;
     }
     
     .wie {
-        margin-left: .35em;
+        margin-left: $title-space;
     }
 
     .land {
-        margin-left: .15em;
+        margin-left: $title-dot-space;
     }
 }
