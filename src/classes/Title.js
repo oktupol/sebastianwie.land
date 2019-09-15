@@ -1,18 +1,107 @@
 export class Title {
     /**
      * Initializes the Title component.
-     * 
+     * @param {HTMLDocument} document
      * @param {HTMLElement} titleElement 
      */
-    constructor(titleElement) {
+    constructor(document, titleElement) {
+        this.document = document;
         this.titleElement = titleElement;
-        this.slider = titleElement.getElementsByClassName('slider')[0];
-        this.webDiv = titleElement.getElementsByClassName('web')[0];
-        this.mailDiv = titleElement.getElementsByClassName('mail')[0];
-        this.link = titleElement.getElementsByTagName('a')[0];
 
         this.webHref = 'https://sebastianwie.land';
         this.mailHref = 'mailto:sebasti@nwie.land';
+    }
+
+    _initComponent() {
+        this.link = this._createTitleLinkBox(this.titleElement);
+        this.slider = this._createLabelDiv(this.link, ['slider', 'up'], true);
+        this.webDiv = this._createLabelDiv(this.link, ['web'], false, 'http:', 'a');
+        this.mailDiv = this._createLabelDiv(this.link, ['mail'], false, 'mail:', '@');
+    }
+
+    /**
+     * Creates the title box and a link inside it
+     * @param {HtmlElement} titleElement 
+     * @return {HTMLAnchorElement}
+     */
+    _createTitleLinkBox(titleElement) {
+        let titleBox = this.document.createElement('div');
+        let link = this.document.createElement('a');
+        titleBox.classList.add('title-box');
+        titleBox.appendChild(link);
+        titleElement.appendChild(titleBox);
+        return link;
+    }
+
+    /**
+     * Creates a div containing the text to display
+     * 
+     * @param {HTMLAnchorElement} linkElement
+     * @param {string[]} classes 
+     * @param {boolean} isSlider 
+     * @param {string} labelText 
+     * @param {string} aText 
+     * @return {HTMLDivElement}
+     */
+    _createLabelDiv(linkElement, classes, isSlider, labelText, aText) {
+        if (isSlider) {
+            labelText = null;
+            aText = ' ';
+        }
+
+        let div = this.document.createElement('div');
+        if (classes) {
+            div.classList.add(...classes);
+        }
+
+        if (labelText) {
+            let label = this.document.createElement('span');
+            label.classList.add('label');
+            label.innerHTML = labelText;
+            div.appendChild(label);
+        }
+
+        let content = [
+            ['sebasti', null, ['placeholder']],
+            [aText, ['placeholder'], ['static']],
+            ['n', null, ['placeholder']],
+            ['wie', ['wie'], ['placeholder', 'wie']],
+            ['.', ['dot'], ['placeholder', 'dot']],
+            ['land', ['land'], ['placeholder', 'land']]
+        ]
+
+        for (let line of content) {
+            let text = line[0], classes;
+            if (isSlider) {
+                classes = line[1];
+            } else {
+                classes = line[2];
+            }
+
+            div.appendChild(this._createText(text, classes));
+        }
+
+        linkElement.appendChild(div);
+
+        return div;
+    }
+
+    /**
+     * @param {string} content 
+     * @param {string[]} classes
+     * @return {Text|HTMLSpanElement}
+     */
+    _createText(content, classes) {
+        let text = document.createTextNode(content);
+
+        if (classes !== null) {
+            let span = document.createElement('span');
+            span.classList.add(...classes);
+            span.appendChild(text);
+            return span;
+        }
+
+        return text;
     }
 
     _moveSliderDown() {
@@ -45,8 +134,8 @@ export class Title {
     }
 
     init() {
+        this._initComponent();
         this._updateLink();
         this._initListeners();
-        console.log(this.slider, this.webDiv, this.mailDiv);
     }
 }
