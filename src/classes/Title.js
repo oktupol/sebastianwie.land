@@ -15,22 +15,16 @@ export class Title {
         this.mailHref = 'mailto:sebastianwie.land';
     }
 
-    _toggleSlider() {
-        if (this.slider.classList.contains('up')) {
-            this._moveSliderDown();
-        } else {
-            this._moveSliderUp();
-        }
-    }
-
     _moveSliderDown() {
         this.slider.classList.remove('up');
         this.slider.classList.add('down');
+        this._updateLink();
     }
 
     _moveSliderUp() {
         this.slider.classList.remove('down');
         this.slider.classList.add('up');
+        this._updateLink();
     }
 
     _updateLink() {
@@ -42,15 +36,12 @@ export class Title {
     }
 
     _initListeners() {
-        this.webDiv.onmouseenter = () => {
-            this._moveSliderUp();
-            this._updateLink();
-        };
-
-        this.mailDiv.onmouseenter = () => {
-            this._moveSliderDown();
-            this._updateLink();
-        };
+        let moveSliderUp = () => this._moveSliderUp();
+        let moveSliderDown = () => this._moveSliderDown();
+        this.webDiv.onmouseenter = moveSliderUp;
+        this.webDiv.ontouchend = moveSliderUp;
+        this.mailDiv.onmouseenter = moveSliderDown;
+        this.mailDiv.ontouchend = moveSliderDown;
     }
 
     init() {
