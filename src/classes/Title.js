@@ -12,7 +12,7 @@ export class Title {
         this.link = titleElement.getElementsByTagName('a')[0];
 
         this.webHref = 'https://sebastianwie.land';
-        this.mailHref = 'mailto:sebastianwie.land';
+        this.mailHref = 'mailto:sebasti@nwie.land';
     }
 
     _moveSliderDown() {
