@@ -69,7 +69,7 @@ export class TitleSwipeListener {
         this.help.classList.add('hide');
 
         setTimeout(() => {
-            if (this.help1Shown) {
+            if (this.help1Shown && !this.help2Shown) {
                 this.help2Shown = true;
                 this.help.classList.remove('hide');
                 this.help.innerHTML = 'Swipe right to send mail';
