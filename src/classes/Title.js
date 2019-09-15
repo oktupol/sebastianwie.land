@@ -109,18 +109,6 @@ export class Title {
         return text;
     }
 
-    _moveSliderDown() {
-        this.slider.classList.remove('up');
-        this.slider.classList.add('down');
-        this._updateLink();
-    }
-
-    _moveSliderUp() {
-        this.slider.classList.remove('down');
-        this.slider.classList.add('up');
-        this._updateLink();
-    }
-
     _updateLink() {
         if (this.slider.classList.contains('up')) {
             this.link.href = this.webHref;
@@ -130,12 +118,28 @@ export class Title {
     }
 
     _initListeners() {
-        let moveSliderUp = () => this._moveSliderUp();
-        let moveSliderDown = () => this._moveSliderDown();
+        let moveSliderUp = () => this.selectHttpLink();
+        let moveSliderDown = () => this.selectMailLink();
         this.webDiv.onmouseenter = moveSliderUp;
         this.webDiv.ontouchend = moveSliderUp;
         this.mailDiv.onmouseenter = moveSliderDown;
         this.mailDiv.ontouchend = moveSliderDown;
+    }
+
+    selectHttpLink() {
+        this.slider.classList.remove('down');
+        this.slider.classList.add('up');
+        this._updateLink();
+    }
+
+    selectMailLink() {
+        this.slider.classList.remove('up');
+        this.slider.classList.add('down');
+        this._updateLink();
+    }
+
+    getLink() {
+        return this.link;
     }
 
     init() {
