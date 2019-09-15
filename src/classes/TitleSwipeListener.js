@@ -72,7 +72,7 @@ export class TitleSwipeListener {
             if (this.help1Shown && !this.help2Shown) {
                 this.help2Shown = true;
                 this.help.classList.remove('hide');
-                this.help.innerHTML = 'Swipe right to send mail';
+                this.help.innerHTML = 'Swipe right to compose mail';
                 this.help.classList.add('show');
             }
         }, 350);
