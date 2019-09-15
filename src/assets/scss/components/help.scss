@@ -1,0 +1,22 @@
+#help {
+    position: absolute;
+    bottom: $help-bottom-margin;
+    font-size: $help-font-size;
+    color: $help-color;
+    display: block;
+    font-weight: lighter;
+    opacity: 0;
+    transition-property: opacity;
+    transition-duration: $help-fade-duration;
+    display: none;
+
+    &.hide {
+        opacity: 0;
+        display: block;
+    }
+
+    &.show {
+        opacity: 1;
+        display: block;
+    }
+}
