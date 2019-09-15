@@ -61,13 +61,18 @@ export class Title {
             div.appendChild(label);
         }
 
+        let placeholder = 'placeholder',
+            wie = 'wie',
+            dot = 'dot',
+            land = 'land';
+
         let content = [
-            ['sebasti', null, ['placeholder']],
-            [aText, ['placeholder'], ['static']],
-            ['n', null, ['placeholder']],
-            ['wie', ['wie'], ['placeholder', 'wie']],
-            ['.', ['dot'], ['placeholder', 'dot']],
-            ['land', ['land'], ['placeholder', 'land']]
+            ['sebasti', null, [placeholder]],
+            [aText, [placeholder], ['static']],
+            ['n', null, [placeholder]],
+            ['wie', [wie], [placeholder, wie]],
+            ['.', [dot], [placeholder, dot]],
+            ['land', [land], [placeholder, land]]
         ]
 
         for (let line of content) {
