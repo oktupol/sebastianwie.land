@@ -26,7 +26,7 @@ export class TitleKeyboardListener {
             }
 
             if (enterKeys.includes(key)) {
-                title.link.click();
+                title.getLink().click();
             }
         });
     }

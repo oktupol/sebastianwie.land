@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --config webpack.prod.js",
-    "start": "webpack-dev-server --open --config webpack.dev.js",
+    "start": "webpack-dev-server --host 0.0.0.0 --config webpack.dev.js",
     "watch": "webpack --watch --config webpack.dev.js"
   },
   "keywords": [],
@@ -29,5 +29,8 @@
     "webpack-cli": "^3.3.8",
     "webpack-dev-server": "^3.8.0",
     "webpack-merge": "^4.2.2"
+  },
+  "dependencies": {
+    "hammerjs": "^2.0.8"
   }
 }
