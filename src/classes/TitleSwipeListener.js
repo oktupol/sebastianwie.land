@@ -13,7 +13,7 @@ export class TitleSwipeListener {
 
         if (!isProbablyMobile) {
             // we don't want any swipe action on non-touch-screen-browsers
-            return;
+            //return;
         }
 
         this.help = document.getElementById('help');
@@ -49,6 +49,8 @@ export class TitleSwipeListener {
 
     _displayHelpSwipeDown() {
         this.help.classList.add('hide');
+        // I need at least one character to pre-load the font
+        this.help.innerHTML = ' ';
 
         setTimeout(() => {
             if (!this.helpSkipped) {
