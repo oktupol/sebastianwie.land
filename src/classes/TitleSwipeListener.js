@@ -11,9 +11,10 @@ export class TitleSwipeListener {
     constructor(window, document, title) {
         let isProbablyMobile = Math.max(window.screen.width, window.innerWidth) <= 800;
 
+        this.disableHelp = false;
         if (!isProbablyMobile) {
-            // we don't want any swipe action on non-touch-screen-browsers
-            return;
+            // we don't want any swipe action help on non-mobile browsers
+            this.disableHelp = true;
         }
 
         this.help = document.getElementById('help');
@@ -48,9 +49,13 @@ export class TitleSwipeListener {
     }
 
     _displayHelpSwipeDown() {
+        if (this.disableHelp) {
+            return;
+        }
+
         this.help.classList.add('hide');
         // I need at least one character to pre-load the font
-        this.help.innerHTML = ' ';
+        this.help.innerHTML = '.';
 
         setTimeout(() => {
             if (!this.helpSkipped) {
@@ -63,6 +68,10 @@ export class TitleSwipeListener {
     }
 
     _displayHelpSwipeRight() {
+        if (this.disableHelp) {
+            return;
+        }
+
         if (!this.help1Shown) {
             this.helpSkipped = true;
         }
@@ -90,6 +99,10 @@ export class TitleSwipeListener {
     }
 
     _hideHelpSwipeRight() {
+        if (this.disableHelp) {
+            return;
+        }
+
         if (this.help2Shown) {
             this.help.classList.remove('show');
             this.help.classList.add('hide');
