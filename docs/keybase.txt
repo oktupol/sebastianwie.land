@@ -1,0 +1,54 @@
+==================================================================
+https://keybase.io/oktupol
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://sebastianwie.land
+  * I am oktupol (https://keybase.io/oktupol) on keybase.
+  * I have a public key ASBOJwgmmsR21TlbY9DSE9xfg-VtdSqZNrSfpM9glnbuTgo
+
+To do so, I am signing this object:
+
+{
+    "body": {
+        "key": {
+            "eldest_kid": "0101817385dfa37e06209e3c091ca3f8d0a94ad2b8197b39b457d8d22fe2fa5030120a",
+            "host": "keybase.io",
+            "kid": "01204e2708269ac476d5395b63d0d213dc5f83e56d752a9936b49fa4cf609676ee4e0a",
+            "uid": "2bc3420db6a6242b3db2aa0fc39e3319",
+            "username": "oktupol"
+        },
+        "service": {
+            "hostname": "sebastianwie.land",
+            "protocol": "https:"
+        },
+        "type": "web_service_binding",
+        "version": 1
+    },
+    "client": {
+        "name": "keybase.io go client",
+        "version": "1.0.18"
+    },
+    "ctime": 1485686810,
+    "expire_in": 504576000,
+    "merkle_root": {
+        "ctime": 1485686802,
+        "hash": "970f7b537c1687efbecbe2e44cd7276e812ce43d7ad7e1fa40c9714b03419e7e0f7eda1953a93148a38781a5e18083059f6c2be8835d59142d3b2860bb80dc28",
+        "seqno": 822239
+    },
+    "prev": "b327778674d963681a52654423acd743c2213f46c23552a715c44990b20254b0",
+    "seqno": 17,
+    "tag": "signature"
+}
+
+which yields the signature:
+
+hKRib2R5hqhkZXRhY2hlZMOpaGFzaF90eXBlCqNrZXnEIwEgTicIJprEdtU5W2PQ0hPcX4PlbXUqmTa0n6TPYJZ27k4Kp3BheWxvYWTFAvl7ImJvZHkiOnsia2V5Ijp7ImVsZGVzdF9raWQiOiIwMTAxODE3Mzg1ZGZhMzdlMDYyMDllM2MwOTFjYTNmOGQwYTk0YWQyYjgxOTdiMzliNDU3ZDhkMjJmZTJmYTUwMzAxMjBhIiwiaG9zdCI6ImtleWJhc2UuaW8iLCJraWQiOiIwMTIwNGUyNzA4MjY5YWM0NzZkNTM5NWI2M2QwZDIxM2RjNWY4M2U1NmQ3NTJhOTkzNmI0OWZhNGNmNjA5Njc2ZWU0ZTBhIiwidWlkIjoiMmJjMzQyMGRiNmE2MjQyYjNkYjJhYTBmYzM5ZTMzMTkiLCJ1c2VybmFtZSI6Im9rdHVwb2wifSwic2VydmljZSI6eyJob3N0bmFtZSI6InNlYmFzdGlhbndpZS5sYW5kIiwicHJvdG9jb2wiOiJodHRwczoifSwidHlwZSI6IndlYl9zZXJ2aWNlX2JpbmRpbmciLCJ2ZXJzaW9uIjoxfSwiY2xpZW50Ijp7Im5hbWUiOiJrZXliYXNlLmlvIGdvIGNsaWVudCIsInZlcnNpb24iOiIxLjAuMTgifSwiY3RpbWUiOjE0ODU2ODY4MTAsImV4cGlyZV9pbiI6NTA0NTc2MDAwLCJtZXJrbGVfcm9vdCI6eyJjdGltZSI6MTQ4NTY4NjgwMiwiaGFzaCI6Ijk3MGY3YjUzN2MxNjg3ZWZiZWNiZTJlNDRjZDcyNzZlODEyY2U0M2Q3YWQ3ZTFmYTQwYzk3MTRiMDM0MTllN2UwZjdlZGExOTUzYTkzMTQ4YTM4NzgxYTVlMTgwODMwNTlmNmMyYmU4ODM1ZDU5MTQyZDNiMjg2MGJiODBkYzI4Iiwic2Vxbm8iOjgyMjIzOX0sInByZXYiOiJiMzI3Nzc4Njc0ZDk2MzY4MWE1MjY1NDQyM2FjZDc0M2MyMjEzZjQ2YzIzNTUyYTcxNWM0NDk5MGIyMDI1NGIwIiwic2Vxbm8iOjE3LCJ0YWciOiJzaWduYXR1cmUifaNzaWfEQBM19w3kGdOvSW4CIcb5pDjdjXRI+FLu++QawG5YotffA+ZTKsaG1+wXVQKoNjirZOxSaFuZCz70yspF7rEXRASoc2lnX3R5cGUgpGhhc2iCpHR5cGUIpXZhbHVlxCCDqzEX+gC3L+kSSMYdxb/BZI50KlPWu6LmDEOoZuKtyKN0YWfNAgKndmVyc2lvbgE=
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/oktupol
+
+==================================================================
