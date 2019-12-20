@@ -35,8 +35,7 @@ export class SwipeListener extends AbstractListener {
      */
     init() {
         const isProbablyMobile = Math.max(window.screen.width, window.innerWidth) <= 800;
-        // this.helpDisabled = !isProbablyMobile;
-        this.helpDisabled = false;
+        this.helpDisabled = !isProbablyMobile;
 
         const Hammer = require('hammerjs');
         const mc = new Hammer(document.body);
