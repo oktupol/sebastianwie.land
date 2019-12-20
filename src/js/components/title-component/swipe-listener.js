@@ -35,7 +35,8 @@ export class SwipeListener extends AbstractListener {
      */
     init() {
         const isProbablyMobile = Math.max(window.screen.width, window.innerWidth) <= 800;
-        this.helpDisabled = !isProbablyMobile;
+        // this.helpDisabled = !isProbablyMobile;
+        this.helpDisabled = false;
 
         const Hammer = require('hammerjs');
         const mc = new Hammer(document.body);
@@ -81,7 +82,7 @@ export class SwipeListener extends AbstractListener {
             }
         }).then(helpElement => new Promise((resolve, reject) => {
             let helpSkipped = false;
-            this.helpObserver.waitFor('swipeDown', () => {
+            this.helpObserver.once('swipeDown', () => {
                 helpSkipped = true;
             });
             setTimeout(() => {
@@ -94,7 +95,7 @@ export class SwipeListener extends AbstractListener {
                 }
             }, 5000);
         })).then(helpElement => new Promise((resolve, reject) => {
-            this.helpObserver.waitFor('swipeDown', () => {
+            this.helpObserver.once('swipeDown', () => {
                 if (this.helpDisabled) {
                     reject();
                 } else {
