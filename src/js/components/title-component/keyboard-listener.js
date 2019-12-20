@@ -14,9 +14,9 @@ export class KeyboardListener extends AbstractListener {
             let key = event.key;
 
             if (upKeys.includes(key)) {
-                this.titleComponent.setAttribute('selection', 'web');
+                this.titleComponent.selection = 'web';
             } else if (downKeys.includes(key)) {
-                this.titleComponent.setAttribute('selection', 'mail');
+                this.titleComponent.selection = 'mail';
             } else if (enterKeys.includes(key)) {
                 this.titleComponent.anchor.click();
             }

@@ -23,14 +23,6 @@ import {SwipeListener} from "./swipe-listener";
                     '@'
                 );
 
-            wrapper.classList.add('title-box');
-            wrapper.appendChild(anchor);
-            this.appendChild(wrapper);
-
-            anchor.appendChild(slider);
-            anchor.appendChild(webDiv);
-            anchor.appendChild(mailDiv);
-
             Reflect.defineProperty(this, 'anchor', {
                 value: anchor,
                 enumerable: true
@@ -56,7 +48,15 @@ import {SwipeListener} from "./swipe-listener";
                 writable: true
             });
 
+            wrapper.classList.add('title-box');
+            wrapper.appendChild(anchor);
+
             this.updateSlider();
+            this.appendChild(wrapper);
+
+            anchor.appendChild(slider);
+            anchor.appendChild(webDiv);
+            anchor.appendChild(mailDiv);
 
             this.addListener(new MouseListener());
             this.addListener(new KeyboardListener());
@@ -198,6 +198,20 @@ import {SwipeListener} from "./swipe-listener";
          */
         set mailHref(mailHref) {
             this.setAttribute('mail-href', mailHref);
+        }
+
+        /**
+         * @returns {string}
+         */
+        get selection() {
+            return this.getAttribute('selection');
+        }
+
+        /**
+         * @param {string} selection
+         */
+        set selection(selection) {
+            this.setAttribute('selection', selection);
         }
     });
 }(window, document));

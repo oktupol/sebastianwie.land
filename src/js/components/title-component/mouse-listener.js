@@ -10,10 +10,10 @@ export class MouseListener extends AbstractListener {
      */
     init() {
         let selectWeb = () => {
-                this.titleComponent.setAttribute('selection', 'web');
+                this.titleComponent.selection = 'web';
             },
             selectMail = () => {
-                this.titleComponent.setAttribute('selection', 'mail');
+                this.titleComponent.selection = 'mail';
             };
 
         this.titleComponent.webDiv.addEventListener("mouseenter", selectWeb);
