@@ -44,11 +44,11 @@ export class SwipeListener extends AbstractListener {
         mc.on('swipeup swipedown swiperight', event => {
             switch (event.type) {
                 case 'swipedown':
-                    this.titleComponent.selection = 'web';
+                    this.titleComponent.selection = 'mail';
                     this.helpObserver.emit('swipeDown');
                     break;
                 case 'swipeup':
-                    this.titleComponent.selection = 'mail';
+                    this.titleComponent.selection = 'web';
                     this.disableHelp();
                     break;
                 case 'swiperight':
