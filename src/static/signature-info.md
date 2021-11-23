@@ -1,13 +1,13 @@
-# Dear E-Mail recipient,
+**Dear E-Mail recipient,**
 
 if you are reading this, you are probably wondering what's deal with the line
-  that says "pgp" in my E-mail signature, followed by a bunch of numbers and
-  letters, or attachment called "signature.asc" in the message you just received
-  from me. The short version: this file contains an electronic signature which
-  you can use to verify the authenticity of the E-mail message you received.
-  This means, you are able to verify that indeed I, Sebastian, composed the
-  message, and nobody else tampered with it, and nobody else composed it
-  pretending to be me. Now you may be asking yourself some questions, such as:
+that says "pgp" in my E-mail signature, followed by a bunch of numbers and
+letters, or attachment called "signature.asc" in the message you just received
+from me. The short version: this file contains an electronic signature which
+you can use to verify the authenticity of the E-mail message you received.
+This means, you are able to verify that indeed I, Sebastian, composed the
+message, and nobody else tampered with it, and nobody else composed it
+pretending to be me. Now you may be asking yourself some questions, such as:
 
 ## How can I verify the authenticity of your message?
 
