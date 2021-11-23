@@ -389,3 +389,11 @@ To summarise:
   `sebastianwie.land` and `nwie.land`, as well as the web space of former.
 - The owner of `nwie.land` published the same OpenPGP key in the Web Key
   Directory of `nwie.land`.
+  
+## Where can I read more about OpenPGP?
+
+- [A Deep Dive on End-to-End Encryption: How Do Public Key Encryption Systems
+  Work?](https://ssd.eff.org/en/module/deep-dive-end-end-encryption-how-do-public-key-encryption-systems-work)
+  by the Electronic Frontier Foundation
+- [OpenPGP in Thunderbird - HOWTO and
+  FAQ](https://support.mozilla.org/en-US/kb/openpgp-thunderbird-howto-and-faq)
