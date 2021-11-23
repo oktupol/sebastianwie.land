@@ -402,7 +402,7 @@ To summarise:
 
 While this doesn't give you ultimate confidence about the legitimacy of my OpenPGP key, it does mean two things:
 
-- If you can be certain about me owning one of above mentioned things, you can
+- If you are certain about me owning one of above mentioned things, you can
   be certain about me owning all of above mentioned things due to all those
   proofs of ownership.  
   Example: If you and I were in the same room at the same time, and you see me
