@@ -330,7 +330,10 @@ tell you that the signature is good.
    
 ### Further confidence of legitimacy thanks to WKD
 
-Ignoring Keybase and the proofs that I just provided, when using OpenPGP for encrypting and verifying E-mails, users commonly face two problems: "What is the public key of the recipient?" and "Is the public key I have _really_ the right one?"
+Ignoring Keybase and the proofs that I just provided, when using OpenPGP for
+encrypting and verifying E-mails, users commonly face two problems: "What is
+the public key of the recipient?" and "Is the public key I have _really_ the
+right one?"
 
 Historically, users could upload their public keys to key servers; these are
 servers that publicly list public keys and offer searching capabilities for
@@ -389,6 +392,24 @@ To summarise:
   `sebastianwie.land` and `nwie.land`, as well as the web space of former.
 - The owner of `nwie.land` published the same OpenPGP key in the Web Key
   Directory of `nwie.land`.
+- In addition to those domains and websites, I proved ownership of some online
+  accounts, such as
+  [Github](https://gist.github.com/oktupol/4f2fe5827220cfcdc5eb7c0e02738443).
+  Verification can be done in the same way as described in the [first example
+  on this
+  page](#proof-that-the-keyholder-and-the-website-owner-of-sebastianwieland-are-the-same-person).
+  A complete list of online accounts verifiable like this is on [Keybase](https://keybase.io/sebastianwieland).
+
+While this doesn't give you ultimate confidence about the legitimacy of my OpenPGP key, it does mean two things:
+
+- If you can be certain about me owning one of above mentioned things, you can
+  be certain about me owning all of above mentioned things due to all those
+  proofs of ownership.  
+  Example: If you and I were in the same room at the same time, and you see me
+  pushing something to above mentioned Github account, you can be certain that
+  I am the owner of above mentioned domains and OpenPGP key.
+- If I were an imposter, I am **very** elaborate.
+
   
 ## Where can I read more about OpenPGP?
 
