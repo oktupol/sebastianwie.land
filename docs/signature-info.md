@@ -327,3 +327,65 @@ tell you that the signature is good.
 6. The hash I published can be found in the TXT record that starts with
    keybase-site-verification and is, apart from base64 padding (i.e. trailing
    `=` signs) identical to the one you just generated.
+   
+### Further confidence of legitimacy thanks to WKD
+
+Ignoring Keybase and the proofs that I just provided, when using OpenPGP for encrypting and verifying E-mails, users commonly face two problems: "What is the public key of the recipient?" and "Is the public key I have _really_ the right one?"
+
+Historically, users could upload their public keys to key servers; these are
+servers that publicly list public keys and offer searching capabilities for
+E-mail addresses. However, not everyone chooses to upload theirs. Also, there
+are several different key servers; each with its own list of public keys.  And
+since anyone can publish new keys on these servers, and anyone can create key
+pairs for arbitrary identities, it is sometimes difficult to trust these.
+
+Some public key owners may choose to publish their key on their private web-site
+instead, in a text file, but as a potential sender of a message, I have to find
+that one first.
+
+The **Web Key Directory** provides a standardised way for looking for public
+OpenPGP keys, and offers a fair amount of trust at the same time. Its function
+can be summarised like this:
+
+- Senders check a "well known" URL on the domain of the recipient.
+- If a public key is available for that mail address, it can be downloaded via
+  HTTPS.
+- The downloaded public key can now be used without any further user
+  interaction.
+
+When looking up the key, the sender constructs a hash out of the local part
+(left of the @-sign) of the recipient's E-mail address and looks for a file named
+like that.
+
+Example: for the E-mail address `key-submission@example.org`, the sender will
+first hash the local part `key-submission`, resulting in
+`bxzcxpxk8h87z1k7bzk86xn5aj47intu`, and then query the URL:
+```
+https://openpgpkey.example.org/.well-known/openpgpkey/example.org/hu/bxzcxpxk8h87z1k7bzk86xn5aj47intu
+```
+
+If the name `openpgpkey.example.org` isn't resolvable, the sender will
+additionally query the a second URL:
+```
+https://example.org/.well-known/openpgpkey/hu/bxzcxpxk8h87z1k7bzk86xn5aj47intu
+```
+
+If any of these URLs contains a public OpenPGP key matching the E-Mail address,
+the sender may use it for encrypting messages.
+
+Trusting keys that were discovered using a WKD is easier, too, since publishing
+a key inside a domain's WKD generally requires the permission to do so by at
+least the domain owner. Of course, this trust cannot be ultimate, as the domain
+owner and the owner of the E-mail address may be two different people. However,
+in my case, I supplied proof that this is not the case a few paragraphs above.
+
+### Conclusion
+
+To summarise:
+
+- I used the OpenPGP key whose signature ends in `D34D 12E4 12ED EF1A` to sign
+  the E-mail you just opened
+- I used the same OpenPGP key to prove ownership of the domains
+  `sebastianwie.land` and `nwie.land`, as well as the web space of former.
+- The owner of `nwie.land` published the same OpenPGP key in the Web Key
+  Directory of `nwie.land`.
