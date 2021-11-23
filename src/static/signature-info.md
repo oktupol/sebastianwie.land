@@ -68,7 +68,7 @@ against a key is useless if you can't verify the authenticity of the key.
 Disappointingly, the short answer to above question is: You can't.
 
 The long answer: Using [Keybase](https://keybase.io/sebastianwieland), I made it
-possible for you to verify that the owner of the PGP key that was used for
+possible for you to verify that the owner of the OpenPGP key that was used for
 signing the E-mail you received, the owner of the `nwie.land` domain (from which
 the message you received was sent), and the owner of the `sebastianwie.land`
 domain and website (which you are currently on) are the same person. If you
@@ -208,7 +208,7 @@ tell you that the signature is good.
     
     - On Linux or Mac, run:
         ```bash
-        gpg -o - --dearmor signed-proof.asc | openssl -sha256 -binary | base64
+        gpg -o - --dearmor signed-proof.asc | openssl sha256 -binary | base64
         ```
     - On Windows, make sure that you're using Powershell and run:
         ```powershell
@@ -306,7 +306,7 @@ tell you that the signature is good.
     
     - On Linux or Mac, run:
         ```bash
-        gpg -o - --dearmor signed-proof.asc | openssl -sha256 -binary | base64
+        gpg -o - --dearmor signed-proof.asc | openssl sha256 -binary | base64
         ```
     - On Windows, make sure that you're using Powershell and run:
         ```powershell

@@ -68,7 +68,7 @@ against a key is useless if you can't verify the authenticity of the key.
 Disappointingly, the short answer to above question is: You can't.
 
 The long answer: Using [Keybase](https://keybase.io/sebastianwieland), I made it
-possible for you to verify that the owner of the PGP key that was used for
+possible for you to verify that the owner of the OpenPGP key that was used for
 signing the E-mail you received, the owner of the `nwie.land` domain (from which
 the message you received was sent), and the owner of the `sebastianwie.land`
 domain and website (which you are currently on) are the same person. If you
@@ -79,7 +79,7 @@ The only thing I cannot prove is that this person is me.
 
 You need:
 
-- My [public PGP key](https://sebastianwie.land/pgp-pubkey.asc), which is also
+- My [public OpenPGP key](https://sebastianwie.land/pgp-pubkey.asc), which is also
   available via [Web Key Directory (WKD)](https://wiki.gnupg.org/WKD)
 - An OpenPGP implementation. For this guide I use [GnuPG](https://gnupg.org/),
   but any implementation works.
@@ -119,7 +119,7 @@ I created following object:
 }
 ```
 
-I signed it using my PGP key, and put the signed message into a file at
+I signed it using my OpenPGP key, and put the signed message into a file at
 [https://sebastianwie.land/keybase.txt](https://sebastianwie.land/keybase.txt).
 
 1. Copy the PGP message (Everything between the `---BEGIN PGP MESSAGE---` and
@@ -163,7 +163,7 @@ I created following object:
 }
 ```
 
-I signed it using my PGP key, yielding following signed message: 
+I signed it using my OpenPGP key, yielding following signed message: 
 
 ```
 -----BEGIN PGP MESSAGE-----
@@ -208,7 +208,7 @@ tell you that the signature is good.
     
     - On Linux or Mac, run:
         ```bash
-        gpg -o - --dearmor signed-proof.asc | openssl -sha256 -binary | base64
+        gpg -o - --dearmor signed-proof.asc | openssl sha256 -binary | base64
         ```
     - On Windows, make sure that you're using Powershell and run:
         ```powershell
@@ -261,7 +261,7 @@ I created following object:
 }
 ```
 
-I signed it using my PGP key, yielding following signed message: 
+I signed it using my OpenPGP key, yielding following signed message: 
 
 ```
 -----BEGIN PGP MESSAGE-----
@@ -306,7 +306,7 @@ tell you that the signature is good.
     
     - On Linux or Mac, run:
         ```bash
-        gpg -o - --dearmor signed-proof.asc | openssl -sha256 -binary | base64
+        gpg -o - --dearmor signed-proof.asc | openssl sha256 -binary | base64
         ```
     - On Windows, make sure that you're using Powershell and run:
         ```powershell
