@@ -79,7 +79,7 @@ The only thing I cannot prove is that this person is me.
 
 You need:
 
-- My [public PGP key](https://sebastianwie.land/pgp-pubkey.asc), which is also
+- My [public OpenPGP key](https://sebastianwie.land/pgp-pubkey.asc), which is also
   available via [Web Key Directory (WKD)](https://wiki.gnupg.org/WKD)
 - An OpenPGP implementation. For this guide I use [GnuPG](https://gnupg.org/),
   but any implementation works.
@@ -119,8 +119,8 @@ I created following object:
 }
 ```
 
-I signed it using my PGP key, and put the signed message into a file at
-https://sebastianwie.land/keybase.txt.
+I signed it using my OpenPGP key, and put the signed message into a file at
+[https://sebastianwie.land/keybase.txt](https://sebastianwie.land/keybase.txt).
 
 1. Copy the PGP message (Everything between the `---BEGIN PGP MESSAGE---` and
    `---END PGP MESSAGE---` markers, including the markers) and save it into a
@@ -163,7 +163,7 @@ I created following object:
 }
 ```
 
-I signed it using my PGP key, yielding following signed message: 
+I signed it using my OpenPGP key, yielding following signed message: 
 
 ```
 -----BEGIN PGP MESSAGE-----
@@ -261,7 +261,7 @@ I created following object:
 }
 ```
 
-I signed it using my PGP key, yielding following signed message: 
+I signed it using my OpenPGP key, yielding following signed message: 
 
 ```
 -----BEGIN PGP MESSAGE-----

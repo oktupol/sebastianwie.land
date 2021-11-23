@@ -120,7 +120,7 @@ I created following object:
 ```
 
 I signed it using my PGP key, and put the signed message into a file at
-https://sebastianwie.land/keybase.txt.
+[https://sebastianwie.land/keybase.txt](https://sebastianwie.land/keybase.txt).
 
 1. Copy the PGP message (Everything between the `---BEGIN PGP MESSAGE---` and
    `---END PGP MESSAGE---` markers, including the markers) and save it into a
