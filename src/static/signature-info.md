@@ -1,3 +1,7 @@
+---
+title: OpenPGP info
+---
+
 **Dear E-Mail recipient,**
 
 if you are reading this, you are probably wondering what's deal with the line
