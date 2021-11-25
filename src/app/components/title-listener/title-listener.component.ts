@@ -42,7 +42,9 @@ export class TitleListenerComponent implements OnInit, OnDestroy {
   }
 
   private removeKeyboardListener(): void {
-    document.removeEventListener('keydown', this.keyboardListener as EventListenerOrEventListenerObject);
+    if (this.keyboardListener) {
+      document.removeEventListener('keydown', this.keyboardListener);
+    }
   }
 
   private addSwipeListener(): void {
@@ -67,7 +69,9 @@ export class TitleListenerComponent implements OnInit, OnDestroy {
   }
 
   private removeSwipeListener(): void {
-    this.mc?.stop(true);
-    this.mc?.destroy();
+    if (this.mc) {
+      this.mc.stop(true);
+      this.mc.destroy();
+    }
   }
 }
