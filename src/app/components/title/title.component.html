@@ -1,0 +1,18 @@
+<div class="title-box">
+  <a [href]="href">
+    <div class="slider" [class.up]="position === 'up'" [class.down]="position === 'down'">
+      sebasti<span class="placeholder">{{position == 'up' ? 'a' : '@'}}</span>n<span class="wie">wie</span><span
+        class="dot">.</span><span class="land">land</span>
+    </div>
+    <div class="web" (mouseover)="position = 'up'">
+      <span class="label">http:</span><span class="placeholder">sebasti</span><span class="static">a</span><span
+        class="placeholder">n</span><span class="placeholder wie">wie</span><span class="placeholder dot">.</span><span
+        class="placeholder land">land</span>
+    </div>
+    <div class="mail" (mouseover)="position = 'down'">
+      <span class="label">mail:</span><span class="placeholder">sebasti</span><span class="static">@</span><span
+        class="placeholder">n</span><span class="placeholder wie">wie</span><span class="placeholder dot">.</span><span
+        class="placeholder land">land</span>
+    </div>
+  </a>
+</div>

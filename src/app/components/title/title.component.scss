@@ -1,0 +1,73 @@
+@import "../../../styles/variables.scss";
+
+$font-size: calc(0.8em + 2vw);
+$font-family: 'Fira Code', 'Courier New', Courier, monospace;
+$line-height: 1.25em;
+$dot-space: .15em;
+$dot-vertical-offset: .03em;
+$tld-length: 4;
+$space: .35em;
+$slide-duration: 240ms;
+
+:host {
+  font-size: $font-size;
+  line-height: $line-height;
+  font-family: $font-family;
+
+  .title-box {
+    display: inline-block;
+    position: relative;
+
+    a {
+      color: inherit;
+      text-decoration: inherit;
+      display: block;
+    }
+  }
+
+  .slider {
+    position: absolute;
+    width: 100%;
+    text-align: right;
+
+    transition-property: top;
+    transition-duration: $slide-duration;
+
+    &.up {
+      top: 0;
+    }
+
+    &.down {
+      top: $line-height;
+    }
+  }
+
+  .label {
+    color: $detail-color;
+    margin-right: $space;
+  }
+
+  .placeholder {
+    visibility: hidden;
+  }
+
+  .static {
+    color: $highlight-color;
+    user-select: none;
+  }
+
+  .dot {
+    color: $detail-color;
+    position: absolute;
+    right: $tld-length - 0.47 * 1ch;
+    margin-top: $dot-vertical-offset;
+  }
+
+  .wie {
+    margin-left: $space;
+  }
+
+  .land {
+    margin-left: $dot-space;
+  }
+}
