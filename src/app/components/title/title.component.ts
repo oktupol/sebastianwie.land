@@ -32,7 +32,7 @@ export class TitleComponent implements OnInit {
     return this._hrefs[this.position];
   }
 
-  constructor(public store: Store) { }
+  constructor(private store: Store) { }
 
   ngOnInit(): void {
   }
