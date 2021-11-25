@@ -1,0 +1,6 @@
+$fira-code-base-path: '../../assets/fonts/fira-code/distr';
+@include font-face('Fira Code', $fira-code-base-path, 300, 'FiraCode-Light', normal);
+@include font-face('Fira Code', $fira-code-base-path, 400, 'FiraCode-Regular', normal);
+@include font-face('Fira Code', $fira-code-base-path, 500, 'FiraCode-Medium', normal);
+@include font-face('Fira Code', $fira-code-base-path, 700, 'FiraCode-Bold', normal);
+@include font-face('Fira Code VF', $fira-code-base-path, 300 700, 'FiraCode-Bold', normal, woff woff2 ttf);

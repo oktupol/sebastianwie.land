@@ -1,0 +1,16 @@
+@import "./variables.scss";
+@import "./fonts/index.scss";
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+html {
+  padding: 0 .5em;
+}
+
+body {
+  background-color: $background-color;
+  color: $color;
+}
