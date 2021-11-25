@@ -1,7 +1,6 @@
 @import "../../../styles/variables.scss";
 
 $font-size: calc(0.8em + 2vw);
-$font-family: 'Fira Code', 'Courier New', Courier, monospace;
 $line-height: 1.25em;
 $dot-space: .15em;
 $dot-vertical-offset: .03em;
@@ -12,7 +11,6 @@ $slide-duration: 240ms;
 :host {
   font-size: $font-size;
   line-height: $line-height;
-  font-family: $font-family;
 
   .title-box {
     display: inline-block;

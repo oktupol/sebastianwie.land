@@ -7,10 +7,11 @@ html, body {
 }
 
 html {
-  padding: 0 .5em;
+  padding: 0 $page-padding;
 }
 
 body {
   background-color: $background-color;
   color: $color;
+  font-family: $font-family;
 }

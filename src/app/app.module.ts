@@ -10,13 +10,16 @@ import { TitleComponent } from './components/title/title.component';
 import { TitleListenerComponent } from './components/title-listener/title-listener.component';
 import { reducers, metaReducers } from './store/reducers';
 import { environment } from 'src/environments/environment';
+import { ContentPageModule } from './shared/components/content-page/content-page.module';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TitleWrapperComponent,
     TitleComponent,
-    TitleListenerComponent
+    TitleListenerComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +30,8 @@ import { environment } from 'src/environments/environment';
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,
-    })
+    }),
+    ContentPageModule
   ],
   providers: [],
   bootstrap: [AppComponent]

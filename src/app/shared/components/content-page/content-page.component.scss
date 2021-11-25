@@ -1,0 +1,51 @@
+@import "../../../../styles/variables.scss";
+
+:host{
+  position: relative;
+
+  .content-wrapper {
+    min-height: 100%;
+    max-width: $content-width;
+    margin: 0 auto;
+    padding: $page-padding 0;
+    box-sizing: border-box;
+
+    display: grid;
+    grid-template-columns: [start] 1fr 1fr [end];
+    grid-template-rows: $navigation-height 1fr;
+
+    .menu-link, .home-link{
+      background-color: $content-background-color;
+      align-self: stretch;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: $navigation-item-width;
+
+      color: inherit;
+      text-decoration: inherit;
+      border: $content-border;
+      border-bottom: none;
+      box-sizing: border-box;
+    }
+
+    .menu-link {
+      justify-self: start;
+    }
+
+    .home-link {
+      justify-self: end;
+    }
+
+    main {
+      width: 100%;
+      background-color: $content-background-color;
+      padding: 0 $content-padding;
+      box-sizing: border-box;
+      border: $content-border;
+      grid-column-start: start;
+      grid-column-end: end;
+    }
+  }
+}
