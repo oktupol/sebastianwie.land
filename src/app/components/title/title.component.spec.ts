@@ -8,9 +8,9 @@ describe('TitleComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TitleComponent ]
+      declarations: [TitleComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
@@ -21,5 +21,23 @@ describe('TitleComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  describe('position', () => {
+    it('should accept "up" and "down" as values', () => {
+      component.position = 'up';
+      expect(component.position).toEqual('up');
+      component.position = 'down';
+      expect(component.position).toEqual('down');
+      component.position = 'up';
+      expect(component.position).toEqual('up');
+    });
+
+    it('should not accept values other than "up" and "down"', () => {
+      component.position = 'left';
+      expect(component.position).not.toEqual('left');
+      component.position = 'right';
+      expect(component.position).not.toEqual('right');
+    })
   });
 });
