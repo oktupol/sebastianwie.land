@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Position } from 'src/app/util/types';
 
-type Position = 'up' | 'down';
+import * as titleActions from '../../store/actions/title.actions';
 
 @Component({
   selector: 'nwie-title',
@@ -30,12 +32,16 @@ export class TitleComponent implements OnInit {
     return this._hrefs[this.position];
   }
 
-  constructor() { }
+  constructor(public store: Store) { }
 
   ngOnInit(): void {
   }
 
   private isPosition(position: string | Position): position is Position {
     return ['up', 'down'].includes(position);
+  }
+
+  public setPosition(position: Position): void {
+    this.store.dispatch(titleActions.setPosition({position}));
   }
 }
