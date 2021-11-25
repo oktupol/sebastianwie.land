@@ -1,4 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import 'hammerjs';
 import * as titleActions from '../../store/actions/title.actions';
@@ -9,7 +10,7 @@ import * as titleActions from '../../store/actions/title.actions';
 })
 export class TitleListenerComponent implements OnInit, OnDestroy {
 
-  constructor(private store: Store) { }
+  constructor(private store: Store, @Inject(DOCUMENT) private document: Document) { }
 
   private keyboardListener: EventListenerOrEventListenerObject | null = null;
   private mc: HammerManager | null = null;
@@ -38,17 +39,17 @@ export class TitleListenerComponent implements OnInit, OnDestroy {
       }
     }) as EventListenerOrEventListenerObject;
 
-    document.addEventListener('keydown', this.keyboardListener);
+    this.document.addEventListener('keydown', this.keyboardListener);
   }
 
   private removeKeyboardListener(): void {
     if (this.keyboardListener) {
-      document.removeEventListener('keydown', this.keyboardListener);
+      this.document.removeEventListener('keydown', this.keyboardListener);
     }
   }
 
   private addSwipeListener(): void {
-    this.mc = new Hammer.Manager(document.body, {
+    this.mc = new Hammer.Manager(this.document.body, {
       recognizers: [
         [Hammer.Swipe, {
           direction: Hammer.DIRECTION_UP | Hammer.DIRECTION_DOWN
