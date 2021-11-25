@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import 'hammerjs';
 import * as titleActions from '../../store/actions/title.actions';
 
 @Component({
@@ -11,13 +12,16 @@ export class TitleListenerComponent implements OnInit, OnDestroy {
   constructor(private store: Store) { }
 
   private keyboardListener: EventListenerOrEventListenerObject | null = null;
+  private mc: HammerManager | null = null;
 
   ngOnInit(): void {
     this.addKeyboardListener();
+    this.addSwipeListener();
   }
 
   ngOnDestroy(): void {
     this.removeKeyboardListener();
+    this.removeSwipeListener();
   }
 
   private addKeyboardListener(): void {
@@ -39,5 +43,31 @@ export class TitleListenerComponent implements OnInit, OnDestroy {
 
   private removeKeyboardListener(): void {
     document.removeEventListener('keydown', this.keyboardListener as EventListenerOrEventListenerObject);
+  }
+
+  private addSwipeListener(): void {
+    this.mc = new Hammer.Manager(document.body, {
+      recognizers: [
+        [Hammer.Swipe, {
+          direction: Hammer.DIRECTION_UP | Hammer.DIRECTION_DOWN
+        }]
+      ]
+    });
+
+    this.mc.on('swipeup swipedown', event => {
+      switch (event.type) {
+        case 'swipeup':
+          this.store.dispatch(titleActions.setPosition({ position: 'up' }));
+          break;
+        case 'swipedown':
+          this.store.dispatch(titleActions.setPosition({ position: 'down' }));
+          break;
+      }
+    });
+  }
+
+  private removeSwipeListener(): void {
+    this.mc?.stop(true);
+    this.mc?.destroy();
   }
 }
