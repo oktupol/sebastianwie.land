@@ -2,6 +2,7 @@ $background-color: #d0d0d0;
 $color: #101010;
 $highlight-color: #e01010;
 $detail-color: #707070;
+$backdrop-color: rgba(0, 0, 0, .5);
 
 $font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 $content-font-family: $font-family;
@@ -13,8 +14,10 @@ $content-width: 800px;
 $content-padding: 2em;
 $content-background-color: #fff;
 $content-border: 1px solid #000;
+$content-end-padding: 1.5em;
+$content-backdrop-color: $backdrop-color;
 
-$navigation-backdrop-color: rgba(0, 0, 0, 0.5);
+$navigation-backdrop-color: $backdrop-color;
 $navigation-padding-vertical: .3em;
 $navigation-padding-horizontal: .7em;
 
