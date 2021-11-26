@@ -27,6 +27,7 @@
     "@scullyio/scully": "^2.0.0",
     "@scullyio/scully-plugin-puppeteer": "^2.0.0",
     "hammerjs": "^2.0.8",
+    "ngx-markdown": "^13.0.0",
     "rxjs": "~7.4.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"

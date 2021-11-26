@@ -3,11 +3,13 @@ $color: #101010;
 $highlight-color: #e01010;
 $detail-color: #707070;
 
-$font-family: 'Fira Code', 'Courier New', Courier, monospace;
+$font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+$content-font-family: $font-family;
+$title-font-family: 'Fira Code', 'Courier New', Courier, monospace;
 
 $page-padding: .5em;
-$content-width: 960px;
-$content-padding: .8em;
+$content-width: 800px;
+$content-padding: 2em;
 $content-background-color: #fff;
 $content-border: 1px solid #000;
 

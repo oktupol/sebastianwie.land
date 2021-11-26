@@ -1,7 +1,7 @@
 <div class="title-box">
   <a [href]="href">
-    <div class="slider" [class.up]="position === 'up'" [class.down]="position === 'down'">
-      sebasti<span class="placeholder">{{position == 'up' ? 'a' : '@'}}</span>n<span class="wie">wie</span><span
+    <div class="slider {{ position }}">
+      sebasti<span class="placeholder">&nbsp;</span>n<span class="wie">wie</span><span
         class="dot">.</span><span class="land">land</span>
     </div>
     <div class="web" (mouseover)="setPosition('up')">

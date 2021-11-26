@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { OpenpgpComponent } from './openpgp.component';
+import { MarkdownComponent } from './markdown.component';
 
 describe('OpenpgpComponent', () => {
-  let component: OpenpgpComponent;
-  let fixture: ComponentFixture<OpenpgpComponent>;
+  let component: MarkdownComponent;
+  let fixture: ComponentFixture<MarkdownComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ OpenpgpComponent ]
+      declarations: [ MarkdownComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(OpenpgpComponent);
+    fixture = TestBed.createComponent(MarkdownComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

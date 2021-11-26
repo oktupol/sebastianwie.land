@@ -9,6 +9,7 @@ $space: .35em;
 $slide-duration: 240ms;
 
 :host {
+  font-family: $title-font-family;
   font-size: $font-size;
   line-height: $line-height;
 
