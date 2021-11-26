@@ -1,6 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Store } from '@ngrx/store';
 
 import { TitleComponent } from './title.component';
+
+const mockStore = {
+  dispatch: jasmine.createSpy('dispatch'),
+}
 
 describe('TitleComponent', () => {
   let component: TitleComponent;
@@ -8,7 +13,10 @@ describe('TitleComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [TitleComponent]
+      declarations: [TitleComponent],
+      providers: [
+        { provide: Store, useValue: mockStore }
+      ]
     })
       .compileComponents();
   });
@@ -38,6 +46,14 @@ describe('TitleComponent', () => {
       expect(component.position).not.toEqual('left');
       component.position = 'right';
       expect(component.position).not.toEqual('right');
+    });
+  });
+
+  describe('setPosition', () => {
+    it('should dispatch action to store', () => {
+      component.setPosition('down');
+
+      expect(mockStore.dispatch).toHaveBeenCalled();
     })
   });
 });
