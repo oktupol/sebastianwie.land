@@ -17,39 +17,55 @@
     display: flex;
     flex-direction: column;
 
-    .menu-link {
-      position: relative;
-      z-index: 1550;
-
-      font-family: $navigation-font-family;
-
-      color: $color;
-      border: none;
-      border-right: $content-border;
-      background-color: $content-background-color;
-      text-decoration: none;
-      font-size: 1rem;
-
-      @media screen and (min-width: $content-width) {
-        border-left: $content-border;
-        border-top: $content-border;
-      }
-
+    .button-row {
       display: flex;
-      align-items: center;
-      justify-content: center;
-      width: $navigation-item-width;
-      height: $navigation-height;
+      flex-direction: row;
 
-      cursor: pointer;
+      .menu-link {
+        position: relative;
+        z-index: 1530;
 
-      &.homepage:not(.open) {
-        color: $detail-color;
+        &:first-child {
+          z-index: 1550;
+        }
+
+        font-family: $navigation-font-family;
+
+        color: $color;
         border: none;
-        background: unset;
-        text-decoration: underline;
+        padding: 0;
+        box-sizing: border-box;
+        border-collapse: collapse;
+        border-right: $content-border;
+        background-color: $content-background-color;
+        text-decoration: none;
+        font-size: 1rem;
+
+        @media screen and (min-width: $content-width) {
+          border-top: $content-border;
+
+          &:first-child {
+            border-left: $content-border;
+          }
+        }
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: $navigation-item-width;
+        height: $navigation-height;
+
+        cursor: pointer;
+
+        &.homepage:not(.open) {
+          color: $detail-color;
+          border: none;
+          background: unset;
+          text-decoration: underline;
+        }
       }
     }
+
 
     .navigation-backdrop {
       position: fixed;

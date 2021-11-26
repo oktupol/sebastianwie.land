@@ -2,22 +2,13 @@
 
 :host{
   position: relative;
-  top: -$navigation-height;
   font-family: $content-font-family;
-
-  @media screen and (min-width: $content-width) {
-    top: calc(-#{$navigation-height} - #{$page-padding});
-  }
 
   .content-wrapper {
     max-width: $content-width;
     margin: 0 auto;
     padding: 0;
     box-sizing: border-box;
-
-    @media screen and (min-width: $content-width) {
-      padding: $page-padding 0;
-    }
 
     display: grid;
     grid-template-columns: 1fr;
@@ -35,44 +26,19 @@
       }
     }
 
-    .home-link{
-      position: relative;
-      font-size: 1rem;
-      justify-self: start;
-      margin-left: $navigation-item-width;
-      font-family: $navigation-font-family;
-      background-color: $content-background-color;
-      align-self: stretch;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: $navigation-item-width;
-
-      color: inherit;
-      text-decoration: inherit;
-      border-right: $content-border;
-      box-sizing: border-box;
-
-      @media screen and (min-width: $content-width) {
-        border-top: $content-border;
-      }
-    }
-
     main {
       position: relative;
       width: 100%;
       align-self: start;
       overflow: auto;
       background-color: $content-background-color;
-      padding: 0 $page-padding;
+      padding: 0 $page-padding $content-end-padding;
       box-sizing: border-box;
       border-top: $content-border;
       border-bottom: $content-border;
-      padding-bottom: $content-end-padding;
 
       @media screen and (min-width: $content-width) {
-        padding: 0 $content-padding;
+        padding: 0 $content-padding $content-end-padding;
         border-left: $content-border;
         border-right: $content-border;
       }

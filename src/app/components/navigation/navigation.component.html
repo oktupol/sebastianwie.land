@@ -1,5 +1,8 @@
 <div class="navigation-wrapper">
-  <button class="menu-link" [class.homepage]="isHomepage" [class.open]="navOpen" (click)="toggle()">nav</button>
+  <div class="button-row">
+    <button class="menu-link" [class.homepage]="isHomepage" [class.open]="navOpen" (click)="toggle()">nav</button>
+    <a class="menu-link" routerLink="/" *ngIf="!isHomepage">home</a>
+  </div>
 
   <nav *ngIf="navOpen">
     <div class="navigation-backdrop" (click)="close()"></div>
