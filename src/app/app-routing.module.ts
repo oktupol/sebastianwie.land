@@ -4,7 +4,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { TitleListenerComponent } from './components/title-listener/title-listener.component';
 
 const routes: Routes = [
-  { path: '', component: TitleListenerComponent },
+  { path: '', component: TitleListenerComponent, pathMatch: 'full' },
   { path: 'signature-info', redirectTo: 'sites/openpgp' },
   { path: 'signature-info.html', redirectTo: 'sites/openpgp' },
   { path: 'sites', loadChildren: () => import('./modules/content/content.module').then(m => m.ContentModule) },

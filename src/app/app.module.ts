@@ -12,6 +12,7 @@ import { reducers, metaReducers } from './store/reducers';
 import { environment } from 'src/environments/environment';
 import { ContentPageModule } from './shared/components/content-page/content-page.module';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { ScullyLibModule } from '@scullyio/ng-lib';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
       maxAge: 25,
       logOnly: environment.production,
     }),
-    ContentPageModule
+    ContentPageModule,
+    ScullyLibModule
   ],
   providers: [],
   bootstrap: [AppComponent]
