@@ -1,0 +1,13 @@
+<div class="navigation-wrapper">
+  <button class="menu-link" [class.homepage]="isHomepage" [class.open]="navOpen" (click)="toggle()">nav</button>
+
+  <nav *ngIf="navOpen">
+    <div class="navigation-backdrop" (click)="close()"></div>
+    <ul>
+      <li><a routerLink="/" (click)="close()">home</a></li>
+      <li><a routerLink="/sites/openpgp" (click)="close()">OpenPGP</a></li>
+      <li>Nav item 3</li>
+      <li>Nav item 4</li>
+    </ul>
+  </nav>
+</div>

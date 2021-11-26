@@ -1,0 +1,82 @@
+@import "../../../styles/variables.scss";
+
+:host {
+  position: relative;
+  font-family: $navigation-font-family;
+
+  .navigation-wrapper {
+    max-width: $content-width;
+    margin: 0 auto;
+    padding: $page-padding 0 0;
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+
+    .menu-link {
+      position: relative;
+      z-index: 1550;
+
+      font-family: $navigation-font-family;
+
+      color: $color;
+      border: $content-border;
+      border-bottom: none;
+      background-color: $content-background-color;
+      text-decoration: none;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: $navigation-item-width;
+      height: $navigation-height;
+
+      cursor: pointer;
+
+      &.homepage:not(.open) {
+        color: $detail-color;
+        border: none;
+        background: unset;
+        text-decoration: underline;
+      }
+    }
+
+    .navigation-backdrop {
+      position: fixed;
+      z-index: 1540;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      color: white;
+      background: $navigation-backdrop-color;
+    }
+
+    ul {
+      position: absolute;
+      z-index: 1550;
+      border: $content-border;
+      background-color: $content-background-color;
+      list-style: none;
+      margin: 0;
+      padding: #{$content-padding - $navigation-padding-vertical} $content-padding;
+      max-width: fit-content;
+
+      li {
+        border-bottom: $content-border;
+        padding: $navigation-padding-vertical $navigation-padding-horizontal;
+        box-sizing: border-box;
+
+        &:last-child {
+          border-bottom: none;
+        }
+
+        a {
+          display: block;
+          text-decoration: none;
+          color: $color;
+        }
+      }
+    }
+  }
+}

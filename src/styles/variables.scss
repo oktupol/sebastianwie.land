@@ -6,12 +6,17 @@ $detail-color: #707070;
 $font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 $content-font-family: $font-family;
 $title-font-family: 'Fira Code', 'Courier New', Courier, monospace;
+$navigation-font-family: $title-font-family;
 
 $page-padding: .5em;
 $content-width: 800px;
 $content-padding: 2em;
 $content-background-color: #fff;
 $content-border: 1px solid #000;
+
+$navigation-backdrop-color: rgba(0, 0, 0, 0.5);
+$navigation-padding-vertical: .3em;
+$navigation-padding-horizontal: .7em;
 
 $navigation-height: 40px;
 $navigation-item-width: 100px;

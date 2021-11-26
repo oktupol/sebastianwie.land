@@ -13,6 +13,7 @@ import { environment } from 'src/environments/environment';
 import { ContentPageModule } from './shared/components/content-page/content-page.module';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { ScullyLibModule } from '@scullyio/ng-lib';
+import { NavigationComponent } from './components/navigation/navigation.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { ScullyLibModule } from '@scullyio/ng-lib';
     TitleWrapperComponent,
     TitleComponent,
     TitleListenerComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    NavigationComponent
   ],
   imports: [
     BrowserModule,

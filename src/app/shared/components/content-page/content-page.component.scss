@@ -2,6 +2,7 @@
 
 :host{
   position: relative;
+  top: calc(-#{$navigation-height} - #{$page-padding});
   font-family: $content-font-family;
 
   .content-wrapper {
@@ -12,10 +13,11 @@
     box-sizing: border-box;
 
     display: grid;
-    grid-template-columns: [start] 1fr 1fr [end];
+    grid-template-columns: 1fr;
     grid-template-rows: $navigation-height 1fr;
 
     .menu-link, .home-link{
+      font-family: $navigation-font-family;
       background-color: $content-background-color;
       align-self: stretch;
 
@@ -31,22 +33,17 @@
       box-sizing: border-box;
     }
 
-    .menu-link {
-      justify-self: start;
-    }
-
     .home-link {
       justify-self: end;
     }
 
     main {
       width: 100%;
+      overflow: auto;
       background-color: $content-background-color;
       padding: 0 $content-padding;
       box-sizing: border-box;
       border: $content-border;
-      grid-column-start: start;
-      grid-column-end: end;
     }
   }
 }
