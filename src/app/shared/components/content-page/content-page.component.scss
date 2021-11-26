@@ -10,10 +10,6 @@
     padding: 0;
     box-sizing: border-box;
 
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: $navigation-height 1fr;
-
     .content-backdrop {
       position: fixed;
       left: 0;
@@ -29,7 +25,6 @@
     main {
       position: relative;
       width: 100%;
-      align-self: start;
       overflow: auto;
       background-color: $content-background-color;
       padding: 0 $page-padding $content-end-padding;
@@ -39,6 +34,7 @@
 
       @media screen and (min-width: $content-width) {
         padding: 0 $content-padding $content-end-padding;
+        margin-bottom: $page-padding;
         border-left: $content-border;
         border-right: $content-border;
       }
