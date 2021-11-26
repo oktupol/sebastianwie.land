@@ -7,7 +7,11 @@ html, body {
 }
 
 html {
-  padding: 0 $page-padding;
+  padding: 0;
+
+  @media screen and (min-width: $content-width) {
+    padding: 0 $page-padding;
+  }
 }
 
 body {
