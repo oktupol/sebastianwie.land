@@ -15,6 +15,11 @@ export class NavigationComponent implements OnInit, OnDestroy {
   public isHomepage = true;
   public navOpen = false;
 
+  public readonly links = [
+    { routerLink: '/', label: 'home' },
+    { routerLink: '/sites/about', label: 'about '},
+  ]
+
   private destroy$ = new Subject<void>();
 
   constructor(private router: Router, private store: Store) { }

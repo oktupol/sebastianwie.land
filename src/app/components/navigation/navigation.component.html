@@ -1,14 +1,13 @@
 <div class="navigation-wrapper">
   <div class="button-row">
-    <button class="menu-link" [class.homepage]="isHomepage" [class.open]="navOpen" (click)="toggle()">nav</button>
+    <button class="menu-link" [class.homepage]="isHomepage" [class.open]="navOpen" (click)="toggle()">{{ navOpen ? 'close' : 'nav' }}</button>
     <a class="menu-link" routerLink="/" *ngIf="!isHomepage">home</a>
   </div>
 
   <nav *ngIf="navOpen">
     <div class="navigation-backdrop" (click)="close()"></div>
     <ul>
-      <li><a routerLink="/" (click)="close()">home</a></li>
-      <li><a routerLink="/sites/about" (click)="close()">about</a></li>
+      <li *ngFor="let link of links"><a [routerLink]="link.routerLink" (click)="close()">{{ link.label }}</a></li>
     </ul>
   </nav>
 </div>
