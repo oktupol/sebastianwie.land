@@ -6,7 +6,8 @@ import * as titleActions from '../../store/actions/title.actions';
 
 @Component({
   selector: 'nwie-title-listener',
-  template: '',
+  templateUrl: './title-listener.component.html',
+  styleUrls: ['./title-listener.component.scss'],
 })
 export class TitleListenerComponent implements OnInit, OnDestroy {
 
