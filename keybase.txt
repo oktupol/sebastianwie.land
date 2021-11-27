@@ -1,0 +1,72 @@
+==================================================================
+https://keybase.io/sebastianwieland
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://sebastianwie.land
+  * I am sebastianwieland (https://keybase.io/sebastianwieland) on keybase.
+  * I have a public key with fingerprint 0112 3C38 2EEA 91D7 2622  8888 D34D 12E4 12ED EF1A
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "010191ddf1d5d1d4dd3b38f3e52f516ed3a3b24557d5857deb6020c6c586e92489330a",
+      "fingerprint": "01123c382eea91d726228888d34d12e412edef1a",
+      "host": "keybase.io",
+      "key_id": "d34d12e412edef1a",
+      "kid": "010191ddf1d5d1d4dd3b38f3e52f516ed3a3b24557d5857deb6020c6c586e92489330a",
+      "uid": "98ed804846fdb3c65e7f552910691619",
+      "username": "sebastianwieland"
+    },
+    "service": {
+      "hostname": "sebastianwie.land",
+      "protocol": "https:"
+    },
+    "type": "web_service_binding",
+    "version": 1
+  },
+  "ctime": 1616607287,
+  "expire_in": 157680000,
+  "prev": "1da748e9f287b4574beaf1df08ea988ac1390b4a2b6476eb74072f9ee3f44572",
+  "seqno": 5,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+-----BEGIN PGP MESSAGE-----
+
+owGtkn1QFGUcx+/AyjuCOclQGd5ckaQO3PfbPTCMmFTIF0SaEcVz9/ZZWLn2jrvj
+TiAcYeQlJxgMcwJimuOlqKjJYTJy5GKa4JrQBnkZrJOACh2wwhlEGh2kZ5n8zz97
+ZvZ5Zn/P5/fd7++3v/rgQJVWPbI39I/Qv+bD1YOzvOr4kZPJpQhvFYoRYylSAFYP
+YBGAw2kqkATEiKAYirGYIIiYQAmYQAoCwROMSAAKFymMBgLBETxOUpRBoBi4AZ5G
+cdRMmymGBixOMixBoByiR0RJzgN2m12SnauyGE6YCQYHgIPyBpzGcQYugSAFDAck
+fAQgYkpivtWhZEBzPOcAiZIVxuCLadXeE/j/2XfRqhzLAIFBSYakRYEnzDQFDCJF
+4SyG0ixGY6wCOoBd5t4EkHYAaNUpcbJbAhZOFpAyPYzZXZIZKA1WKnoCmbiK6hGb
+3eq0mq0WeJ3vdNocRiXdWWxTeDfgTf8pmXhJFmBTYYYL2B2SVUaMGCTNTkmRhq5o
+GjXgjEGPgJM2yQ5MkkJQBppB4YLfAXbggpqYwBlIBrAiZHmSMpA84GDbRJSB/4Zh
+ODNGsChPcjhPkwYa8AYSyoosAIRIQhxHlOIKZStipKBPLk8pS8qTOWeRHSBl2rcD
+iDUqtVYVGbZ5jTo0mUmcOzceh9TUPB7EpwKUKVRpNbrHkUcTOtX0w0/Tbne0pFhH
+ft72gusfX/i3WK8mtPvijztiJjsOH/TWfnX2w8+x7j1b0+W0zh88B5Ow724OF25s
+H1xbrdtxZ8pNtgUv/urZPnD8b3H0tz9jinbdb5hIrTi67Oh7cb+/v6q5b3dq+eQF
+Om0prddckrLTWRnRvbu0sD2ovul6rueZpGHdw1MhX5ZU3GF8fWd9rSmxgwHfZFHx
+mtyRB73vtA0tjyU4fvK/e7rh+4yge0jIiRQhbuvtxIs83rZFU2FZ75nPxGMzOtf6
+8URtDQhvtdDxLZrpyunmKzFh2Tltm0aba6vIoziyMlTtzey3L5gu15XIpZ1nMG/1
+oTL/FzOO1Mz82rdacj4aWXr5JqK+FaXlGmXLng5/bC04FFlX6bEV6t7YvjixrMWw
+lSKf8bXyE77Tl0vWRVPg45qYoG0jk8/2Z6lvHB68GjEcFvvK5N5PFiupjGPFv284
+81LrbJbm1fczs3yuyaKChnRvbvyG4YoyfF+g+1TU5tjRsRk+temIbvwCvvSImvdP
+1w91XUl3hVydYiNr8oe+jkw535mEr8tJ2LXQ6BXdHdH3gqOrIu527RszNS1MDLc3
+thxIK/9gYEx/Q5x9eiZ5fH33pU3P9+xnA6POzfRcP3Df7fVPfbaSMDX64O5sz7Xn
+st97Pe5S3bWBY6GeubycXyrnuna2Z6t6buk3/gs=
+=1y9a
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/sebastianwieland
+
+==================================================================
