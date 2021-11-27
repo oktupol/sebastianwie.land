@@ -19,7 +19,8 @@ export class TitleEffects {
             this.router.navigate(['sites', 'about']);
             return titleActions.activateSuccess();
           case 'down':
-            this.window.location.href='mailto:sebasti@nwie.land';
+            // this.window.location.href='mailto:sebasti@nwie.land';
+            this.window.open("mailto:sebasti@nwie.land");
             return titleActions.activateSuccess();
           default:
             console.log('activating while what?');
