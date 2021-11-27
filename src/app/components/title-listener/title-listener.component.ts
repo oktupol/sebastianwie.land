@@ -28,6 +28,7 @@ export class TitleListenerComponent implements OnInit, OnDestroy {
   private addKeyboardListener(): void {
     const upKeys = ['k', 'ArrowUp'];
     const downKeys = ['j', 'ArrowDown'];
+    const enterKeys = ['Enter'];
 
     this.keyboardListener = ((event: KeyboardEvent) => {
       let key = event.key;
@@ -36,6 +37,8 @@ export class TitleListenerComponent implements OnInit, OnDestroy {
         this.store.dispatch(titleActions.setPosition({ position: 'up' }));
       } else if (downKeys.includes(key)) {
         this.store.dispatch(titleActions.setPosition({ position: 'down' }));
+      } else if (enterKeys.includes(key)) {
+        this.store.dispatch(titleActions.activate());
       }
     }) as EventListenerOrEventListenerObject;
 
@@ -52,12 +55,12 @@ export class TitleListenerComponent implements OnInit, OnDestroy {
     this.mc = new Hammer.Manager(this.document.body, {
       recognizers: [
         [Hammer.Swipe, {
-          direction: Hammer.DIRECTION_UP | Hammer.DIRECTION_DOWN
+          direction: Hammer.DIRECTION_UP | Hammer.DIRECTION_DOWN | Hammer.DIRECTION_RIGHT
         }]
       ]
     });
 
-    this.mc.on('swipeup swipedown', event => {
+    this.mc.on('swipeup swipedown swiperight', event => {
       switch (event.type) {
         case 'swipeup':
           this.store.dispatch(titleActions.setPosition({ position: 'up' }));
@@ -65,6 +68,8 @@ export class TitleListenerComponent implements OnInit, OnDestroy {
         case 'swipedown':
           this.store.dispatch(titleActions.setPosition({ position: 'down' }));
           break;
+        case 'swiperight':
+          this.store.dispatch(titleActions.activate());
       }
     });
   }

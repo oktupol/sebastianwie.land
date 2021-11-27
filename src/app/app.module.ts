@@ -14,6 +14,10 @@ import { ContentPageModule } from './shared/components/content-page/content-page
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { ScullyLibModule } from '@scullyio/ng-lib';
 import { NavigationComponent } from './components/navigation/navigation.component';
+import { TitleEffects } from './store/effects/title.effects';
+import { EffectsModule } from '@ngrx/effects';
+import { WINDOW } from './util/injection-tokens';
+
 
 @NgModule({
   declarations: [
@@ -30,6 +34,7 @@ import { NavigationComponent } from './components/navigation/navigation.componen
     StoreModule.forRoot(reducers, {
       metaReducers
     }),
+    EffectsModule.forRoot([TitleEffects]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,
@@ -37,7 +42,9 @@ import { NavigationComponent } from './components/navigation/navigation.componen
     ContentPageModule,
     ScullyLibModule
   ],
-  providers: [],
+  providers: [
+    { provide: WINDOW, useValue: window }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
