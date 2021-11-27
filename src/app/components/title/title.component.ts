@@ -22,16 +22,6 @@ export class TitleComponent implements OnInit {
   get position(): Position {
     return this._position;
   }
-
-  private readonly _hrefs = {
-    up: "https://sebastianwie.land",
-    down: "mailto:sebasti@nwie.land"
-  }
-
-  get href() {
-    return this._hrefs[this.position];
-  }
-
   constructor(private store: Store) { }
 
   ngOnInit(): void {
@@ -43,5 +33,9 @@ export class TitleComponent implements OnInit {
 
   public setPosition(position: Position): void {
     this.store.dispatch(titleActions.setPosition({position}));
+  }
+
+  public activate(): void {
+    this.store.dispatch(titleActions.activate());
   }
 }
