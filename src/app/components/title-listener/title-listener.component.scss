@@ -1,0 +1,15 @@
+@import "../../../styles/variables.scss";
+
+:host {
+  position: absolute;
+  bottom: $page-padding;
+  left: $page-padding;
+  font-size: .8rem;
+  font-family: $title-font-family;
+  color: $detail-color;
+  user-select: none;
+
+  @media screen and (min-width: $mobile-breakpoint) {
+    display: none;
+  }
+}
