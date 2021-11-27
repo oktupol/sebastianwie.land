@@ -16,12 +16,7 @@ $slide-duration: 240ms;
   .title-box {
     display: inline-block;
     position: relative;
-
-    a {
-      color: inherit;
-      text-decoration: inherit;
-      display: block;
-    }
+    cursor: pointer;
   }
 
   .slider {
