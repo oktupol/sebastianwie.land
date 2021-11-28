@@ -50,6 +50,10 @@ form {
       border-left: none;
     }
 
+    textarea {
+      resize: vertical;
+    }
+
     button {
       background-color: unset;
       font-family: $title-font-family;
@@ -57,7 +61,8 @@ form {
       cursor: pointer;
 
       &::before {
-        content: '-> ';
+        content: '=>';
+        margin-right: .5em;
       }
     }
   }
