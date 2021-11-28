@@ -1,0 +1,71 @@
+form {
+  .input-row, .button-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    margin: 0 -.4em;
+
+    & > * {
+      flex-basis: 100%;
+
+      @media screen and (min-width: $mobile-breakpoint) {
+        flex-basis: unset;
+        flex-grow: 1;
+      }
+
+      flex-grow: 1;
+      margin: 0 .4em;
+    }
+
+    .input-group, .textarea-group {
+      display: flex;
+      flex-direction: column-reverse;
+      margin-bottom: .75em;
+
+      label {
+        font-size: .75em;
+        font-family: $title-font-family;
+        margin: .25em 0;
+        padding-left: .75em;
+      }
+
+    }
+
+    .textarea-group {
+      flex-direction: column;
+    }
+
+    textarea, input, button {
+      border: 1px solid black;
+      font-size: 1em;
+      box-sizing: border-box;
+      padding: .25em;
+      font-family: $content-font-family;
+    }
+
+    input, button {
+      border-right: none;
+      border-top: none;
+      border-left: none;
+    }
+
+    button {
+      background-color: unset;
+      font-family: $title-font-family;
+      padding: .75em 1em;
+      cursor: pointer;
+
+      &::before {
+        content: '-> ';
+      }
+    }
+  }
+
+  .button-row {
+    & > * {
+      flex-basis: unset;
+      flex-grow: unset;
+    }
+  }
+}

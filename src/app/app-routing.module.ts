@@ -8,6 +8,7 @@ const routes: Routes = [
   { path: 'signature-info', redirectTo: 'sites/openpgp' },
   { path: 'signature-info.html', redirectTo: 'sites/openpgp' },
   { path: 'sites', loadChildren: () => import('./modules/content/content.module').then(m => m.ContentModule) },
+  { path: 'contact', loadChildren: () => import('./modules/contact/contact.module').then(m => m.ContactModule) },
   { path: '**', component: NotFoundComponent },
 ];
 

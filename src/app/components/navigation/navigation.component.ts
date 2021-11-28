@@ -18,6 +18,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
   public readonly links = [
     { routerLink: '/', label: 'home' },
     { routerLink: '/sites/about', label: 'about '},
+    { routerLink: '/contact', label: 'contact' },
   ]
 
   private destroy$ = new Subject<void>();

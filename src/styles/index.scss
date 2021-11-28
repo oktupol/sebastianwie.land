@@ -1,21 +1,5 @@
 @import "./variables.scss";
 @import "./fonts/index.scss";
 
-html, body {
-  height: 100%;
-  margin: 0;
-}
-
-html {
-  padding: 0;
-
-  @media screen and (min-width: $content-width) {
-    padding: 0 $page-padding;
-  }
-}
-
-body {
-  background-color: $background-color;
-  color: $color;
-  font-family: $font-family;
-}
+@import "./globalStyles/document.scss";
+@import "./globalStyles/forms.scss";
