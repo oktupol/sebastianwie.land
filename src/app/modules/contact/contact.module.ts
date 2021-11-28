@@ -7,6 +7,10 @@ import { ContentPageModule } from 'src/app/shared/components/content-page/conten
 import { StoreModule } from '@ngrx/store';
 import { FEATURE_MODULE, reducers } from './store/reducer';
 import { ReactiveFormsModule } from '@angular/forms';
+import { EffectsModule } from '@ngrx/effects';
+import { OpenpgpEffects } from './store/effects/openpgp.effects';
+import { OpenpgpAdapter } from './adapters/openpgp.adapter';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -17,7 +21,12 @@ import { ReactiveFormsModule } from '@angular/forms';
     ContactRoutingModule,
     ContentPageModule,
     StoreModule.forFeature(FEATURE_MODULE, reducers),
-    ReactiveFormsModule
+    EffectsModule.forFeature([ OpenpgpEffects ]),
+    ReactiveFormsModule,
+    HttpClientModule
+  ],
+  providers: [
+    OpenpgpAdapter
   ]
 })
 export class ContactModule { }
