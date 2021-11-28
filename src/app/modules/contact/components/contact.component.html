@@ -3,37 +3,38 @@
 
   <p>
     Messages sent through this form are end-to-end encrypted.
-    Unlike regular e-mails, no evil government, corporation or power-hungry sysadmin is able to intercept and read them.
+    Unlike regular e-mails, no nosy government, evil corporation or power-hungry sysadmin is able to intercept and read them.
   </p>
 
   <form [formGroup]="contactForm">
     <div class="input-row">
       <div class="input-group">
-        <label for="subject">Subject</label>
         <input type="text" id="subject" formControlName="subject"/>
+        <label for="subject">Subject</label>
       </div>
     </div>
 
     <div class="input-row">
       <div class="input-group">
-        <label for="fromName">Your name</label>
         <input type="text" id="fromName" formControlName="fromName" autocomplete="name"/>
+        <label for="fromName">Your name</label>
       </div>
       <div class="input-group">
-        <label for="fromEmail">Your e-mail address</label>
         <input type="email" id="fromEmail" formControlName="fromEmail" autocomplete="email"/>
+        <label for="fromEmail">Your e-mail address</label>
       </div>
     </div>
 
     <div class="input-row">
       <div class="textarea-group">
-        <label for="message">Message</label>
         <textarea id="message" formControlName="message" rows="10"></textarea>
+        <label for="message">Message</label>
       </div>
     </div>
 
     <div class="button-row">
-      <button type="submit">Send</button>
+      <button type="submit" [disabled]="!contactForm.valid">Send</button>
+      <button type="reset">Clear form</button>
     </div>
   </form>
 </nwie-content-page>

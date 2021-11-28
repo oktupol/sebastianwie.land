@@ -20,7 +20,7 @@ form {
 
     .input-group, .textarea-group {
       display: flex;
-      flex-direction: column-reverse;
+      flex-direction: column;
       margin-bottom: .75em;
 
       label {
@@ -29,11 +29,10 @@ form {
         margin: .25em 0;
         padding-left: .75em;
       }
-
     }
 
     .textarea-group {
-      flex-direction: column;
+      flex-direction: column-reverse;
     }
 
     textarea, input, button {
@@ -54,6 +53,15 @@ form {
       resize: vertical;
     }
 
+    .ng-touched.ng-invalid {
+      border-color: $highlight-color;
+      color: $highlight-color;
+
+      & ~ label {
+        color: $highlight-color;
+      }
+    }
+
     button {
       background-color: unset;
       font-family: $title-font-family;
@@ -64,6 +72,15 @@ form {
         content: '=>';
         margin-right: .5em;
       }
+
+      &[disabled] {
+        border-color: transparent;
+        opacity: .5;
+
+        &::before {
+          visibility: hidden;
+        }
+      }
     }
   }
 
@@ -71,6 +88,21 @@ form {
     & > * {
       flex-basis: unset;
       flex-grow: unset;
+    }
+
+    justify-content: space-between;
+
+    button[type=reset] {
+      border: none;
+      padding: 0;
+      font-size: .75em;
+      align-self: flex-start;
+      color: $detail-color;
+
+      &::before{
+        content: unset;
+        margin-right: unset;
+      }
     }
   }
 }
