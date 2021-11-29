@@ -1,4 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
+import { Message } from '../../interfaces/message';
 import { reset, storeInputs } from '../actions/contact-form.actions';
 
 export const FEATURE = 'contactForm';
@@ -19,6 +20,6 @@ const initialState: State = {
 
 export const reducer = createReducer(
   initialState,
-  on(storeInputs, (state, { subject, fromName, fromEmail, message }) => ({ ...state, subject, fromName, fromEmail, message })),
+  on(storeInputs, (state, message: Message) => ({ ...state, ...message })),
   on(reset, (state) => ({ ...state, ...initialState })),
 );

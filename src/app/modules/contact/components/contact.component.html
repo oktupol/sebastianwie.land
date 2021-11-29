@@ -6,7 +6,7 @@
     Unlike with regular e-mails, no nosy government, evil corporation or power-hungry sysadmin is able to intercept and read them.
   </p>
 
-  <form [formGroup]="contactForm">
+  <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
     <div class="input-row">
       <div class="input-group">
         <input type="text" id="subject" formControlName="subject"/>

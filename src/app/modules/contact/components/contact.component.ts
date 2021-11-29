@@ -2,6 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { debounceTime, Subject, take, takeUntil } from 'rxjs';
+import { Message } from '../interfaces/message';
+import { OpenpgpService } from '../services/openpgp.service';
 import { reset, storeInputs } from '../store/actions/contact-form.actions';
 import { getContactFormInputs } from '../store/selectors/contact-form.selectors';
 
@@ -20,7 +22,11 @@ export class ContactComponent implements OnInit, OnDestroy {
 
   private destroy$ = new Subject<void>();
 
-  constructor(private fb: FormBuilder, private store: Store) { }
+  constructor(
+    private fb: FormBuilder,
+    private store: Store,
+    private openpgpService: OpenpgpService
+  ) { }
 
   ngOnInit(): void {
     this.listenToChanges();
@@ -45,7 +51,7 @@ export class ContactComponent implements OnInit, OnDestroy {
         takeUntil(this.destroy$),
         debounceTime(300)
       )
-      .subscribe(val => {
+      .subscribe((val: Message) => {
         this.store.dispatch(storeInputs({
           subject: val.subject,
           fromName: val.fromName,
@@ -57,5 +63,11 @@ export class ContactComponent implements OnInit, OnDestroy {
 
   public reset(): void {
     this.store.dispatch(reset());
+  }
+
+  public onSubmit(): void {
+    this.openpgpService.encrypt(this.contactForm.value).subscribe(encrypted => {
+      console.log(encrypted);
+    });
   }
 }

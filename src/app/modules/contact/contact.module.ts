@@ -11,6 +11,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { OpenpgpEffects } from './store/effects/openpgp.effects';
 import { OpenpgpAdapter } from './adapters/openpgp.adapter';
 import { HttpClientModule } from '@angular/common/http';
+import { OpenpgpService } from './services/openpgp.service';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule
   ],
   providers: [
-    OpenpgpAdapter
+    OpenpgpAdapter,
+    OpenpgpService
   ]
 })
 export class ContactModule { }

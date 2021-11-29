@@ -17,7 +17,7 @@ export const initialState: State = {
 
 export const reducer = createReducer(
   initialState,
-  on(openPgpActions.loadPublicKey, (state) => ({ ...state, loading: true })),
-  on(openPgpActions.loadPublicKeySuccess, (state, { publicKey }) => ({ ...state, loading: false, publicKey })),
+  on(openPgpActions.loadPublicKey, (state) => ({ ...state, loading: true, error: initialState.error })),
+  on(openPgpActions.loadPublicKeySuccess, (state, { publicKey }) => ({ ...state, loading: false, publicKey, error: initialState.error })),
   on(openPgpActions.loadPublicKeyFailure, (state, { error }) => ({ ...state, loading: false, error })),
 );
