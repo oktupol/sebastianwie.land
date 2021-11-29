@@ -38,7 +38,7 @@ export class OpenpgpService {
   }
 
   public encryptMessage(msg: Message): Observable<Message> {
-    return this.encrypt(msg.subject).pipe(
+    return this.encrypt(msg.message).pipe(
       map((encrypted) => ({ ...msg, message: `${encrypted}` })),
     );
   }
