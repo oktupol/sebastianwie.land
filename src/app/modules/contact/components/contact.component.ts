@@ -66,7 +66,7 @@ export class ContactComponent implements OnInit, OnDestroy {
   }
 
   public onSubmit(): void {
-    this.openpgpService.encrypt(this.contactForm.value).subscribe(encrypted => {
+    this.openpgpService.encryptMessage(this.contactForm.value).subscribe(encrypted => {
       console.log(encrypted);
     });
   }
