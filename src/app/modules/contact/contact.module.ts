@@ -12,6 +12,7 @@ import { OpenpgpEffects } from './store/effects/openpgp.effects';
 import { OpenpgpAdapter } from './adapters/openpgp.adapter';
 import { HttpClientModule } from '@angular/common/http';
 import { OpenpgpService } from './services/openpgp.service';
+import { EncodingService } from './services/encoding.service';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { OpenpgpService } from './services/openpgp.service';
   ],
   providers: [
     OpenpgpAdapter,
-    OpenpgpService
+    OpenpgpService,
+    EncodingService
   ]
 })
 export class ContactModule { }
