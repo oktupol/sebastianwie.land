@@ -21,10 +21,7 @@ export class OpenpgpService {
           this.store.dispatch(loadPublicKey());
           return EMPTY;
         }),
-        takeUntil(this.store.select(getError).pipe(
-          take(1),
-          filter(error => error !== null)
-        )),
+        takeUntil(this.store.select(getError).pipe(filter(error => error))),
         take(1),
       );
   }

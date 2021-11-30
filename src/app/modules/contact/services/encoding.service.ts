@@ -16,13 +16,13 @@ export class EncodingService {
 
     for(let i = 0; i < bytes.length; i += 5) {
       result += chars[ bytes[i] >> 3 ];
-      result += chars[ ((bytes[i] & 7) << 2) | (bytes[i+1] >> 6) ];
-      result += chars[ (bytes[i+1] & 63) >> 1 ];
-      result += chars[ ((bytes[i+1] & 1) << 4) | (bytes[i+2] >> 4) ];
-      result += chars[ ((bytes[i+2] & 15) << 1) | (bytes[i+3] >> 7) ];
-      result += chars[ (bytes[i+3] & 127) >> 2 ];
-      result += chars[ ((bytes[i+3] & 3) << 3) | (bytes[i+4] >> 5) ];
-      result += chars[ bytes[i+4] & 31 ];
+      result += chars[ ((bytes[i] & 7) << 2) | (bytes[i + 1] >> 6) ];
+      result += chars[ (bytes[i + 1] & 63) >> 1 ];
+      result += chars[ ((bytes[i + 1] & 1) << 4) | (bytes[i + 2] >> 4) ];
+      result += chars[ ((bytes[i + 2] & 15) << 1) | (bytes[i + 3] >> 7) ];
+      result += chars[ (bytes[i + 3] & 127) >> 2 ];
+      result += chars[ ((bytes[i + 3] & 3) << 3) | (bytes[i + 4] >> 5) ];
+      result += chars[ bytes[i + 4] & 31 ];
     }
 
     const cutoff = (8 - Math.ceil((bytes.length % 5) / 5 * 8)) % 8;

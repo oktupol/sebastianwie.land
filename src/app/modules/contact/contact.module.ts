@@ -13,6 +13,7 @@ import { OpenpgpAdapter } from './adapters/openpgp.adapter';
 import { HttpClientModule } from '@angular/common/http';
 import { OpenpgpService } from './services/openpgp.service';
 import { EncodingService } from './services/encoding.service';
+import { MultipartDocumentService } from './services/multipart-document.service';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { EncodingService } from './services/encoding.service';
   providers: [
     OpenpgpAdapter,
     OpenpgpService,
-    EncodingService
+    EncodingService,
+    MultipartDocumentService,
   ]
 })
 export class ContactModule { }
