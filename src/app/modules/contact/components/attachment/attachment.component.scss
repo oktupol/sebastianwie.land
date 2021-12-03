@@ -1,0 +1,35 @@
+@import '../../../../../styles/variables.scss';
+
+:host {
+  display: block;
+  font-family: $title-font-family;
+  font-size: .75em;
+
+  display: flex;
+  flex-direction: row;
+
+  label {
+    cursor: pointer;
+  }
+
+  input[type=file] {
+    position: fixed;
+    left: -1000px;
+    top: -1000px;
+    visibility: none;
+  }
+
+  button {
+    background: none;
+    border: none;
+    padding: 0;
+    font-family: $title-font-family;
+    font-size: 1em;
+    cursor: pointer;
+  }
+
+  .spacer {
+    flex-grow: 1;
+    border-bottom: 1px dashed black;
+  }
+}

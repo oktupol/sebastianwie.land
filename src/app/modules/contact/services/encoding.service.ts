@@ -8,6 +8,10 @@ export enum Base32Charset {
   WORD_SAFE = '23456789CFGHJMPQRVWXcfghjmpqrvwx',
 }
 
+export enum Base64Charset {
+  DEFAULT = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/',
+}
+
 @Injectable()
 export class EncodingService {
   base32(buffer: ArrayBuffer | Uint8Array, chars: Base32Charset = Base32Charset.DEFAULT): string {
@@ -27,5 +31,29 @@ export class EncodingService {
 
     const cutoff = (8 - Math.ceil((bytes.length % 5) / 5 * 8)) % 8;
     return result.substring(0, result.length - cutoff);
+  }
+
+  base64(buffer: ArrayBuffer | Uint8Array, chars: Base64Charset = Base64Charset.DEFAULT): string {
+    const bytes = (buffer instanceof ArrayBuffer) ? new Uint8Array(buffer) : buffer;
+    let result = '';
+
+    for (let i = 0; i < bytes.length; i += 3) {
+      result += chars[ bytes[i] >> 2 ];
+      result += chars[ ((bytes[i] & 3) << 4) | (bytes[i + 1] >> 4) ];
+      result += chars[ ((bytes[i + 1] & 15) << 2) | (bytes[i + 2] >> 6) ];
+      result += chars[ bytes[i + 2] & 63 ];
+    }
+
+    if (bytes.length % 3 === 2) {
+      result = result.substring(0, result.length - 1) + '=';
+    } else if (bytes.length % 3 === 1) {
+      result = result.substring(0, result.length - 2) + '==';
+    }
+
+    return result;
+  }
+
+  wrap(str: string): string {
+    return str.replace(/(?![^\n]{1,76}$)([^\n]{1,76})/g, '$1\n');
   }
 }

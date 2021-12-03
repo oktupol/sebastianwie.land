@@ -1,5 +1,3 @@
-import { environment } from 'src/environments/environment';
-
 export interface AbstractDocument {
   contentType: string;
   toString(): string;

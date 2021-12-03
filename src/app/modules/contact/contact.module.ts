@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ContactRoutingModule } from './contact-routing.module';
-import { ContactComponent } from './components/contact.component';
+import { ContactComponent } from './components/contact/contact.component';
 import { ContentPageModule } from 'src/app/shared/components/content-page/content-page.module';
 import { StoreModule } from '@ngrx/store';
 import { FEATURE_MODULE, reducers } from './store/reducer';
@@ -14,10 +14,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { OpenpgpService } from './services/openpgp.service';
 import { EncodingService } from './services/encoding.service';
 import { MultipartDocumentService } from './services/multipart-document.service';
+import { AttachmentComponent } from './components/attachment/attachment.component';
 
 @NgModule({
   declarations: [
-    ContactComponent
+    ContactComponent,
+    AttachmentComponent
   ],
   imports: [
     CommonModule,

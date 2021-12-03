@@ -32,9 +32,16 @@
       </div>
     </div>
 
+    <div class="attachments">
+      <nwie-attachment *ngFor="let attachment of attachmentFields.controls; let i = index"
+        [control]="attachment"
+        (addAttachment)="addAttachmentField()"
+        (delete)="deleteAttachment(i)"></nwie-attachment>
+    </div>
+
     <div class="button-row">
       <button type="submit" [disabled]="!contactForm.valid">Send</button>
-      <button type="reset">Clear form</button>
+      <button type="reset" (click)="reset()">Clear form</button>
     </div>
   </form>
 </nwie-content-page>

@@ -3,4 +3,5 @@ export interface Message {
   fromName: string;
   fromEmail: string;
   message: string;
+  attachments?: Array<File | null>;
 }
