@@ -15,6 +15,9 @@ import { OpenpgpService } from './services/openpgp.service';
 import { EncodingService } from './services/encoding.service';
 import { MultipartDocumentService } from './services/multipart-document.service';
 import { AttachmentComponent } from './components/attachment/attachment.component';
+import { MailAdapter } from './adapters/mail.adapter';
+import { ContactFormService } from './services/contact-form.service';
+import { ContactFormEffects } from './store/effects/contact-form.effects';
 
 @NgModule({
   declarations: [
@@ -26,15 +29,17 @@ import { AttachmentComponent } from './components/attachment/attachment.componen
     ContactRoutingModule,
     ContentPageModule,
     StoreModule.forFeature(FEATURE_MODULE, reducers),
-    EffectsModule.forFeature([ OpenpgpEffects ]),
+    EffectsModule.forFeature([ OpenpgpEffects, ContactFormEffects ]),
     ReactiveFormsModule,
     HttpClientModule
   ],
   providers: [
     OpenpgpAdapter,
+    MailAdapter,
     OpenpgpService,
     EncodingService,
     MultipartDocumentService,
+    ContactFormService,
   ]
 })
 export class ContactModule { }

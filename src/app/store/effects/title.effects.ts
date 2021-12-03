@@ -9,7 +9,7 @@ import * as titleSelectors from '../selectors/title.selectors';
 @Injectable()
 export class TitleEffects {
   activate$ = createEffect(() => this.actions$.pipe(
-    ofType(titleActions.TITLE_ACTIVATE),
+    ofType(titleActions.activate),
     mergeMap(() => this.store.select(titleSelectors.getPosition).pipe(
       take(1),
       map(position => {
