@@ -76,7 +76,7 @@ export class MimeDocumentFactory {
   }
 
   public setPlainTextContent(content: string): MimeDocumentFactory {
-    this.contentType = 'text/plain;charset=utf8';
+    this.contentType = 'text/plain;charset=utf-8';
     this.contentTransferEncoding = 'quoted-printable';
     this.content = content;
     return this;

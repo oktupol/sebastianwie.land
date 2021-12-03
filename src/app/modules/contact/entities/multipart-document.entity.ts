@@ -13,16 +13,16 @@ export class MultipartDocument implements AbstractDocument {
 
   toString(): string {
     const result = [];
-    const boundaryLeftPadded = this.boundary.padStart(52, '-');
+    const boundaryLeftPadded = this.boundary.padStart(50, '-');
 
     result.push(`Content-Type: ${this.contentType};boundary=${boundaryLeftPadded}`);
     result.push('');
 
     for(let part of this.parts) {
-      result.push(boundaryLeftPadded);
+      result.push(`--${boundaryLeftPadded}`);
       result.push(part.toString());
     }
-    result.push(`${boundaryLeftPadded}--`);
+    result.push(`--${boundaryLeftPadded}--`);
 
     return result.join('\n');
   }
