@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
 
-  backendUrl: 'https://localhost:8001',
+  backendUrl: 'https://sebastianwieland.de/api',
 };
