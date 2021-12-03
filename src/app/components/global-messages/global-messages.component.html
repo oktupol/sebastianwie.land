@@ -1,0 +1,8 @@
+<div class="gm-container" *ngIf="globalMessages.length">
+  <div *ngFor="let message of globalMessages; let i = index" [class]="message.type">
+    <div>
+      {{ message.message }}
+    </div>
+    <button type="button" (click)="remove(i)">&times;</button>
+  </div>
+</div>

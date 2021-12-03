@@ -17,6 +17,8 @@ import { NavigationComponent } from './components/navigation/navigation.componen
 import { TitleEffects } from './store/effects/title.effects';
 import { EffectsModule } from '@ngrx/effects';
 import { WINDOW } from './util/injection-tokens';
+import { GlobalMessagesService } from './shared/services/global-messages.service';
+import { GlobalMessagesComponent } from './components/global-messages/global-messages.component';
 
 
 @NgModule({
@@ -26,7 +28,8 @@ import { WINDOW } from './util/injection-tokens';
     TitleComponent,
     TitleListenerComponent,
     NotFoundComponent,
-    NavigationComponent
+    NavigationComponent,
+    GlobalMessagesComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +46,7 @@ import { WINDOW } from './util/injection-tokens';
     ScullyLibModule
   ],
   providers: [
-    { provide: WINDOW, useValue: window }
+    GlobalMessagesService,
   ],
   bootstrap: [AppComponent]
 })

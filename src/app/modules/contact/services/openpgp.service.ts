@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { createMessage, encrypt, NodeStream, readKey, WebStream } from 'openpgp';
-import { EMPTY, filter, from, map, mergeMap, Observable, of, take, takeUntil, withLatestFrom, } from 'rxjs';
-import { Message } from '../interfaces/message';
+import { EMPTY, filter, from,  mergeMap, Observable, of, take, takeUntil, withLatestFrom, } from 'rxjs';
 import { loadPublicKey } from '../store/actions/openpgp.actions';
 import { getError, getPublicKey } from '../store/selectors/openpgp.selectors';
 
 @Injectable()
 export class OpenpgpService {
-  public constructor(private store: Store) {}
+  public constructor(private store: Store) { }
 
   public getOpenpgpKey(): Observable<string> {
     return this.store.select(getPublicKey)
@@ -31,12 +30,6 @@ export class OpenpgpService {
       mergeMap(key => from(readKey({ armoredKey: key }))),
       withLatestFrom(from(createMessage({ text: text }))),
       mergeMap(([key, message]) => from(encrypt({ message, encryptionKeys: key }))),
-    );
-  }
-
-  public encryptMessage(msg: Message): Observable<Message> {
-    return this.encrypt(msg.message).pipe(
-      map((encrypted) => ({ ...msg, message: `${encrypted}` })),
     );
   }
 
