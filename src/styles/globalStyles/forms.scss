@@ -4,7 +4,7 @@ form {
     flex-direction: row;
     flex-wrap: wrap;
 
-    margin: 0 -.4em;
+    margin: 0 -#{$form-field-margin};
 
     & > * {
       flex-basis: 100%;
@@ -15,19 +15,19 @@ form {
       }
 
       flex-grow: 1;
-      margin: 0 .4em;
+      margin: 0 #{$form-field-margin};
     }
 
     .input-group, .textarea-group {
       display: flex;
       flex-direction: column;
-      margin-bottom: .75em;
+      margin-bottom: $input-group-margin;
 
       label {
-        font-size: .75em;
-        font-family: $title-font-family;
-        margin: .25em 0;
-        padding-left: .75em;
+        font-size: $label-font-size;
+        font-family: $label-font-family;
+        margin: #{$label-margin} 0;
+        padding-left: #{$label-padding};
       }
     }
 
@@ -36,11 +36,11 @@ form {
     }
 
     textarea, input, button {
-      border: 1px solid black;
-      font-size: 1em;
+      border: $input-border;
+      font-size: $input-font-size;
       box-sizing: border-box;
-      padding: .25em;
-      font-family: $content-font-family;
+      padding: $input-padding;
+      font-family: $input-font-family;
     }
 
     input, button {
@@ -54,17 +54,17 @@ form {
     }
 
     .ng-touched.ng-invalid {
-      border-color: $highlight-color;
-      color: $highlight-color;
+      border-color: $input-invalid-color;
+      color: $input-invalid-color;
 
       & ~ label {
-        color: $highlight-color;
+        color: $input-invalid-color;
       }
     }
 
     button {
       background-color: unset;
-      font-family: $title-font-family;
+      font-family: $label-font-family;
       padding: .75em 1em;
       cursor: pointer;
 
@@ -95,9 +95,9 @@ form {
     button[type=reset] {
       border: none;
       padding: 0;
-      font-size: .75em;
+      font-size: $label-font-size;
       align-self: flex-start;
-      color: $detail-color;
+      color: $reset-button-color;
 
       &::before{
         content: unset;
