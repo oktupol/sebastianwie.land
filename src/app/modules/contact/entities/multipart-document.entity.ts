@@ -7,15 +7,24 @@ export class MultipartDocument implements AbstractDocument {
   constructor(
     public contentType: string,
     public boundary: string,
+    public protectedHeaders: boolean,
   ) {}
 
   public parts: AbstractDocument[] = [];
+  public headers: string[] = [];
 
   toString(): string {
     const result = [];
     const boundaryLeftPadded = this.boundary.padStart(50, '-');
 
-    result.push(`Content-Type: ${this.contentType};boundary=${boundaryLeftPadded}`);
+    if (!this.protectedHeaders) {
+      result.push(`Content-Type: ${this.contentType};boundary=${boundaryLeftPadded}`);
+    } else {
+      result.push(`Content-Type: ${this.contentType};boundary=${boundaryLeftPadded};protected-headers="v1"`);
+      for (let header of this.headers) {
+        result.push(header);
+      }
+    }
     result.push('');
 
     for(let part of this.parts) {

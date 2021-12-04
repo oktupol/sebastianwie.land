@@ -11,7 +11,7 @@ import { reset, send, sendFailure, sendSuccess } from '../actions/contact-form.a
 export class ContactFormEffects {
   send$ = createEffect(() => this.actions$.pipe(
     ofType(send),
-    mergeMap(({encryptedMsg}) => this.mailAdapter.postMail(encryptedMsg).pipe(
+    mergeMap(({encryptedMsg, messageId}) => this.mailAdapter.postMail(encryptedMsg, messageId).pipe(
       map(() => sendSuccess()),
       catchError((error: HttpErrorResponse) => {
         switch (error.status) {

@@ -11,6 +11,6 @@ export const storeInputs = createAction(
   props<{ subject: string, fromName: string, fromEmail: string, message: string }>()
 );
 export const reset = createAction(CONTACT_FORM_RESET);
-export const send = createAction(CONTACT_FORM_SEND, props<{ encryptedMsg: string }>());
+export const send = createAction(CONTACT_FORM_SEND, props<{ encryptedMsg: string, messageId: string }>());
 export const sendSuccess = createAction(CONTACT_FORM_SEND_SUCCESS);
 export const sendFailure = createAction(CONTACT_FORM_SEND_FAILURE, props<{ error: any }>());

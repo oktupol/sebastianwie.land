@@ -7,8 +7,13 @@ import { environment } from 'src/environments/environment';
 export class MailAdapter {
   public constructor(private http: HttpClient) {}
 
-  public postMail(message: string): Observable<string> {
-    return this.http.post(environment.backendUrl + '/mail', message, { responseType: 'text' });
+  public postMail(message: string, messageId: string): Observable<string> {
+    return this.http.post(environment.backendUrl + '/mail', message, {
+      headers: {
+        'X-Nwie-Message-Id': messageId
+      },
+      responseType: 'text'
+    });
   }
 
 }

@@ -4,6 +4,8 @@ import { EncodingService } from '../services/encoding.service';
 export class MultipartDocumentFactory {
   private contentType?: string;
   private boundary?: string;
+  private protectedHeaders = false;
+  private headers: string[] = [];
 
   private parts: AbstractDocument[] = [];
 
@@ -17,6 +19,16 @@ export class MultipartDocumentFactory {
 
   public setBoundary(boundary: string): MultipartDocumentFactory {
     this.boundary = boundary;
+    return this;
+  }
+
+  public setProtectedHeaders(): MultipartDocumentFactory {
+    this.protectedHeaders = true;
+    return this;
+  }
+
+  public addHeader(header: string, value: string): MultipartDocumentFactory {
+    this.headers.push(`${header}: ${value}`);
     return this;
   }
 
@@ -44,8 +56,13 @@ export class MultipartDocumentFactory {
       throw new Error('boundary must be set!');
     }
 
-    const result = new MultipartDocument(this.contentType, this.boundary);
+    const result = new MultipartDocument(this.contentType, this.boundary, this.protectedHeaders);
     result.parts = [ ...this.parts ];
+
+    if (this.protectedHeaders) {
+      result.headers = [ ...this.headers ];
+    }
+
     return result;
   }
 }
