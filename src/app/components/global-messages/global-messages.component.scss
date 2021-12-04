@@ -5,7 +5,7 @@
   bottom: 0;
   right: 0;
   left: 0;
-  z-index: 1300;
+  z-index: map-get($z-index, 'global-message') + 50;
 
   display: flex;
   justify-content: center;

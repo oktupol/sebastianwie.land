@@ -13,5 +13,7 @@ export const environment = {
       100
     ].map(b => String.fromCharCode(b)).join('')}>`,
     messageIdDomain: 'sebastianwieland.de',
+    maxMessageSize: 2_500_000,
+    maxEncryptedMessageSize: 5_000_000,
   }
 };

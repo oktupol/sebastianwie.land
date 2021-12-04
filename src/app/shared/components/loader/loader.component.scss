@@ -1,0 +1,68 @@
+@import '../../../../styles/variables.scss';
+
+.backdrop {
+  position: fixed;
+  z-index: map-get($z-index, 'loader');
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+
+  background-color: $backdrop-color;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .loader {
+    flex-basis: 200px;
+    height: 120px;
+    border: $content-border;
+    background-color: $content-background-color;
+    font-family: $loader-font-family;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+
+    .loader-dots {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 100px;
+
+      .dot {
+        height: 10px;
+        width: 10px;
+
+        animation-duration: 2s;
+        animation-timing-function: steps(4, end);
+        animation-iteration-count: infinite;
+
+        &.dot1 { animation-name: flash1; }
+        &.dot2 { animation-name: flash2; }
+        &.dot3 { animation-name: flash3; }
+      }
+
+      @keyframes flash1 {
+        0% { background-color: $content-background-color; }
+        24% { background-color: $content-background-color; }
+        25% { background-color: $color; }
+        100% { background-color: $color; }
+      }
+      @keyframes flash2 {
+        0% { background-color: $content-background-color; }
+        49% { background-color: $content-background-color; }
+        50% { background-color: $color; }
+        100% { background-color: $color; }
+      }
+      @keyframes flash3 {
+        0% { background-color: $content-background-color; }
+        74% { background-color: $content-background-color; }
+        75% { background-color: $color; }
+        100% { background-color: $color; }
+      }
+    }
+  }
+}

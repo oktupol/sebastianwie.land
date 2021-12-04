@@ -18,6 +18,7 @@ import { AttachmentComponent } from './components/attachment/attachment.componen
 import { MailAdapter } from './adapters/mail.adapter';
 import { ContactFormService } from './services/contact-form.service';
 import { ContactFormEffects } from './store/effects/contact-form.effects';
+import { LoaderModule } from 'src/app/shared/components/loader/loader.module';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { ContactFormEffects } from './store/effects/contact-form.effects';
     StoreModule.forFeature(FEATURE_MODULE, reducers),
     EffectsModule.forFeature([ OpenpgpEffects, ContactFormEffects ]),
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    LoaderModule
   ],
   providers: [
     OpenpgpAdapter,

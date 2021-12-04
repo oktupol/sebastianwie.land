@@ -5,7 +5,7 @@ import { debounceTime, Subject, take, takeUntil } from 'rxjs';
 import { Message } from '../../interfaces/message';
 import { ContactFormService } from '../../services/contact-form.service';
 import { storeInputs } from '../../store/actions/contact-form.actions';
-import { getContactFormInputs } from '../../store/selectors/contact-form.selectors';
+import { getContactFormInputs, isSending } from '../../store/selectors/contact-form.selectors';
 
 @Component({
   selector: 'nwie-contact',
@@ -22,6 +22,8 @@ export class ContactComponent implements OnInit, OnDestroy {
   });
 
   public attachmentFields!: FormArray;
+
+  public sending = false;
 
   private destroy$ = new Subject<void>();
 
@@ -41,6 +43,10 @@ export class ContactComponent implements OnInit, OnDestroy {
       .subscribe(values => {
         this.contactForm.setValue({ ...values, attachments: [null] });
       });
+
+    this.store.select(isSending).pipe(
+      takeUntil(this.destroy$)
+    ).subscribe(s => this.sending = s);
   }
 
   ngOnDestroy(): void {

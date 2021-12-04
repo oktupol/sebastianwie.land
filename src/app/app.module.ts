@@ -16,7 +16,6 @@ import { ScullyLibModule } from '@scullyio/ng-lib';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { TitleEffects } from './store/effects/title.effects';
 import { EffectsModule } from '@ngrx/effects';
-import { WINDOW } from './util/injection-tokens';
 import { GlobalMessagesService } from './shared/services/global-messages.service';
 import { GlobalMessagesComponent } from './components/global-messages/global-messages.component';
 
@@ -29,7 +28,7 @@ import { GlobalMessagesComponent } from './components/global-messages/global-mes
     TitleListenerComponent,
     NotFoundComponent,
     NavigationComponent,
-    GlobalMessagesComponent
+    GlobalMessagesComponent,
   ],
   imports: [
     BrowserModule,

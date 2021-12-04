@@ -1,3 +1,5 @@
+@import "./z-indexes.scss";
+
 $background-color: #d0d0d0;
 $color: #101010;
 $highlight-color: #e01010;
@@ -44,3 +46,5 @@ $reset-button-color: $detail-color;
 $attachment-spacer-border: 1px dashed #000;
 
 $global-message-font-family: $title-font-family;
+
+$loader-font-family: $title-font-family;
