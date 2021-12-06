@@ -16,3 +16,19 @@ body {
   color: $color;
   font-family: $font-family;
 }
+
+.imprint-link {
+  position: absolute;
+  display: block;
+  padding: .25em;
+  color: $color;
+  text-decoration: none;
+  font-family: $navigation-font-family;
+  font-size: .6em;
+  background-color: $background-color;
+  opacity: 0.25;
+  right: 0;
+  top: 0;
+  z-index: map-get($z-index, 'imprint-link');
+}
+
