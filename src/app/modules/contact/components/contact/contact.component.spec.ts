@@ -1,9 +1,8 @@
-import { DebugElement, Injectable } from '@angular/core';
-import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
-import { FormArray, FormBuilder, ReactiveFormsModule } from '@angular/forms';
-import { By } from '@angular/platform-browser';
+import { Component, DebugElement, EventEmitter, Injectable, Input, Output } from '@angular/core';
+import { ComponentFixture, TestBed, } from '@angular/core/testing';
+import { FormArray, FormBuilder, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { EMPTY, Observable, of } from 'rxjs';
+import { EMPTY, of } from 'rxjs';
 import { Message } from '../../interfaces/message';
 import { ContactFormService } from '../../services/contact-form.service';
 import { getContactFormInputs } from '../../store/selectors/contact-form.selectors';
@@ -34,6 +33,19 @@ class MockContactFormService {
 
   }
 }
+
+@Component({ selector: 'nwie-content-page', template: '<p><ng-content></ng-content></p>' })
+class MockContentPageComponent {
+}
+@Component({ selector: 'nwie-loader', template: 'loading...' })
+class MockLoaderComponent {
+}
+@Component({ selector: 'nwie-attachment', template: '<div>attachment</div>' })
+class MockAttachmentComponent {
+  @Input() public control!: FormControl;
+  @Output() public addAttachment = new EventEmitter<void>();
+  @Output() public delete = new EventEmitter<void>();
+}
 describe('ContactComponent', () => {
   let component: ContactComponent;
   let fixture: ComponentFixture<ContactComponent>;
@@ -43,7 +55,7 @@ describe('ContactComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ContactComponent],
+      declarations: [ContactComponent, MockContentPageComponent, MockLoaderComponent, MockAttachmentComponent],
       imports: [ReactiveFormsModule],
       providers: [
         FormBuilder,

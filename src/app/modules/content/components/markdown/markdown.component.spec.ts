@@ -1,3 +1,4 @@
+import { Component, Input } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute, Data } from '@angular/router';
 import { Subject } from 'rxjs';
@@ -8,13 +9,21 @@ const activatedRouteData = new Subject<Data>();
 const activatedRouteMock = {
   data: activatedRouteData,
 }
+
+@Component({ selector: 'markdown', template: 'markdown mock' })
+class MockMarkdownComponent {
+  @Input() public src!: string;
+}
+@Component({ selector: 'nwie-content-page', template: '<p><ng-content></ng-content></p>' })
+class MockContentPageComponent {
+}
 describe('MarkdownComponent', () => {
   let component: MarkdownComponent;
   let fixture: ComponentFixture<MarkdownComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MarkdownComponent ],
+      declarations: [ MarkdownComponent, MockMarkdownComponent, MockContentPageComponent ],
       providers: [{ provide: ActivatedRoute, useValue: activatedRouteMock }]
     })
     .compileComponents();
