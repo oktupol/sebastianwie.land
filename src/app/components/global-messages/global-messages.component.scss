@@ -46,19 +46,19 @@
       }
 
       &.info {
-        background-color: #60f8f6;
+        background-color: $info-color;
       }
 
       &.success {
-        background-color: #7cf88a;
+        background-color: $success-color;
       }
 
       &.warn {
-        background-color: #f8f366;
+        background-color: $warn-color;
       }
 
       &.error {
-        background-color: #f85768;
+        background-color: $error-color;
       }
     }
   }

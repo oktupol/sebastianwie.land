@@ -1,6 +1,5 @@
-import { DOCUMENT } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
-import { WINDOW } from 'src/app/util/injection-tokens';
+import { VerificationResponse } from 'src/app/util/types';
 
 @Component({
   selector: 'nwie-verify-email',
@@ -13,12 +12,11 @@ export class VerifyEmailComponent implements OnInit, AfterViewInit {
   public emailFileName: string = '';
   public isDraggedOver: boolean = false;
 
+  public verificationResponse?: VerificationResponse;
+
   @ViewChild('fileUploadBox') private fileUploadBox !: ElementRef;
 
-  constructor(
-    @Inject(WINDOW) private window: Window,
-    @Inject(DOCUMENT) private document: Document,
-  ) { }
+  constructor() { }
 
   ngOnInit(): void {
   }
@@ -37,8 +35,10 @@ export class VerifyEmailComponent implements OnInit, AfterViewInit {
   }
 
   selectFile(file: File) {
-    this.emailFile = file;
-    this.emailFileName = file.name;
+    if (file.type === 'message/rfc822') {
+      this.emailFile = file;
+      this.emailFileName = file.name;
+    }
   }
 
   onInputChange(event: Event) {

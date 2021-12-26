@@ -4,6 +4,11 @@
     Using this tool, you can verify the legitimacy of emails sent by me. To do
     so, export the email as .eml file and open it here.
   </p>
+  <p>
+    This tool checks the legitimacy by verifying a digital signature within the
+    email. The verification happens on your device; no information is uploaded
+    into the internet.
+  </p>
 
   <form class="file-upload-box"
     (dragover)="isDraggedOver = true"
@@ -17,7 +22,7 @@
     <input type="file" id="email-file" accept="message/rfc822" (change)="onInputChange($event)"/>
 
     <label for="email-file">
-      <p>Choose an email file...</p>
+      <p>Choose an email file ...</p>
       <div class="mock-input">
         <div class="text-field">{{ emailFileName }}</div>
         <div class="button">Choose</div>
@@ -25,4 +30,107 @@
       <p>... or drop it here.</p>
     </label>
   </form>
+
+  <div class="verification-response warn" *ngIf="verificationResponse === 'not-an-eml-file'">
+    <h2>Not an .eml File</h2>
+    <p>
+      The file you uploaded does not appear to be an .eml file.
+    </p>
+  </div>
+
+  <div class="verification-response info" *ngIf="verificationResponse === 'not-from-me'">
+    <h2>Not from me</h2>
+    <p>
+      This tool can only check the legitimacy of emails sent by me.
+    </p>
+  </div>
+
+  <div class="verification-response error" *ngIf="verificationResponse === 'not-a-multipart-file' || verificationResponse === 'no-signature-present'">
+    <h2>Could not verify legitimacy!</h2>
+
+    <p>
+      The email appears to be sent by me, but it is not signed. There is no
+      certainty about its legitimacy!
+    </p>
+
+    <p>
+      This could mean one or multiple of following things:
+    </p>
+
+    <ul>
+      <li>I am the author, but a third party between me and you removed the
+      signature from the original email</li>
+      <li>I am the author, but a third party between me and you altered the
+      contents of the email.</li>
+      <li>I am <strong>not</strong> the author, and a third party sent you this
+      email pretending to be me.</li>
+    </ul>
+
+    <p>
+      When in doubt: <strong>ignore this email!</strong> If the legitimacy of
+      the email is crucial to you, contact me using <a
+      routerLink="/contact">the end-to-end encrypted contact form</a> and
+      request an end-to-end encrypted reply!
+    </p>
+  </div>
+
+  <div class="verification-response info" *ngIf="verificationResponse === 'encrypted'">
+    <h2>Encrypted message</h2>
+    <p>
+      This message is encrypted and can only be opened by the recipient. If you
+      are the recipient, use your decryption software to verify its legitimacy.
+    </p>
+  </div>
+
+  <div class="verification-response error" *ngIf="verificationResponse === 'bad-signature'">
+    <h2>Could not verify legitimacy!</h2>
+
+    <p>
+      The email appears to be sent by me, but the signature doesn't match.
+      There is no certainty about its legitimacy!
+    </p>
+
+    <p>
+      This could mean one or multiple of following things:
+    </p>
+
+    <ul>
+      <li>I am the author, but a third party between me and you altered the
+      contents of the email.</li>
+      <li>I am <strong>not</strong> the author, and a third party sent you this
+      email pretending to be me.</li>
+    </ul>
+
+    <p>
+      When in doubt: <strong>ignore this email!</strong> If the legitimacy of
+      the email is crucial to you, contact me using <a
+      routerLink="/contact">the end-to-end encrypted contact form</a> and
+      request an end-to-end encrypted reply!
+    </p>
+  </div>
+
+  <div class="verification-response success" *ngIf="verificationResponse === 'good-signature'">
+    <h2>Legitimacy verified.</h2>
+
+    <p>
+      Please check following things:
+    </p>
+
+    <ul>
+      <li>Does the URL of the website you're on start with <code>https://</code>?</li>
+      <li>Is your browser showing you a padlock symbol without any warnings next to the URL?</li>
+      <li>Were you able to enter this website without having to accept any warnings about an insecure connection?</li>
+      <li>Do you own the device you're currently using?</li>
+    </ul>
+
+    <p>
+      If you were able to answer all of these questions with "yes", you can be
+      certain about the email's legitimacy.
+    </p>
+
+    <p>
+      If you had to answer any of these questions with "no", it is possible
+      that someone tampered with this tool to present you a wrong result.
+    </p>
+  </div>
 </nwie-content-page>
