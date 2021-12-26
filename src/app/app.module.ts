@@ -18,6 +18,7 @@ import { TitleEffects } from './store/effects/title.effects';
 import { EffectsModule } from '@ngrx/effects';
 import { GlobalMessagesService } from './shared/services/global-messages.service';
 import { GlobalMessagesComponent } from './components/global-messages/global-messages.component';
+import { WINDOW } from './util/injection-tokens';
 
 
 @NgModule({
@@ -45,6 +46,7 @@ import { GlobalMessagesComponent } from './components/global-messages/global-mes
     ScullyLibModule
   ],
   providers: [
+    { provide: WINDOW, useValue: window },
     GlobalMessagesService,
   ],
   bootstrap: [AppComponent]

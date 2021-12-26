@@ -1,0 +1,28 @@
+<nwie-content-page>
+  <h1>Verify E-Mail Legitimacy</h1>
+  <p>
+    Using this tool, you can verify the legitimacy of emails sent by me. To do
+    so, export the email as .eml file and open it here.
+  </p>
+
+  <form class="file-upload-box"
+    (dragover)="isDraggedOver = true"
+    (dragenter)="isDraggedOver = true"
+    (dragleave)="isDraggedOver = false"
+    (dragend)="isDraggedOver = false"
+    (drop)="isDraggedOver = false; onDrop($event)"
+    [class.is-dragged-over]="isDraggedOver"
+    #fileUploadBox>
+
+    <input type="file" id="email-file" accept="message/rfc822" (change)="onInputChange($event)"/>
+
+    <label for="email-file">
+      <p>Choose an email file...</p>
+      <div class="mock-input">
+        <div class="text-field">{{ emailFileName }}</div>
+        <div class="button">Choose</div>
+      </div>
+      <p>... or drop it here.</p>
+    </label>
+  </form>
+</nwie-content-page>

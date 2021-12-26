@@ -19,11 +19,13 @@ import { MailAdapter } from './adapters/mail.adapter';
 import { ContactFormService } from './services/contact-form.service';
 import { ContactFormEffects } from './store/effects/contact-form.effects';
 import { LoaderModule } from 'src/app/shared/components/loader/loader.module';
+import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
 
 @NgModule({
   declarations: [
     ContactComponent,
-    AttachmentComponent
+    AttachmentComponent,
+    VerifyEmailComponent
   ],
   imports: [
     CommonModule,
