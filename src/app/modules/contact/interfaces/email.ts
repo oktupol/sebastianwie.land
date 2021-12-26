@@ -9,7 +9,7 @@ export interface ContentType {
 }
 export interface Email {
   headers: Headers,
-  contentType?: ContentType,
+  contentType: ContentType,
   content: string,
   parts?: Array<{ raw: string, parsed: Email }>
   isMultipart: boolean

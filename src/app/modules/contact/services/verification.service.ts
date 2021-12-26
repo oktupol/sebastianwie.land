@@ -32,11 +32,15 @@ export class VerificationService {
           return of('not-a-multipart-file');
         }
 
-        if (email.contentType?.type === 'multipart/encrypted') {
+        if (email.contentType.type === 'multipart/encrypted') {
           return of('encrypted');
         }
 
-        if (!email.parts || email.parts.length < 2 || email.parts[1].parsed.contentType?.type !== 'application/pgp-signature') {
+        if (email.contentType.type !== 'multipart/signed' || email.contentType.params?.['protocol'] !== 'application/pgp-signature') {
+          return of('no-signature-present');
+        }
+
+        if (!email.parts || email.parts.length < 2 || email.parts[1].parsed.contentType.type !== 'application/pgp-signature') {
           return of('no-signature-present');
         }
 
@@ -73,20 +77,20 @@ export class VerificationService {
     }
 
     // Advance i to next non-empty line
-    while(lines[++i].trim() === '');
+    while (!lines[++i].trim());
 
     const contentLines = lines.splice(i);
     const content = contentLines.join('\n');
+    const contentType = this.parseContentType(headers['content-type']);
 
-    if (!headers['content-type'].startsWith('multipart/')) {
+    if (!contentType.type.startsWith('multipart/')) {
       return {
         headers,
         content,
-        contentType: this.parseContentType(headers['content-type']),
+        contentType,
         isMultipart: false
       };
     } else {
-      const contentType = this.parseContentType(headers['content-type']);
       const boundary = contentType.params?.['boundary'];
 
       if (!boundary) {
@@ -104,8 +108,9 @@ export class VerificationService {
       let partIndex = -1;
       for (let i = 0; i < contentLines.length; i++) {
         const line = contentLines[i];
+        const trimmedLine = line.trim();
 
-        if (line.trim() === `--${boundary}` || line.trim() === `--${boundary}--`) {
+        if (trimmedLine === `--${boundary}` || trimmedLine === `--${boundary}--`) {
           partIndex++;
 
           if (partIndex > 0) {
@@ -113,7 +118,7 @@ export class VerificationService {
             part = [];
           }
 
-          if (line === `--${boundary}--`) {
+          if (trimmedLine === `--${boundary}--`) {
             break;
           }
         } else if (partIndex >= 0) {
