@@ -17,6 +17,10 @@ body {
   font-family: $font-family;
 }
 
+img {
+  max-width: 100%;
+}
+
 .imprint-link {
   position: absolute;
   display: block;

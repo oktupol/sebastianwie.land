@@ -7,8 +7,8 @@ const routes: Routes = [
   { path: 'about', component: MarkdownComponent, data: {
     markdownFile: '/assets/content/about.md'
   }},
-  { path: 'openpgp', component: MarkdownComponent, data: {
-    markdownFile: '/assets/content/openpgp.md'
+  { path: 'exporting-emails', component: MarkdownComponent, data: {
+    markdownFile: '/assets/content/exporting-emails.md'
   }},
   { path: 'imprint', component: ImprintComponent },
 ];

@@ -19,6 +19,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
     { routerLink: '/', label: 'home' },
     { routerLink: '/sites/about', label: 'about '},
     { routerLink: '/contact', label: 'contact' },
+    { routerLink: '/contact/verify', label: 'verify e-mail signature' },
   ]
 
   private destroy$ = new Subject<void>();

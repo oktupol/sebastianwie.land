@@ -5,8 +5,8 @@ import { TitleListenerComponent } from './components/title-listener/title-listen
 
 const routes: Routes = [
   { path: '', component: TitleListenerComponent, pathMatch: 'full' },
-  { path: 'signature-info', redirectTo: 'sites/openpgp' },
-  { path: 'signature-info.html', redirectTo: 'sites/openpgp' },
+  { path: 'signature-info', redirectTo: 'contact/verify' },
+  { path: 'signature-info.html', redirectTo: 'contact/verify' },
   { path: 'sites', loadChildren: () => import('./modules/content/content.module').then(m => m.ContentModule) },
   { path: 'contact', loadChildren: () => import('./modules/contact/contact.module').then(m => m.ContactModule) },
   { path: '**', component: NotFoundComponent },
