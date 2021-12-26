@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
 import { VerificationResponse } from 'src/app/util/types';
+import { VerificationService } from '../../services/verification.service';
 
 @Component({
   selector: 'nwie-verify-email',
@@ -16,13 +17,15 @@ export class VerifyEmailComponent implements OnInit, AfterViewInit {
 
   @ViewChild('fileUploadBox') private fileUploadBox !: ElementRef;
 
-  constructor() { }
+  constructor(
+    private verificationService: VerificationService
+  ) { }
 
   ngOnInit(): void {
   }
 
   ngAfterViewInit(): void {
-    const div = this.fileUploadBox.nativeElement as HTMLDivElement;
+    const box = this.fileUploadBox.nativeElement as HTMLFormElement;
 
     const preventDefault = (e: Event) => {
       e.preventDefault();
@@ -30,15 +33,18 @@ export class VerifyEmailComponent implements OnInit, AfterViewInit {
     };
 
     for (let event of ['drag', 'dragstart', 'dragend', 'dragover', 'dragenter', 'dragleave', 'drop']) {
-      div.addEventListener(event, preventDefault);
+      box.addEventListener(event, preventDefault);
     }
   }
 
   selectFile(file: File) {
-    if (file.type === 'message/rfc822') {
-      this.emailFile = file;
-      this.emailFileName = file.name;
-    }
+    this.emailFile = file;
+    this.emailFileName = file.name;
+
+
+    this.verificationService.verify(file).subscribe(result => {
+      this.verificationResponse = result;
+    });
   }
 
   onInputChange(event: Event) {

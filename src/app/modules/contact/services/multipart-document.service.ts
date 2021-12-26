@@ -1,14 +1,18 @@
 import { Injectable } from '@angular/core';
 import { from, last, map, mergeMap, Observable, of, take, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { MultipartDocument } from '../entities/multipart-document.entity';
+import { AbstractDocument, MultipartDocument } from '../entities/multipart-document.entity';
 import { MimeDocumentFactory, MultipartDocumentFactory } from '../factories/multipart-document.factory';
 import { Message } from '../interfaces/message';
 import { EncodingService } from './encoding.service';
+import { FileService } from './file.service';
 
 @Injectable()
 export class MultipartDocumentService {
-  constructor(private encodingService: EncodingService) { }
+  constructor(
+    private encodingService: EncodingService,
+    private fileService: FileService
+  ) { }
 
   public multipartDocumentFactory(): MultipartDocumentFactory {
     return new MultipartDocumentFactory(this.encodingService);
@@ -40,7 +44,7 @@ export class MultipartDocumentService {
       return of(factory.build());
     } else {
       return from(attachments).pipe(
-        mergeMap(attachment => this.readFileContents(attachment as File).pipe(
+        mergeMap(attachment => this.fileService.readFileContentsAsArrayBuffer(attachment as File).pipe(
           map(buffer => ({ attachment: attachment as File, content: new Uint8Array(buffer) }))
         )),
         tap(({ attachment, content }) => {
@@ -56,33 +60,5 @@ export class MultipartDocumentService {
         map(() => factory.build())
       );
     }
-  }
-
-
-  private readFileContents(file: File): Observable<ArrayBuffer> {
-    return new Observable(subscriber => {
-      if (!file) {
-        subscriber.error('Parameter file must be given');
-        subscriber.complete();
-        return;
-      }
-
-      const reader = new FileReader();
-      reader.onload = () => {
-        if (reader.result instanceof ArrayBuffer) {
-          subscriber.next(reader.result);
-          subscriber.complete();
-        } else {
-          subscriber.error('While reading ' + file.name + ', expected ArrayBuffer as result. Got ' + typeof reader.result);
-          subscriber.complete();
-        }
-      }
-      reader.onerror = () => {
-        subscriber.error('Error occurred during reading file ' + file.name);
-        subscriber.complete();
-      }
-
-      reader.readAsArrayBuffer(file);
-    });
   }
 }

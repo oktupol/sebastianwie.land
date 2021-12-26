@@ -20,6 +20,8 @@ import { ContactFormService } from './services/contact-form.service';
 import { ContactFormEffects } from './store/effects/contact-form.effects';
 import { LoaderModule } from 'src/app/shared/components/loader/loader.module';
 import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
+import { FileService } from './services/file.service';
+import { VerificationService } from './services/verification.service';
 
 @NgModule({
   declarations: [
@@ -44,6 +46,8 @@ import { VerifyEmailComponent } from './components/verify-email/verify-email.com
     EncodingService,
     MultipartDocumentService,
     ContactFormService,
+    FileService,
+    VerificationService,
   ]
 })
 export class ContactModule { }
