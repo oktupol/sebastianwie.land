@@ -10,8 +10,8 @@
     If you do not use any OpenPGP software, the signature appears to you as an
     attachment called <code>signature.asc</code>. In this case, you can verify
     the e-mail's signature using the verification tool below. This can be done
-    with any message sent by me, as long as your e-mail client supports
-    exporting e-mails as .eml files.
+    with any e-mail message sent by me, as long as your e-mail client supports
+    exporting messages as .eml files.
   </p>
   <p>
     To verify the signature of an e-mail, export it as .eml file and open it here.
@@ -40,10 +40,10 @@
     <input type="file" id="email-file" accept="message/rfc822" (change)="onInputChange($event)"/>
 
     <label for="email-file">
-      <p>Choose an e-mail file ...</p>
+      <p>Open an e-mail file ...</p>
       <div class="mock-input">
         <div class="text-field">{{ emailFileName }}</div>
-        <div class="button">Choose</div>
+        <div class="button">Open</div>
       </div>
       <p>... or drop it here.</p>
     </label>
