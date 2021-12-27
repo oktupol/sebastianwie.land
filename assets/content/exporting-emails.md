@@ -1,6 +1,6 @@
 # How to Export E-mails as .Eml File?
 
-Exporting E-mails as .eml file is easiest if you are on a desktop computer.
+Exporting e-mails as .eml file is easiest if you are on a desktop computer.
 
 ### Using Apple Mail
 
