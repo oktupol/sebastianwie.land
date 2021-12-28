@@ -80,8 +80,8 @@ export class ContactComponent implements OnInit, OnDestroy {
   private listenToChanges(): void {
     this.contactForm.valueChanges
       .pipe(
+        debounceTime(300),
         takeUntil(this.destroy$),
-        debounceTime(300)
       )
       .subscribe((val: Message) => {
         if (val.fromEmail && val.attachments) {
