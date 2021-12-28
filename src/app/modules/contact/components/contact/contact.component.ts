@@ -27,6 +27,12 @@ export class ContactComponent implements OnInit, OnDestroy {
 
   public sending = false;
 
+  public get requestEncryptedReply(): boolean {
+    return this.contactForm.get('requestEncryptedReply')?.value ?? false;
+  }
+
+  public hasSuitablePublicKey = false;
+
   private destroy$ = new Subject<void>();
 
   constructor(
@@ -80,7 +86,6 @@ export class ContactComponent implements OnInit, OnDestroy {
       .subscribe((val: Message) => {
         if (val.fromEmail && val.attachments) {
           this.contactFormService.checkForPublicKey(val.fromEmail, val.attachments)
-            .pipe(take(1))
             .subscribe(value => this.hasSuitablePublicKey = value);
         }
 
@@ -102,7 +107,9 @@ export class ContactComponent implements OnInit, OnDestroy {
   }
 
   public onSubmit(): void {
-    this.contactFormService.send(this.contactForm.value);
+    this.contactFormService.send(this.contactForm.value, {
+      hasSuitablePublicKey: this.hasSuitablePublicKey
+    });
   }
 
   private requiredIf(predicate: Predicate<void>): ValidatorFn {
@@ -113,10 +120,4 @@ export class ContactComponent implements OnInit, OnDestroy {
       return null;
     };
   }
-
-  public get requestEncryptedReply(): boolean {
-    return this.contactForm.get('requestEncryptedReply')?.value ?? false;
-  }
-
-  public hasSuitablePublicKey = false;
 }
