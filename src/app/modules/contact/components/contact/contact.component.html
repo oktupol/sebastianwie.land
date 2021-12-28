@@ -25,28 +25,34 @@
       </div>
     </div>
 
-    <div class="input-row">
+    <div class="input-row" *ngIf="!hasSuitablePublicKey">
       <div class="checkbox-group">
-        <input type="checkbox" id="requestEncryptedReply" formControlName="requestEncryptedReply" (change)="onRequestEncryptedReplyChange()"/>
+        <input type="checkbox" id="requestEncryptedReply" formControlName="requestEncryptedReply"/>
         <label for="requestEncryptedReply">
           Request encrypted reply
           <nwie-help>
             <p>
               Messages sent to me through this contact form are end-to-end
-              encrypted, but my replies to you are not by default. This is
+              encrypted, but my replies to you aren't by default. This is
               because in order to encrypt information, one needs either a
               public key of the recipient, or a shared secret.
             </p>
             <p>
-              Using the <em>Request encrypted reply</em>-option, you can set up
-              such a shared secret in the form of a passphrase, which I can
-              then use to encrypt any message I send to you. The passphrase
-              will be exchanged encrypted just like the rest of the message.
+              If you want me send my reply to you end-to-end encrypted, you
+              need to select the option <em>Request encrypted reply</em>, and
+              set up a passphrase which acts as shared secret. The passphrase
+              will be exchanged in an encrypted manner just like the rest of
+              the message.
             </p>
             <p>
               When receiving my reply, you then need to enter the passphrase
-              again to decrypt the reply. It is therefore important that you
-              remember it or save it in a secure location.
+              again to decrypt it. It is therefore important that you remember
+              it or save it in a secure location, such as a USB drive or a
+              password manager.
+            </p>
+            <p>
+              Alternatively, attach your armored public OpenPGP key to this
+              message.
             </p>
           </nwie-help>
         </label>
@@ -55,6 +61,10 @@
         <input type="text" id="encryptionPassphrase" formControlName="encryptionPassphrase"/>
         <label for="encryptionPassphrase">Encryption passphrase (≥ 8 characters)</label>
       </div>
+    </div>
+
+    <div class="message-row" *ngIf="hasSuitablePublicKey">
+      <div>My reply will be encrypted using your attached public key.</div>
     </div>
 
     <div class="input-row">

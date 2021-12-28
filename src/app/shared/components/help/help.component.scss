@@ -1,5 +1,9 @@
 @import "../../../../styles/variables.scss";
 
+:host {
+  white-space: initial;
+}
+
 .help-link {
   text-decoration: underline;
   cursor: pointer;

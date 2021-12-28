@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { mergeMap, of, throwError } from 'rxjs';
+import { readKey } from 'openpgp';
+import { catchError, count, EMPTY, filter, from, map, mergeMap, Observable, of, tap, throwError } from 'rxjs';
 import { GlobalMessagesService } from 'src/app/shared/services/global-messages.service';
 import { environment } from 'src/environments/environment';
 import { Message } from '../interfaces/message';
 import { send } from '../store/actions/contact-form.actions';
 import { EncodingService } from './encoding.service';
+import { FileService } from './file.service';
 import { MultipartDocumentService } from './multipart-document.service';
 import { OpenpgpService } from './openpgp.service';
 
@@ -16,7 +18,8 @@ export class ContactFormService {
     private multipartDocumentService: MultipartDocumentService,
     private store: Store,
     private encodingService: EncodingService,
-    private gm: GlobalMessagesService
+    private gm: GlobalMessagesService,
+    private fileService: FileService,
   ) { }
 
   public send(message: Message) {
@@ -52,6 +55,23 @@ export class ContactFormService {
       .subscribe((encrypted) => {
         this.store.dispatch(send({ encryptedMsg: encrypted as string, messageId }))
       });
+  }
+
+  public checkForPublicKey(ofMailAddress: string, attachments: Array<File | null>): Observable<boolean> {
+    const potentialKeyFiles = (attachments
+      .filter(a => a instanceof File) as File[])
+      .filter(f => f.size <= 50_000)
+      .filter(f => f.name.toLowerCase().endsWith('.asc'));
+
+    return from(potentialKeyFiles).pipe(
+      mergeMap(file => this.fileService.readFileContentsAsString(file)),
+      mergeMap(key => from(readKey({ armoredKey: key })).pipe(
+        catchError((error) => { console.log(error); return EMPTY; })
+      )),
+      filter(key => key.users.some(u => u.userID?.email.toLowerCase() === ofMailAddress.toLowerCase())),
+      count(),
+      map(n => n > 0)
+    );
   }
 
   private fillTemplate(message: Message): Message {

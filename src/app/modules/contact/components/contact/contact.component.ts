@@ -1,5 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { AbstractControl, FormArray, FormBuilder, ValidatorFn, Validators } from '@angular/forms';
+import { Component, OnDestroy, OnInit, Predicate } from '@angular/core';
+import { AbstractControl, FormArray, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { debounceTime, Subject, take, takeUntil } from 'rxjs';
 import { Message } from '../../interfaces/message';
@@ -13,12 +13,12 @@ import { getContactFormInputs, isSending } from '../../store/selectors/contact-f
   styleUrls: ['./contact.component.scss']
 })
 export class ContactComponent implements OnInit, OnDestroy {
-  public contactForm = this.fb.group({
+  public contactForm: FormGroup = this.fb.group({
     subject: ['', Validators.required],
     fromName: ['', Validators.required],
     fromEmail: ['', [Validators.email, Validators.required]],
     requestEncryptedReply: [false, []],
-    encryptionPassphrase: ['', [this.requiredIf('requestEncryptedReply').bind(this), Validators.minLength(8)]],
+    encryptionPassphrase: ['', [this.requiredIf(() => this.contactForm?.get('requestEncryptedReply')?.value && !this.hasSuitablePublicKey), Validators.minLength(8)]],
     message: ['', Validators.required],
     attachments: this.createAttachmentsArray(),
   });
@@ -78,6 +78,14 @@ export class ContactComponent implements OnInit, OnDestroy {
         debounceTime(300)
       )
       .subscribe((val: Message) => {
+        if (val.fromEmail && val.attachments) {
+          this.contactFormService.checkForPublicKey(val.fromEmail, val.attachments)
+            .pipe(take(1))
+            .subscribe(value => this.hasSuitablePublicKey = value);
+        }
+
+        this.contactForm.get('encryptionPassphrase')?.updateValueAndValidity();
+
         this.store.dispatch(storeInputs({
           subject: val.subject,
           fromName: val.fromName,
@@ -97,10 +105,9 @@ export class ContactComponent implements OnInit, OnDestroy {
     this.contactFormService.send(this.contactForm.value);
   }
 
-
-  private requiredIf(formControlName: string): ValidatorFn {
+  private requiredIf(predicate: Predicate<void>): ValidatorFn {
     return (formControl: AbstractControl) => {
-      if (this.contactForm?.get(formControlName)?.value) {
+      if (predicate()) {
         return Validators.required(formControl);
       }
       return null;
@@ -111,7 +118,5 @@ export class ContactComponent implements OnInit, OnDestroy {
     return this.contactForm.get('requestEncryptedReply')?.value ?? false;
   }
 
-  public onRequestEncryptedReplyChange(): void {
-    this.contactForm.get('encryptionPassphrase')?.updateValueAndValidity();
-  }
+  public hasSuitablePublicKey = false;
 }

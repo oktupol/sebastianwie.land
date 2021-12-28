@@ -11,10 +11,20 @@ form {
 
       @media screen and (min-width: $mobile-breakpoint) {
         flex-basis: 0;
+
         flex-grow: 1;
       }
 
       margin: 0 #{$form-field-margin};
+    }
+
+    .input-group, .textarea-group, .checkbox-group {
+      label {
+        font-size: $label-font-size;
+        font-family: $label-font-family;
+        padding-left: #{$label-padding};
+        white-space: nowrap;
+      }
     }
 
     .input-group, .textarea-group {
@@ -23,9 +33,6 @@ form {
       margin-bottom: $input-group-margin;
 
       label {
-        font-size: $label-font-size;
-        font-family: $label-font-family;
-        margin: #{$label-margin} 0;
         padding-left: #{$label-padding};
       }
 
@@ -42,15 +49,10 @@ form {
     .checkbox-group {
       display: flex;
       flex-direction: row;
+      flex-grow: unset;
       margin-bottom: $input-group-margin;
       align-items: center;
       min-height: 30px;
-
-      label {
-        font-size: $label-font-size;
-        font-family: $label-font-family;
-        padding-left: #{$label-padding};
-      }
     }
 
     .textarea-group {
@@ -125,5 +127,11 @@ form {
         margin-right: unset;
       }
     }
+  }
+
+  .message-row {
+    margin-bottom: $input-group-margin;
+    font-family: $label-font-family;
+    font-size: $label-font-size;
   }
 }
