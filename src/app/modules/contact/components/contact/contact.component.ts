@@ -18,7 +18,7 @@ export class ContactComponent implements OnInit, OnDestroy {
     fromName: ['', Validators.required],
     fromEmail: ['', [Validators.email, Validators.required]],
     requestEncryptedReply: [false, []],
-    encryptionPassphrase: ['', this.requiredIf('requestEncryptedReply').bind(this)],
+    encryptionPassphrase: ['', [this.requiredIf('requestEncryptedReply').bind(this), Validators.minLength(8)]],
     message: ['', Validators.required],
     attachments: this.createAttachmentsArray(),
   });

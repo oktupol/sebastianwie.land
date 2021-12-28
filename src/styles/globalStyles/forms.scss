@@ -28,6 +28,15 @@ form {
         margin: #{$label-margin} 0;
         padding-left: #{$label-padding};
       }
+
+      &.hidden {
+        display: none;
+
+        @media screen and (min-width: $mobile-breakpoint) {
+          display: flex;
+          visibility: none;
+        }
+      }
     }
 
     .checkbox-group {
@@ -35,6 +44,7 @@ form {
       flex-direction: row;
       margin-bottom: $input-group-margin;
       align-items: center;
+      min-height: 30px;
 
       label {
         font-size: $label-font-size;

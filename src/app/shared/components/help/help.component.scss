@@ -1,0 +1,45 @@
+@import "../../../../styles/variables.scss";
+
+.help-link {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.backdrop {
+  position: fixed;
+  z-index: map-get($z-index, 'loader');
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+
+  background-color: $backdrop-color;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .help-modal {
+    border: $content-border;
+    background-color: $content-background-color;
+
+    font-family: $content-font-family;
+    font-size: 1rem;
+    padding: 2em;
+
+    max-width: $content-width - 150px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    button {
+      &::before {
+        content: none;
+      }
+      margin-top: 1em;
+      border: $input-border;
+    }
+  }
+}

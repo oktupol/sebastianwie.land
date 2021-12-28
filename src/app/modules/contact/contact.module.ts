@@ -22,6 +22,7 @@ import { LoaderModule } from 'src/app/shared/components/loader/loader.module';
 import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
 import { FileService } from './services/file.service';
 import { VerificationService } from './services/verification.service';
+import { HelpModule } from 'src/app/shared/components/help/help.module';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { VerificationService } from './services/verification.service';
     EffectsModule.forFeature([ OpenpgpEffects, ContactFormEffects ]),
     ReactiveFormsModule,
     HttpClientModule,
-    LoaderModule
+    LoaderModule,
+    HelpModule,
   ],
   providers: [
     OpenpgpAdapter,
