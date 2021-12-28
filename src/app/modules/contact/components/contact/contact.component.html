@@ -26,6 +26,17 @@
     </div>
 
     <div class="input-row">
+      <div class="checkbox-group">
+        <input type="checkbox" id="requestEncryptedReply" formControlName="requestEncryptedReply" (change)="onRequestEncryptedReplyChange()"/>
+        <label for="requestEncryptedReply">Request encrypted reply</label>
+      </div>
+      <div class="input-group" [class.hidden]="!requestEncryptedReply">
+        <input type="text" id="encryptionPassphrase" formControlName="encryptionPassphrase"/>
+        <label for="encryptionPassphrase">Encryption passphrase</label>
+      </div>
+    </div>
+
+    <div class="input-row">
       <div class="textarea-group">
         <textarea id="message" formControlName="message" rows="10"></textarea>
         <label for="message">Message</label>

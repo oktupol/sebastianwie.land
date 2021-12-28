@@ -10,11 +10,10 @@ form {
       flex-basis: 100%;
 
       @media screen and (min-width: $mobile-breakpoint) {
-        flex-basis: unset;
+        flex-basis: 0;
         flex-grow: 1;
       }
 
-      flex-grow: 1;
       margin: 0 #{$form-field-margin};
     }
 
@@ -27,6 +26,19 @@ form {
         font-size: $label-font-size;
         font-family: $label-font-family;
         margin: #{$label-margin} 0;
+        padding-left: #{$label-padding};
+      }
+    }
+
+    .checkbox-group {
+      display: flex;
+      flex-direction: row;
+      margin-bottom: $input-group-margin;
+      align-items: center;
+
+      label {
+        font-size: $label-font-size;
+        font-family: $label-font-family;
         padding-left: #{$label-padding};
       }
     }

@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, Validators } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, ValidatorFn, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { debounceTime, Subject, take, takeUntil } from 'rxjs';
 import { Message } from '../../interfaces/message';
@@ -17,6 +17,8 @@ export class ContactComponent implements OnInit, OnDestroy {
     subject: ['', Validators.required],
     fromName: ['', Validators.required],
     fromEmail: ['', [Validators.email, Validators.required]],
+    requestEncryptedReply: [false, []],
+    encryptionPassphrase: ['', this.requiredIf('requestEncryptedReply').bind(this)],
     message: ['', Validators.required],
     attachments: this.createAttachmentsArray(),
   });
@@ -80,6 +82,8 @@ export class ContactComponent implements OnInit, OnDestroy {
           subject: val.subject,
           fromName: val.fromName,
           fromEmail: val.fromEmail,
+          requestEncryptedReply: val.requestEncryptedReply,
+          encryptionPassphrase: val.encryptionPassphrase,
           message: val.message
         }));
       });
@@ -91,5 +95,23 @@ export class ContactComponent implements OnInit, OnDestroy {
 
   public onSubmit(): void {
     this.contactFormService.send(this.contactForm.value);
+  }
+
+
+  private requiredIf(formControlName: string): ValidatorFn {
+    return (formControl: AbstractControl) => {
+      if (this.contactForm?.get(formControlName)?.value) {
+        return Validators.required(formControl);
+      }
+      return null;
+    };
+  }
+
+  public get requestEncryptedReply(): boolean {
+    return this.contactForm.get('requestEncryptedReply')?.value ?? false;
+  }
+
+  public onRequestEncryptedReplyChange(): void {
+    this.contactForm.get('encryptionPassphrase')?.updateValueAndValidity();
   }
 }

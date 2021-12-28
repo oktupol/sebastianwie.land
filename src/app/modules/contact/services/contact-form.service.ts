@@ -55,17 +55,17 @@ export class ContactFormService {
   }
 
   private fillTemplate(message: Message): Message {
-    const template = [
-      `${message.fromName} <${message.fromEmail}> sent a message through the contact from.`,
-      ``,
-      `--------------`,
-      ``,
-      message.message
-    ].join('\n');
+    const template: string[] = [ `${message.fromName} <${message.fromEmail}> sent a message through the contact from.` ];
+
+    if (message.requestEncryptedReply && message.encryptionPassphrase) {
+      template.push(`Encrypted reply requested with passphrase "${message.encryptionPassphrase}"`);
+    }
+
+    template.push(``, `--------------`, ``, message.message);
 
     return {
       ...message,
-      message: template
+      message: template.join('\n')
     };
   }
 
