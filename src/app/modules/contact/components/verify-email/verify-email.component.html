@@ -152,4 +152,17 @@
       that someone tampered with this tool to present you a wrong result.
     </p>
   </div>
+
+  <div class="verification-response info" *ngIf="verificationResponse === 'protonmail'">
+    <h3>Legitimacy verified by Protonmail.</h3>
+
+    <p>
+      Protonmail indicates the legitimacy of e-mails using the blue lock-symbol
+      next to the date.
+    </p>
+
+    <p>
+      <img src="/assets/content/images/protonmail-encryption.png" alt="Protonmail"/>
+    </p>
+  </div>
 </nwie-content-page>

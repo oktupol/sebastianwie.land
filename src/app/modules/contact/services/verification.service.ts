@@ -28,6 +28,10 @@ export class VerificationService {
           return of('not-from-me');
         }
 
+        if (email.headers['x-pm-origin'] === 'internal' && email.headers['x-pm-content-encryption'] === 'end-to-end') {
+          return of('protonmail');
+        }
+
         if (!email.isMultipart) {
           return of('not-a-multipart-file');
         }
