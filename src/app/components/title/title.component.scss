@@ -13,55 +13,82 @@ $slide-duration: 240ms;
   font-size: $font-size;
   line-height: $line-height;
 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
   .title-box {
     display: inline-block;
     position: relative;
     cursor: pointer;
-  }
 
-  .slider {
-    position: absolute;
-    width: 100%;
-    text-align: right;
 
-    transition-property: top;
-    transition-duration: $slide-duration;
+    .slider {
+      position: absolute;
+      width: 100%;
+      text-align: right;
 
-    &.up {
-      top: 0;
+      transition-property: top;
+      transition-duration: $slide-duration;
+
+      &.up {
+        top: 0;
+      }
+
+      &.down {
+        top: $line-height;
+      }
     }
 
-    &.down {
-      top: $line-height;
+    .label {
+      color: $detail-color;
+      margin-right: $space;
+    }
+
+    .placeholder {
+      visibility: hidden;
+    }
+
+    .static {
+      color: $highlight-color;
+      user-select: none;
+    }
+
+    .dot {
+      color: $detail-color;
+      position: absolute;
+      right: $tld-length - 0.47 * 1ch;
+      margin-top: $dot-vertical-offset;
+    }
+
+    .wie {
+      margin-left: $space;
+    }
+
+    .land {
+      margin-left: $dot-space;
     }
   }
 
-  .label {
-    color: $detail-color;
-    margin-right: $space;
-  }
+  .pgp-fingerprint {
+    a {
+      color: $detail-color;
+      .upper-bytes {
+        display: none;
 
-  .placeholder {
-    visibility: hidden;
-  }
+        @media screen and(min-width: $desktop-breakpoint) {
+          display: inline;
+        }
+      }
+    }
 
-  .static {
-    color: $highlight-color;
-    user-select: none;
-  }
+    margin-top: .4em;
+    font-size: .55em;
 
-  .dot {
-    color: $detail-color;
-    position: absolute;
-    right: $tld-length - 0.47 * 1ch;
-    margin-top: $dot-vertical-offset;
-  }
-
-  .wie {
-    margin-left: $space;
-  }
-
-  .land {
-    margin-left: $dot-space;
+    @media screen and(min-width: $desktop-breakpoint) {
+      margin-top: .2em;
+      font-size: .3em;
+    }
   }
 }

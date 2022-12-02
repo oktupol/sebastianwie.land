@@ -11,6 +11,9 @@ const routes: Routes = [
     markdownFile: '/assets/content/exporting-emails.md'
   }},
   { path: 'imprint', component: ImprintComponent },
+  { path: 'pgp', component: MarkdownComponent, data: {
+    markdownFile: '/assets/content/pgp.md'
+  }},
 ];
 
 @NgModule({
