@@ -23,7 +23,7 @@
     "@ngrx/effects": "^13.0.1",
     "@ngrx/store": "^13.0.1",
     "@ngrx/store-devtools": "^13.0.1",
-    "@scullyio/init": "^2.0.5",
+    "@scullyio/init": "^2.1.41",
     "@scullyio/ng-lib": "^2.0.0",
     "@scullyio/scully": "^2.0.0",
     "@scullyio/scully-plugin-puppeteer": "^2.0.0",
