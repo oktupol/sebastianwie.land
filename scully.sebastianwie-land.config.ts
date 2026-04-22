@@ -12,5 +12,9 @@ export const config: ScullyConfig = {
   extraRoutes: [
     '/signature-info',
     '/signature-info.html'
-  ]
+  ],
+  puppeteerLaunchOptions: {
+    executablePath: '/usr/bin/chromium-browser',
+    args: ['--no-sandbox', '--disable-setuid-sandbox']
+  }
 };
