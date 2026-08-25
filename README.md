@@ -1,27 +1,25 @@
 # SebastianwieLand
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.0.3.
+Personal website, built with [Angular](https://angular.dev) 22 and pre-rendered to static HTML for GitHub Pages.
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Run `npm start` for a dev server on `https://localhost:4200/` (it serves over HTTPS, matching the local API at `https://localhost:8001/api`). The app reloads automatically on source changes.
 
 ## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Run `npm run build`. Every route is pre-rendered at build time; the deployable output is `dist/sebastianwie-land/browser`.
 
 ## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Run `npm test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
+For a single headless run:
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+```bash
+CHROME_BIN=$(which chromium) npx ng test --watch=false --browsers=ChromeHeadless
+```
 
-## Further help
+## Deployment
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Pushing to `master` triggers `.github/workflows/publish.yml`, which builds, pre-renders and publishes to GitHub Pages.

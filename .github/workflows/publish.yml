@@ -9,32 +9,22 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
-      - name: Install Chromium
-        run: sudo apt-get update && sudo apt-get install -y chromium-browser
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
+
       - name: Setup Node
-        uses: actions/setup-node@v2.1.2
+        uses: actions/setup-node@v4
         with:
-          node-version: '16.x'
+          node-version: '22.x'
+          cache: 'npm'
 
-      - name: Cache dependencies
-        id: cache-dependencies
-        uses: actions/cache@v4
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os}}-node-
+      - run: npm ci
 
-      - run: npm install
-
-      - run: npm run build
-
-      - run: npx scully --scanRoutes
+      - name: Build and prerender
+        run: npm run build
 
       - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: './dist/static'
+          publish_dir: ./dist/sebastianwie-land/browser
           commit_message: ${{ github.event.head_commit.message }}
