@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectionStrategy, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, of, Subject, takeUntil } from 'rxjs';
 import { Position } from 'src/app/util/types';
@@ -13,12 +13,12 @@ import { TitleComponent } from '../title/title.component';
     imports: [TitleComponent]
 })
 export class TitleWrapperComponent implements OnInit, OnDestroy {
+  private store = inject(Store);
+
 
   private destroy$ = new Subject<void>();
 
   public position!: string;
-
-  constructor(private store: Store) { }
 
   ngOnInit(): void {
     this.store.select(titleSelectors.getPosition)

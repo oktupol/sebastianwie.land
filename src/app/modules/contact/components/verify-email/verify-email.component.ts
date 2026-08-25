@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Inject, OnDestroy, OnInit, ViewChild, ChangeDetectionStrategy } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild, ChangeDetectionStrategy, inject } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 import { VerificationResponse } from 'src/app/util/types';
 import { VerificationService } from '../../services/verification.service';
@@ -14,6 +14,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     imports: [ContentPageComponent, RouterLink, ReactiveFormsModule]
 })
 export class VerifyEmailComponent implements OnInit, AfterViewInit, OnDestroy {
+  private verificationService = inject(VerificationService);
+
 
   public emailFile?: File;
   public emailFileName: string = '';
@@ -24,10 +26,6 @@ export class VerifyEmailComponent implements OnInit, AfterViewInit, OnDestroy {
   private destroy$ = new Subject<void>();
 
   @ViewChild('fileUploadBox') private fileUploadBox !: ElementRef;
-
-  constructor(
-    private verificationService: VerificationService
-  ) { }
 
   ngOnInit(): void {
   }

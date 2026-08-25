@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, mergeMap, of } from 'rxjs';
 import { GlobalMessagesService } from 'src/app/shared/services/global-messages.service';
@@ -7,6 +7,10 @@ import { loadPublicKey, loadPublicKeyFailure, loadPublicKeySuccess } from '../ac
 
 @Injectable()
 export class OpenpgpEffects {
+  private actions$ = inject(Actions);
+  private openpgpAdapter = inject(OpenpgpAdapter);
+  private globalMessagesService = inject(GlobalMessagesService);
+
   loadPublicKey$ = createEffect(() => this.actions$.pipe(
     ofType(loadPublicKey),
     mergeMap(() => this.openpgpAdapter.getPublicKey().pipe(
@@ -20,10 +24,4 @@ export class OpenpgpEffects {
       })
     ))
   ));
-
-  constructor(
-    private actions$: Actions,
-    private openpgpAdapter: OpenpgpAdapter,
-    private globalMessagesService: GlobalMessagesService
-  ) {}
 }

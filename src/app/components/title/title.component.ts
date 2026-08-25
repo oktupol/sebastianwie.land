@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectionStrategy, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Position } from 'src/app/util/types';
 
@@ -13,6 +13,8 @@ import { RouterLink } from '@angular/router';
     imports: [RouterLink]
 })
 export class TitleComponent implements OnInit {
+  private store = inject(Store);
+
 
   private _position: Position = 'up';
 
@@ -25,7 +27,6 @@ export class TitleComponent implements OnInit {
   get position(): Position {
     return this._position;
   }
-  constructor(private store: Store) { }
 
   ngOnInit(): void {
   }

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { createMessage, encrypt, readKey, readSignature, verify, VerifyMessageResult } from 'openpgp';
 import { EMPTY, filter, from,  mergeMap, Observable, of, take, takeUntil, withLatestFrom, } from 'rxjs';
@@ -7,7 +7,8 @@ import { getError, getPublicKey } from '../store/selectors/openpgp.selectors';
 
 @Injectable()
 export class OpenpgpService {
-  public constructor(private store: Store) { }
+  private store = inject(Store);
+
 
   public getOpenpgpKey(): Observable<string> {
     return this.store.select(getPublicKey)

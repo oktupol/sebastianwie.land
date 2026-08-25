@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, ChangeDetectionStrategy } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ChangeDetectionStrategy, inject } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 import { EncodingService } from '../../services/encoding.service';
 
@@ -9,6 +9,8 @@ import { EncodingService } from '../../services/encoding.service';
     changeDetection: ChangeDetectionStrategy.Eager
 })
 export class AttachmentComponent implements OnInit {
+  private encodingService = inject(EncodingService);
+
   @Input() public control!: AbstractControl;
 
   @Output() public addAttachment = new EventEmitter<File>();
@@ -16,8 +18,6 @@ export class AttachmentComponent implements OnInit {
   @Output() public delete = new EventEmitter<void>();
 
   public inputId = this.generateRandomId();
-
-  constructor(private encodingService: EncodingService) { }
 
   ngOnInit(): void {
   }

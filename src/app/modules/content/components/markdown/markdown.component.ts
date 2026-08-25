@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnDestroy, OnInit, ChangeDetectionStrategy, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { map, Observable, Subject, takeUntil } from 'rxjs';
 import { ContentPageComponent } from '../../../../shared/components/content-page/content-page.component';
@@ -12,11 +12,11 @@ import { MarkdownComponent as MarkdownComponent_1 } from 'ngx-markdown';
     imports: [ContentPageComponent, MarkdownComponent_1]
 })
 export class MarkdownComponent implements OnInit, OnDestroy {
+  private activatedRoute = inject(ActivatedRoute);
+
 
   public markdownFile: string = '';
   private destroy$ = new Subject<void>();
-
-  constructor(private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.activatedRoute.data

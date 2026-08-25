@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
@@ -8,6 +8,10 @@ import * as titleSelectors from '../selectors/title.selectors';
 
 @Injectable()
 export class TitleEffects {
+  private actions$ = inject(Actions);
+  private store = inject(Store);
+  private router = inject(Router);
+
   activate$ = createEffect(() => this.actions$.pipe(
     ofType(titleActions.activate),
     mergeMap(() => this.store.select(titleSelectors.getPosition).pipe(
@@ -27,10 +31,4 @@ export class TitleEffects {
       })
     ))
   ));
-
-  constructor(
-    private actions$: Actions,
-    private store: Store,
-    private router: Router,
-  ) {}
 }

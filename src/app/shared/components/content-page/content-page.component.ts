@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnDestroy, OnInit, ChangeDetectionStrategy, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Subject, takeUntil } from 'rxjs';
 import * as navigationSelectors from '../../../store/selectors/navigation.selectors';
@@ -10,12 +10,12 @@ import * as navigationSelectors from '../../../store/selectors/navigation.select
     changeDetection: ChangeDetectionStrategy.Eager
 })
 export class ContentPageComponent implements OnInit, OnDestroy {
+  private store = inject(Store);
+
 
   public navOpen = false;
 
   private destroy$ = new Subject<void>();
-
-  constructor(private store: Store) { }
 
   ngOnInit(): void {
     this.store.select(navigationSelectors.isOpen)

@@ -1,5 +1,5 @@
 
-import { Component, Inject, OnDestroy, OnInit, DOCUMENT, ChangeDetectionStrategy, PLATFORM_ID } from '@angular/core';
+import { Component, OnDestroy, OnInit, DOCUMENT, ChangeDetectionStrategy, PLATFORM_ID, inject } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { Store } from '@ngrx/store';
 import * as titleActions from '../../store/actions/title.actions';
@@ -11,12 +11,10 @@ import * as titleActions from '../../store/actions/title.actions';
     changeDetection: ChangeDetectionStrategy.Eager
 })
 export class TitleListenerComponent implements OnInit, OnDestroy {
+  private store = inject(Store);
+  private document = inject<Document>(DOCUMENT);
+  private platformId = inject<Object>(PLATFORM_ID);
 
-  constructor(
-    private store: Store,
-    @Inject(DOCUMENT) private document: Document,
-    @Inject(PLATFORM_ID) private platformId: Object,
-  ) { }
 
   private keyboardListener: EventListenerOrEventListenerObject | null = null;
   private mc: HammerManager | null = null;

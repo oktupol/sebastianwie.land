@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, Predicate, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnDestroy, OnInit, Predicate, ChangeDetectionStrategy, inject } from '@angular/core';
 import { AbstractControl, UntypedFormArray, UntypedFormBuilder, UntypedFormGroup, ValidatorFn, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { debounceTime, Subject, take, takeUntil } from 'rxjs';
@@ -19,6 +19,10 @@ import { LoaderComponent } from '../../../../shared/components/loader/loader.com
     imports: [ContentPageComponent, ReactiveFormsModule, HelpComponent, AttachmentComponent, LoaderComponent]
 })
 export class ContactComponent implements OnInit, OnDestroy {
+  private fb = inject(UntypedFormBuilder);
+  private store = inject(Store);
+  private contactFormService = inject(ContactFormService);
+
   public contactForm: UntypedFormGroup = this.fb.group({
     subject: ['', Validators.required],
     fromName: ['', Validators.required],
@@ -40,12 +44,6 @@ export class ContactComponent implements OnInit, OnDestroy {
   public hasSuitablePublicKey = false;
 
   private destroy$ = new Subject<void>();
-
-  constructor(
-    private fb: UntypedFormBuilder,
-    private store: Store,
-    private contactFormService: ContactFormService,
-  ) { }
 
   ngOnInit(): void {
     this.listenToChanges();

@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnDestroy, OnInit, ChangeDetectionStrategy, inject } from '@angular/core';
 import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { filter, Subject, takeUntil } from 'rxjs';
@@ -13,6 +13,9 @@ import * as navigationActions from '../../store/actions/navigation.actions';
     imports: [RouterLink]
 })
 export class NavigationComponent implements OnInit, OnDestroy {
+  private router = inject(Router);
+  private store = inject(Store);
+
 
   public isHomepage = true;
   public navOpen = false;
@@ -26,8 +29,6 @@ export class NavigationComponent implements OnInit, OnDestroy {
   ]
 
   private destroy$ = new Subject<void>();
-
-  constructor(private router: Router, private store: Store) { }
 
   ngOnInit(): void {
     this.router.events

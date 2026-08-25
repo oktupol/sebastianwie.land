@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnDestroy, OnInit, ChangeDetectionStrategy, inject } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 import { GlobalMessage } from 'src/app/shared/interfaces/global-message';
 import { GlobalMessagesService } from 'src/app/shared/services/global-messages.service';
@@ -10,11 +10,11 @@ import { GlobalMessagesService } from 'src/app/shared/services/global-messages.s
     changeDetection: ChangeDetectionStrategy.Eager
 })
 export class GlobalMessagesComponent implements OnInit, OnDestroy {
+  private globalMessagesService = inject(GlobalMessagesService);
+
 
   public globalMessages: GlobalMessage[] = [];
   private destroy$ = new Subject<void>();
-
-  constructor(private globalMessagesService: GlobalMessagesService) { }
 
   ngOnInit(): void {
     this.globalMessagesService.getAll().pipe(
