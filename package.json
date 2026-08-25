@@ -6,7 +6,8 @@
     "start": "ng serve --ssl",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "serve:ssr:sebastianwie-land": "node dist/sebastianwie-land/server/server.mjs"
   },
   "private": true,
   "dependencies": {
@@ -17,11 +18,14 @@
     "@angular/forms": "^22.1.3",
     "@angular/platform-browser": "^22.1.3",
     "@angular/platform-browser-dynamic": "^22.1.3",
+    "@angular/platform-server": "^22.1.3",
     "@angular/router": "^22.1.3",
+    "@angular/ssr": "^22.1.5",
     "@ngrx/effects": "^22.0.0",
     "@ngrx/operators": "^22.0.0",
     "@ngrx/store": "^22.0.0",
     "@ngrx/store-devtools": "^22.0.0",
+    "express": "^5.1.0",
     "hammerjs": "^2.0.8",
     "katex": "^0.16.47",
     "marked": "^18.0.11",
@@ -34,18 +38,19 @@
     "zone.js": "~0.15.1"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^22.1.5",
+    "@angular/build": "^22.1.5",
     "@angular/cli": "^22.1.5",
     "@angular/compiler-cli": "^22.1.3",
-    "@types/hammerjs": "^2.0.40",
-    "@types/jasmine": "~3.10.0",
-    "@types/node": "^12.11.1",
-    "jasmine-core": "~3.10.0",
-    "karma": "~6.3.0",
-    "karma-chrome-launcher": "~3.1.0",
-    "karma-coverage": "~2.0.3",
-    "karma-jasmine": "~4.0.0",
-    "karma-jasmine-html-reporter": "~1.7.0",
+    "@types/express": "^5.0.1",
+    "@types/hammerjs": "^2.0.46",
+    "@types/jasmine": "^5.1.15",
+    "@types/node": "^20.17.19",
+    "jasmine-core": "^5.13.0",
+    "karma": "^6.4.4",
+    "karma-chrome-launcher": "^3.2.0",
+    "karma-coverage": "^2.2.1",
+    "karma-jasmine": "^5.1.0",
+    "karma-jasmine-html-reporter": "^2.3.0",
     "typescript": "~6.0.3"
   }
 }

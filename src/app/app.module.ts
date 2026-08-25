@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
@@ -18,6 +18,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { GlobalMessagesService } from './shared/services/global-messages.service';
 import { GlobalMessagesComponent } from './components/global-messages/global-messages.component';
 import { WINDOW } from './util/injection-tokens';
+import { DOCUMENT } from '@angular/core';
 
 
 @NgModule({
@@ -44,8 +45,11 @@ import { WINDOW } from './util/injection-tokens';
     ContentPageModule,
   ],
   providers: [
-    { provide: WINDOW, useValue: window },
+    // Resolved via DOCUMENT so the module can also be evaluated during
+    // prerendering, where `window` does not exist.
+    { provide: WINDOW, useFactory: (doc: Document) => doc.defaultView, deps: [DOCUMENT] },
     GlobalMessagesService,
+    provideClientHydration(),
   ],
   bootstrap: [AppComponent]
 })
