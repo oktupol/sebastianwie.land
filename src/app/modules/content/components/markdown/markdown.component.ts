@@ -1,7 +1,4 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import 'marked/lib/marked';
-import 'prismjs/prism';
-import 'prismjs/components/prism-json';
 import { ActivatedRoute } from '@angular/router';
 import { map, Observable, Subject, takeUntil } from 'rxjs';
 
