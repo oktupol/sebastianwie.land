@@ -1,9 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NotFoundComponent } from './not-found.component';
+import { provideMockStore } from '@ngrx/store/testing';
+import { provideRouter } from '@angular/router';
 
-@Component({ selector: 'nwie-content-page', template: '<p><ng-content></ng-content></p>' })
+@Component({
+    selector: 'nwie-content-page', template: '<p><ng-content /></p>',
+    changeDetection: ChangeDetectionStrategy.OnPush
+})
 class MockContentPageComponent {
 }
 describe('NotFoundComponent', () => {
@@ -12,8 +17,10 @@ describe('NotFoundComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NotFoundComponent, MockContentPageComponent ]
-    })
+    imports: [NotFoundComponent, MockContentPageComponent],
+    providers: [
+        provideRouter([]),provideMockStore({ initialState: { navigation: { open: false } } })]
+})
     .compileComponents();
   });
 

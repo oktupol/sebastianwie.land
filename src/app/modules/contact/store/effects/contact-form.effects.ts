@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Service } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, mergeMap, of } from 'rxjs';
@@ -7,8 +7,13 @@ import { GlobalMessagesService } from 'src/app/shared/services/global-messages.s
 import { MailAdapter } from '../../adapters/mail.adapter';
 import { reset, send, sendFailure, sendSuccess } from '../actions/contact-form.actions';
 
-@Injectable()
+@Service({ autoProvided: false })
 export class ContactFormEffects {
+  private actions$ = inject(Actions);
+  private mailAdapter = inject(MailAdapter);
+  private router = inject(Router);
+  private gm = inject(GlobalMessagesService);
+
   send$ = createEffect(() => this.actions$.pipe(
     ofType(send),
     mergeMap(({encryptedMsg, messageId}) => this.mailAdapter.postMail(encryptedMsg, messageId).pipe(
@@ -49,11 +54,4 @@ export class ContactFormEffects {
       return reset();
     })
   ));
-
-  constructor(
-    private actions$: Actions,
-    private mailAdapter: MailAdapter,
-    private router: Router,
-    private gm: GlobalMessagesService
-  ) {}
 }

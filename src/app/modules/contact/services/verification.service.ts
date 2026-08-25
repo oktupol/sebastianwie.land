@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Service } from '@angular/core';
 import { catchError, from, map, mergeMap, Observable, of } from 'rxjs';
 import { VerificationResponse } from 'src/app/util/types';
 import { environment } from 'src/environments/environment';
@@ -6,12 +6,11 @@ import { ContentType, Email, Headers } from '../interfaces/email';
 import { FileService } from './file.service';
 import { OpenpgpService } from './openpgp.service';
 
-@Injectable()
+@Service({ autoProvided: false })
 export class VerificationService {
-  constructor(
-    private fileService: FileService,
-    private openPgpService: OpenpgpService
-  ) {}
+  private fileService = inject(FileService);
+  private openPgpService = inject(OpenpgpService);
+
 
 
   public verify(file: File): Observable<VerificationResponse> {

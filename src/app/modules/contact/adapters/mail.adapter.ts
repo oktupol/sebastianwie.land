@@ -1,11 +1,12 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Service } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
-@Injectable()
+@Service({ autoProvided: false })
 export class MailAdapter {
-  public constructor(private http: HttpClient) {}
+  private http = inject(HttpClient);
+
 
   public postMail(message: string, messageId: string): Observable<string> {
     return this.http.post(environment.backendUrl + '/mail', message, {

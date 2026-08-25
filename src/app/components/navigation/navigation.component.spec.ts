@@ -1,31 +1,29 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NavigationEnd, Router } from '@angular/router';
-import { Store } from '@ngrx/store';
+import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { Subject } from 'rxjs';
 
 import { NavigationComponent } from './navigation.component';
 
-const navigationOpen = new Subject<boolean>();
-const storeMock = {
-  select() {
-    return navigationOpen;
-  }
-}
 const eventsMock = new Subject<NavigationEnd>();
 const routerMock = {
   events: eventsMock,
+  createUrlTree: () => ({}),
+  serializeUrl: () => '',
 }
+
 describe('NavigationComponent', () => {
   let component: NavigationComponent;
   let fixture: ComponentFixture<NavigationComponent>;
+  let store: MockStore;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NavigationComponent ],
+      imports: [NavigationComponent],
       providers: [
-        { provide: Store, useValue: storeMock },
+        provideMockStore({ initialState: { navigation: { open: false } } }),
         { provide: Router, useValue: routerMock },
-      ]
+      ],
     })
     .compileComponents();
   });
@@ -33,9 +31,9 @@ describe('NavigationComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(NavigationComponent);
     component = fixture.componentInstance;
+    store = TestBed.inject(MockStore);
     fixture.detectChanges();
 
-    navigationOpen.next(false);
     eventsMock.next(new NavigationEnd(0, '/', '/'));
   });
 
@@ -47,25 +45,23 @@ describe('NavigationComponent', () => {
     it('should be true when url is /', () => {
       eventsMock.next(new NavigationEnd(1, '/', '/'));
 
-      expect(component.isHomepage).toBeTrue();
+      expect(component.isHomepage()).toBeTrue();
     });
 
     it('should be false when url is not /', () => {
       eventsMock.next(new NavigationEnd(2, '/some-page', '/some-page'));
 
-      expect(component.isHomepage).toBeFalse();
+      expect(component.isHomepage()).toBeFalse();
     });
   });
 
   describe('navOpen', () => {
     it('should be identical to store value', () => {
-      navigationOpen.next(true);
+      store.setState({ navigation: { open: true } });
+      expect(component.navOpen()).toBeTrue();
 
-      expect(component.navOpen).toBeTrue();
-
-      navigationOpen.next(false);
-
-      expect(component.navOpen).toBeFalse();
+      store.setState({ navigation: { open: false } });
+      expect(component.navOpen()).toBeFalse();
     });
   });
 });

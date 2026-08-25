@@ -1,18 +1,26 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectionStrategy, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Position } from 'src/app/util/types';
 
 import * as titleActions from '../../store/actions/title.actions';
+import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'nwie-title',
-  templateUrl: './title.component.html',
-  styleUrls: ['./title.component.scss']
+    selector: 'nwie-title',
+    templateUrl: './title.component.html',
+    styleUrls: ['./title.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [RouterLink]
 })
 export class TitleComponent implements OnInit {
+  private store = inject(Store);
+
 
   private _position: Position = 'up';
 
+  // Deliberately a setter input rather than input(): invalid values are
+  // ignored so the previous position is kept, which a signal input cannot
+  // express (it would always adopt the incoming value).
   @Input() set position(position: string) {
     if (this.isPosition(position)) {
       this._position = position;
@@ -22,7 +30,6 @@ export class TitleComponent implements OnInit {
   get position(): Position {
     return this._position;
   }
-  constructor(private store: Store) { }
 
   ngOnInit(): void {
   }

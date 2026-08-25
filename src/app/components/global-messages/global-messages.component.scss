@@ -1,11 +1,12 @@
-@import "../../../styles/variables.scss";
+@use "sass:map";
+@use "../../../styles/variables" as *;
 
 :host {
   position: fixed;
   bottom: 0;
   right: 0;
   left: 0;
-  z-index: map-get($z-index, 'global-message') + 50;
+  z-index: map.get($z-index, 'global-message') + 50;
 
   display: flex;
   justify-content: center;
@@ -22,7 +23,7 @@
       margin-top: 0.1em;
       font-family: $global-message-font-family;
 
-      @media screen and(min-width: $content-width) {
+      @media screen and (min-width: $content-width) {
         margin-top: .25em;
       }
 

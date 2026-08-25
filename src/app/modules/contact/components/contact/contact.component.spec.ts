@@ -1,68 +1,77 @@
-import { Component, DebugElement, EventEmitter, Injectable, Input, Output } from '@angular/core';
+import { Component, DebugElement, ChangeDetectionStrategy, input, output, Service } from '@angular/core';
 import { ComponentFixture, TestBed, } from '@angular/core/testing';
-import { FormArray, FormBuilder, FormControl, ReactiveFormsModule } from '@angular/forms';
-import { Store } from '@ngrx/store';
-import { EMPTY, of } from 'rxjs';
+import { UntypedFormArray, UntypedFormBuilder, UntypedFormControl, ReactiveFormsModule } from '@angular/forms';
+import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { Message } from '../../interfaces/message';
 import { ContactFormService } from '../../services/contact-form.service';
-import { getContactFormInputs } from '../../store/selectors/contact-form.selectors';
+import { EncodingService } from '../../services/encoding.service';
+import { getContactFormInputs, isSending } from '../../store/selectors/contact-form.selectors';
 
 import { ContactComponent } from './contact.component';
 
-@Injectable()
-class MockStore {
-  select(selector: any) {
-    if (selector === getContactFormInputs) {
-      return of({
-        subject: 'Subject',
-        fromName: 'Someone',
-        fromEmail: 'name@email.com',
-        message: 'Message'
-      } as Message);
-    }
-
-    return EMPTY;
-  }
-  dispatch() {
-  }
-}
-
-@Injectable()
+@Service({ autoProvided: false })
 class MockContactFormService {
   send() {
 
   }
 }
 
-@Component({ selector: 'nwie-content-page', template: '<p><ng-content></ng-content></p>' })
+@Component({
+    selector: 'nwie-content-page', template: '<p><ng-content /></p>',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [ReactiveFormsModule]
+})
 class MockContentPageComponent {
 }
-@Component({ selector: 'nwie-loader', template: 'loading...' })
+@Component({
+    selector: 'nwie-loader', template: 'loading...',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [ReactiveFormsModule]
+})
 class MockLoaderComponent {
 }
-@Component({ selector: 'nwie-attachment', template: '<div>attachment</div>' })
+@Component({
+    selector: 'nwie-attachment', template: '<div>attachment</div>',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [ReactiveFormsModule]
+})
 class MockAttachmentComponent {
-  @Input() public control!: FormControl;
-  @Output() public addAttachment = new EventEmitter<void>();
-  @Output() public delete = new EventEmitter<void>();
+  public readonly control = input.required<UntypedFormControl>();
+  public readonly addAttachment = output<void>();
+  public readonly delete = output<void>();
 }
 describe('ContactComponent', () => {
   let component: ContactComponent;
   let fixture: ComponentFixture<ContactComponent>;
   let el: DebugElement;
   let contactFormService: ContactFormService;
-  let store: Store;
+  let store: MockStore;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ContactComponent, MockContentPageComponent, MockLoaderComponent, MockAttachmentComponent],
-      imports: [ReactiveFormsModule],
-      providers: [
-        FormBuilder,
-        { provide: Store, useClass: MockStore },
+    imports: [ReactiveFormsModule, ContactComponent, MockContentPageComponent, MockLoaderComponent, MockAttachmentComponent],
+    providers: [
+        EncodingService,
+        UntypedFormBuilder,
+        provideMockStore({
+            initialState: { navigation: { open: false } },
+            selectors: [
+                { selector: getContactFormInputs, value: {
+                    subject: 'Subject',
+                    fromName: 'Someone',
+                    fromEmail: 'name@email.com',
+                    message: 'Message',
+                    // setValue() requires every control, so the mock must cover
+                    // the full selector shape.
+                    requestEncryptedReply: false,
+                    encryptionPassphrase: null,
+                } },
+                { selector: isSending, value: false },
+            ],
+        }),
         { provide: ContactFormService, useClass: MockContactFormService },
-      ]
-    })
+    ]
+})
       .compileComponents();
   });
 
@@ -72,7 +81,7 @@ describe('ContactComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
 
-    store = TestBed.inject(Store);
+    store = TestBed.inject(MockStore);
     contactFormService = TestBed.inject(ContactFormService);
   });
 
@@ -81,10 +90,10 @@ describe('ContactComponent', () => {
   });
 
   describe('attachments', () => {
-    let attachments: FormArray;
+    let attachments: UntypedFormArray;
 
     beforeEach(() => {
-      attachments = component.contactForm.get('attachments') as FormArray;
+      attachments = component.contactForm.get('attachments') as UntypedFormArray;
     });
 
     describe('addAttachmentField', () => {
@@ -122,7 +131,7 @@ describe('ContactComponent', () => {
 
         expect(component.contactForm.get('attachments')).not.toBe(attachments);
 
-        expect((component.contactForm.get('attachments') as FormArray).length).toBe(1);
+        expect((component.contactForm.get('attachments') as UntypedFormArray).length).toBe(1);
       });
     });
   });

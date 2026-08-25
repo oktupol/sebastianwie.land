@@ -1,6 +1,6 @@
 <div class="content-wrapper">
-  <div class="content-backdrop" [class.nav-open]="navOpen"></div>
+  <div class="content-backdrop" [class.nav-open]="navOpen()"></div>
   <main>
-    <ng-content></ng-content>
+    <ng-content />
   </main>
 </div>

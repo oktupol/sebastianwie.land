@@ -11,7 +11,7 @@ module.exports = function (config) {
       require('karma-jasmine-html-reporter'),
       require('karma-coverage'),
       // @ts-ignore
-      require('@angular-devkit/build-angular/plugins/karma'),
+      
     ],
     client: {
       jasmine: {

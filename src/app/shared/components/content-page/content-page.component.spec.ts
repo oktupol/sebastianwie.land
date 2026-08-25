@@ -1,23 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Store } from '@ngrx/store';
-import { Subject } from 'rxjs';
+import { MockStore, provideMockStore } from '@ngrx/store/testing';
 
 import { ContentPageComponent } from './content-page.component';
 
-const navigationOpen = new Subject<boolean>();
-const storeMock = {
-  select: function () {
-    return navigationOpen;
-  }
-}
 describe('ContentPageComponent', () => {
   let component: ContentPageComponent;
   let fixture: ComponentFixture<ContentPageComponent>;
+  let store: MockStore;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ContentPageComponent ],
-      providers: [{ provide: Store, useValue: storeMock }]
+      imports: [ContentPageComponent],
+      providers: [provideMockStore({ initialState: { navigation: { open: false } } })],
     })
     .compileComponents();
   });
@@ -25,8 +19,8 @@ describe('ContentPageComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ContentPageComponent);
     component = fixture.componentInstance;
+    store = TestBed.inject(MockStore);
     fixture.detectChanges();
-    navigationOpen.next(false);
   });
 
   it('should create', () => {
@@ -35,13 +29,11 @@ describe('ContentPageComponent', () => {
 
   describe('navOpen', () => {
     it('should be identical to store value', () => {
-      navigationOpen.next(true);
+      store.setState({ navigation: { open: true } });
+      expect(component.navOpen()).toBeTrue();
 
-      expect(component.navOpen).toBeTrue();
-
-      navigationOpen.next(false);
-
-      expect(component.navOpen).toBeFalse();
+      store.setState({ navigation: { open: false } });
+      expect(component.navOpen()).toBeFalse();
     });
   });
 });

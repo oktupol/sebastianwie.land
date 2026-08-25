@@ -1,3 +1,5 @@
+@use "sass:map";
+
 /*
  * Global coordination of z-indexes.
  *
@@ -8,14 +10,14 @@
  * Usage: In a css-directive, add the property z-index like following:
  *
  *    selector {
- *      z-index: map-get($z-index, 'realm-name');
+ *      z-index: map.get($z-index, 'realm-name');
  *    }
  *
  * Each realm has a usable range of 100 to allow fine-tuning within a single
  * realm, meaning that every value from
- *    map-get($z-index, 'realm-name')
+ *    map.get($z-index, 'realm-name')
  * to
- *    map-get($z-index, 'realm-name') + 99
+ *    map.get($z-index, 'realm-name') + 99
  * is valid.
  */
 $z-realms: (
@@ -30,6 +32,6 @@ $z-index-counter: 1000;
 $z-index: ();
 
 @each $z-realm in $z-realms {
-  $z-index: map-merge($z-index, ($z-realm: $z-index-counter));
+  $z-index: map.merge($z-index, ($z-realm: $z-index-counter));
   $z-index-counter: $z-index-counter + 100;
 }

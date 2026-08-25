@@ -1,24 +1,33 @@
-import { DOCUMENT } from '@angular/common';
-import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
+
+import { Component, OnDestroy, OnInit, DOCUMENT, ChangeDetectionStrategy, PLATFORM_ID, inject } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { Store } from '@ngrx/store';
-import 'hammerjs';
 import * as titleActions from '../../store/actions/title.actions';
 
 @Component({
-  selector: 'nwie-title-listener',
-  templateUrl: './title-listener.component.html',
-  styleUrls: ['./title-listener.component.scss'],
+    selector: 'nwie-title-listener',
+    templateUrl: './title-listener.component.html',
+    styleUrls: ['./title-listener.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TitleListenerComponent implements OnInit, OnDestroy {
+  private store = inject(Store);
+  private document = inject<Document>(DOCUMENT);
+  private platformId = inject<Object>(PLATFORM_ID);
 
-  constructor(private store: Store, @Inject(DOCUMENT) private document: Document) { }
 
   private keyboardListener: EventListenerOrEventListenerObject | null = null;
   private mc: HammerManager | null = null;
 
   ngOnInit(): void {
+    // Both listeners rely on browser-only APIs, and Hammer touches `window`
+    // as a side effect of being imported, so it is loaded lazily here.
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
+
     this.addKeyboardListener();
-    this.addSwipeListener();
+    void this.addSwipeListener();
   }
 
   ngOnDestroy(): void {
@@ -52,7 +61,9 @@ export class TitleListenerComponent implements OnInit, OnDestroy {
     }
   }
 
-  private addSwipeListener(): void {
+  private async addSwipeListener(): Promise<void> {
+    await import('hammerjs');
+
     this.mc = new Hammer.Manager(this.document.body, {
       recognizers: [
         [Hammer.Swipe, {
