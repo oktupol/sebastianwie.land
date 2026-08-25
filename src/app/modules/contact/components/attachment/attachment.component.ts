@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, ChangeDetectionStrategy, inject } from '@angular/core';
+import { Component, ChangeDetectionStrategy, inject, input, output } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 import { EncodingService } from '../../services/encoding.service';
 
@@ -8,19 +8,16 @@ import { EncodingService } from '../../services/encoding.service';
     styleUrls: ['./attachment.component.scss'],
     changeDetection: ChangeDetectionStrategy.Eager
 })
-export class AttachmentComponent implements OnInit {
+export class AttachmentComponent {
   private encodingService = inject(EncodingService);
 
-  @Input() public control!: AbstractControl;
+  public readonly control = input.required<AbstractControl>();
 
-  @Output() public addAttachment = new EventEmitter<File>();
+  public readonly addAttachment = output<File>();
 
-  @Output() public delete = new EventEmitter<void>();
+  public readonly delete = output<void>();
 
   public inputId = this.generateRandomId();
-
-  ngOnInit(): void {
-  }
 
   private generateRandomId(): string {
     const randomBytes = new Uint8Array(5);
@@ -32,12 +29,12 @@ export class AttachmentComponent implements OnInit {
     const file = (event.target as HTMLInputElement).files?.item(0);
     if (file) {
       this.addAttachment.emit(file);
-      this.control.setValue(file);
+      this.control().setValue(file);
     }
   }
 
   public get file(): File {
-    return this.control.value;
+    return this.control().value;
   }
 
   public onDelete(): void {

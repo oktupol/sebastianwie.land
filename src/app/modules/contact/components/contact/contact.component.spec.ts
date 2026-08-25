@@ -1,4 +1,4 @@
-import { Component, DebugElement, EventEmitter, Injectable, Input, Output, ChangeDetectionStrategy } from '@angular/core';
+import { Component, DebugElement, Injectable, ChangeDetectionStrategy, input, output } from '@angular/core';
 import { ComponentFixture, TestBed, } from '@angular/core/testing';
 import { UntypedFormArray, UntypedFormBuilder, UntypedFormControl, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
@@ -55,9 +55,9 @@ class MockLoaderComponent {
     imports: [ReactiveFormsModule]
 })
 class MockAttachmentComponent {
-  @Input() public control!: UntypedFormControl;
-  @Output() public addAttachment = new EventEmitter<void>();
-  @Output() public delete = new EventEmitter<void>();
+  public readonly control = input.required<UntypedFormControl>();
+  public readonly addAttachment = output<void>();
+  public readonly delete = output<void>();
 }
 describe('ContactComponent', () => {
   let component: ContactComponent;

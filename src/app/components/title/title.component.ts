@@ -18,6 +18,9 @@ export class TitleComponent implements OnInit {
 
   private _position: Position = 'up';
 
+  // Deliberately a setter input rather than input(): invalid values are
+  // ignored so the previous position is kept, which a signal input cannot
+  // express (it would always adopt the incoming value).
   @Input() set position(position: string) {
     if (this.isPosition(position)) {
       this._position = position;

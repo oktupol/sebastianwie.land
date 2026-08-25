@@ -1,4 +1,4 @@
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, input } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
@@ -17,7 +17,7 @@ const mockStore = {
     changeDetection: ChangeDetectionStrategy.Eager
 })
 class MockTitleComponent {
-  @Input() public position!: string;
+  public readonly position = input.required<string>();
 }
 describe('TitleWrapperComponent', () => {
   let component: TitleWrapperComponent;

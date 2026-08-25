@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild, ChangeDetectionStrategy, inject } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ChangeDetectionStrategy, inject, viewChild } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 import { VerificationResponse } from 'src/app/util/types';
 import { VerificationService } from '../../services/verification.service';
@@ -25,7 +25,7 @@ export class VerifyEmailComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private destroy$ = new Subject<void>();
 
-  @ViewChild('fileUploadBox') private fileUploadBox !: ElementRef;
+  private readonly fileUploadBox = viewChild.required<ElementRef>('fileUploadBox');
 
   ngOnInit(): void {
   }
@@ -36,7 +36,7 @@ export class VerifyEmailComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
-    const box = this.fileUploadBox.nativeElement as HTMLFormElement;
+    const box = this.fileUploadBox().nativeElement as HTMLFormElement;
 
     const preventDefault = (e: Event) => {
       e.preventDefault();

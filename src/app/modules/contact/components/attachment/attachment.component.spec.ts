@@ -19,6 +19,7 @@ describe('AttachmentComponent', () => {
   let fixture: ComponentFixture<AttachmentComponent>;
 
   let el: DebugElement;
+  let control: UntypedFormControl;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -36,7 +37,8 @@ describe('AttachmentComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(AttachmentComponent);
     component = fixture.componentInstance;
-    component.control = new UntypedFormControl();
+    control = new UntypedFormControl();
+    fixture.componentRef.setInput('control', control);
 
     el = fixture.debugElement;
 
@@ -62,7 +64,7 @@ describe('AttachmentComponent', () => {
     });
 
     it('negative case: control has value', () => {
-      component.control.setValue({ name: 'somefile.txt' });
+      control.setValue({ name: 'somefile.txt' });
       fixture.detectChanges();
 
       const label = el.query(By.css('label'));
@@ -72,7 +74,7 @@ describe('AttachmentComponent', () => {
 
   describe('display fileinfo only if control has value', () => {
     it('positive case: control has value', () => {
-      component.control.setValue({ name: 'somefile.txt' });
+      control.setValue({ name: 'somefile.txt' });
       fixture.detectChanges();
 
       const fileInfo = el.query(By.css('.fileinfo'));

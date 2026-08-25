@@ -1,4 +1,4 @@
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, input } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute, Data } from '@angular/router';
 import { Subject } from 'rxjs';
@@ -19,7 +19,7 @@ const activatedRouteMock = {
     changeDetection: ChangeDetectionStrategy.Eager
 })
 class MockMarkdownComponent {
-  @Input() public src!: string;
+  public readonly src = input.required<string>();
 }
 @Component({
     selector: 'nwie-content-page', template: '<p><ng-content></ng-content></p>',
