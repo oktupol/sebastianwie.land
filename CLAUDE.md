@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project
 
-Personal website (sebastianwie.land) — an Angular 22 SPA, pre-rendered to static HTML at build time and deployed to GitHub Pages. Its main feature is a contact form that PGP-encrypts a full MIME message **in the browser** before posting it to an API, plus a page that verifies PGP signatures on `.eml` files exported from mail clients.
+Personal website (sebastianwie.land) — a zoneless, fully standalone Angular 22 SPA, pre-rendered to static HTML at build time and deployed to GitHub Pages. Its main feature is a contact form that PGP-encrypts a full MIME message **in the browser** before posting it to an API, plus a page that verifies PGP signatures on `.eml` files exported from mail clients.
 
 ## Commands
 
@@ -40,8 +40,13 @@ Because the app is rendered in Node at build time, **anything touching `window` 
 
 `src/gh-pages/` is copied to the output root verbatim (`CNAME`, `.nojekyll`, `keybase.txt`, `pgp-pubkey.asc`). Rotating the PGP key means replacing `pgp-pubkey.asc` there.
 
-### Routing & modules
-The app still uses **NgModules**, not standalone components (every component carries `standalone: false`). `AppRoutingModule` lazy-loads `sites/*` → `ContentModule` and `contact/*` → `ContactModule`.
+### Routing & configuration
+The app is **fully standalone** — there are no NgModules. Wiring lives in:
+- `src/app/app.config.ts` — the root `ApplicationConfig` (router, store, effects, devtools, HttpClient, hydration, `WINDOW`).
+- `src/app/app.config.server.ts` — merges the server-rendering providers on top for prerendering.
+- `src/app/app.routes.ts` — root routes, lazy-loading `sites/*` → `content.routes.ts` and `contact/*` → `contact.routes.ts`.
+
+Feature-scoped state and services are declared in the feature route's `providers` (`provideState`, `provideEffects`, plus the contact services), which keeps them lazy exactly as the old feature NgModules did.
 
 Content pages are markdown-driven: `ContentRoutingModule` maps a route to `MarkdownComponent` via `data.markdownFile` pointing at `src/assets/content/*.md` (rendered by `ngx-markdown`). Adding a prose page = add a `.md` file plus a route entry, no new component — and it will be prerendered automatically.
 
@@ -75,17 +80,27 @@ The root route is `TitleListenerComponent`: j/k/arrow keys and Hammer.js swipes 
 
 ## Conventions
 
+These are load-bearing — the app runs **zoneless**, so breaking them means the view silently stops updating.
+
+- Every component is standalone and uses `ChangeDetectionStrategy.OnPush`.
+- **State that a template reads must be a signal.** Store state via `store.selectSignal(...)`, observables via `toSignal(...)`, local state via `signal(...)`. Assigning a plain field from a `subscribe()` will not re-render.
+- Dependencies are obtained with `inject()`, not constructor parameters. Services use `@Service({ autoProvided: false })`.
+- Subscriptions are torn down with `takeUntilDestroyed(this.destroyRef)`, not a manual `destroy$` Subject.
+- Inputs/outputs use `input()` / `input.required()` / `output()`, and queries use `viewChild()`. The one exception is `TitleComponent.position`, a setter input that deliberately ignores invalid values — a signal input cannot express that.
+- A `FormControl`'s value is not reactive; if a template shows it, derive a signal from `valueChanges` (see `AttachmentComponent`).
 - Component selector prefix `nwie`; SCSS everywhere; TypeScript strict mode with `strictTemplates`.
-- Templates use Angular block control flow (`@if` / `@for`), not `*ngIf` / `*ngFor`.
+- Templates use Angular block control flow (`@if` / `@for`), not `*ngIf` / `*ngFor`, and self-closing tags where possible.
 - Explicit `public`/`private` modifiers are used on members.
-- Feature services and adapters are provided in the owning `NgModule`'s `providers`, not `providedIn: 'root'`.
-- Shared components live in `src/app/shared/components/<name>/` each with its own small `NgModule` (`content-page`, `loader`, `help`) — follow that pattern for new shared pieces.
+- Shared components live in `src/app/shared/components/<name>/` — plain standalone components, no module files.
 - Global SCSS is split under `src/styles/` (`variables`, `z-indexes`, `fonts`, `globalStyles`) and pulled in by `src/styles.scss`; use the shared variables rather than literal colors/z-indexes.
+- Stylesheets use the Sass **module system**: `@use` / `@forward`, never `@import`, and namespaced built-ins (`map.get`, `color.adjust`, `list.append`, `string.quote`). `variables.scss` forwards `z-indexes.scss`, so `@use "<path>/variables" as *;` provides both.
 - Font `url()`s in SCSS must be root-relative (`/assets/...`): esbuild resolves them against the entry stylesheet, not the file that declares them.
 - `tsconfig.json` uses `paths` (not the deprecated `baseUrl`) to make `src/...` imports resolve.
 
 ## Testing notes
 
-Angular 22's `TestBed` defaults to **zoneless** change detection, but the app bootstraps with `provideZoneChangeDetection()`. `src/test.ts` overrides the test environment back to zone-based CD so `fixture.detectChanges()` behaves as the app does; without it, specs fail with `NG0100`.
+The app and the `TestBed` are both zoneless, so no change-detection override is needed in `src/test.ts`.
 
-Several specs log `NG0303`/`NG0304` (unknown element/property) because they declare a component without importing the modules its template needs (`HelpModule`, `ContentPageModule`, router directives). These are pre-existing gaps that Angular used to report as warnings — the suite passes, but new specs should import what the template uses.
+Because components are standalone, a spec renders the component's **real** children rather than silently ignoring unknown elements. A spec therefore has to provide whatever that subtree injects — most commonly `provideMockStore(...)` (needed for `selectSignal`), `provideRouter([])` for `routerLink`, and the feature services. Declaring a stub component with a matching selector no longer intercepts anything.
+
+Anything the mocked store feeds into `setValue()` must cover the full form shape, since `setValue` requires every control.

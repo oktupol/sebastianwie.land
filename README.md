@@ -1,6 +1,6 @@
 # SebastianwieLand
 
-Personal website, built with [Angular](https://angular.dev) 22 and pre-rendered to static HTML for GitHub Pages.
+Personal website, built with [Angular](https://angular.dev) 22 — zoneless, fully standalone, and pre-rendered to static HTML for GitHub Pages.
 
 ## Development server
 
