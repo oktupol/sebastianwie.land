@@ -1,6 +1,6 @@
 import { Component, DebugElement, EventEmitter, Injectable, Input, Output } from '@angular/core';
 import { ComponentFixture, TestBed, } from '@angular/core/testing';
-import { FormArray, FormBuilder, FormControl, ReactiveFormsModule } from '@angular/forms';
+import { UntypedFormArray, UntypedFormBuilder, UntypedFormControl, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { EMPTY, of } from 'rxjs';
 import { Message } from '../../interfaces/message';
@@ -42,7 +42,7 @@ class MockLoaderComponent {
 }
 @Component({ selector: 'nwie-attachment', template: '<div>attachment</div>' })
 class MockAttachmentComponent {
-  @Input() public control!: FormControl;
+  @Input() public control!: UntypedFormControl;
   @Output() public addAttachment = new EventEmitter<void>();
   @Output() public delete = new EventEmitter<void>();
 }
@@ -58,7 +58,7 @@ describe('ContactComponent', () => {
       declarations: [ContactComponent, MockContentPageComponent, MockLoaderComponent, MockAttachmentComponent],
       imports: [ReactiveFormsModule],
       providers: [
-        FormBuilder,
+        UntypedFormBuilder,
         { provide: Store, useClass: MockStore },
         { provide: ContactFormService, useClass: MockContactFormService },
       ]
@@ -81,10 +81,10 @@ describe('ContactComponent', () => {
   });
 
   describe('attachments', () => {
-    let attachments: FormArray;
+    let attachments: UntypedFormArray;
 
     beforeEach(() => {
-      attachments = component.contactForm.get('attachments') as FormArray;
+      attachments = component.contactForm.get('attachments') as UntypedFormArray;
     });
 
     describe('addAttachmentField', () => {
@@ -122,7 +122,7 @@ describe('ContactComponent', () => {
 
         expect(component.contactForm.get('attachments')).not.toBe(attachments);
 
-        expect((component.contactForm.get('attachments') as FormArray).length).toBe(1);
+        expect((component.contactForm.get('attachments') as UntypedFormArray).length).toBe(1);
       });
     });
   });

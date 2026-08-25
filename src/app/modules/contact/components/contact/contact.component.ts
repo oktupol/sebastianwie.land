@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit, Predicate } from '@angular/core';
-import { AbstractControl, FormArray, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { AbstractControl, UntypedFormArray, UntypedFormBuilder, UntypedFormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { debounceTime, Subject, take, takeUntil } from 'rxjs';
 import { Message } from '../../interfaces/message';
@@ -13,7 +13,7 @@ import { getContactFormInputs, isSending } from '../../store/selectors/contact-f
   styleUrls: ['./contact.component.scss']
 })
 export class ContactComponent implements OnInit, OnDestroy {
-  public contactForm: FormGroup = this.fb.group({
+  public contactForm: UntypedFormGroup = this.fb.group({
     subject: ['', Validators.required],
     fromName: ['', Validators.required],
     fromEmail: ['', [Validators.email, Validators.required]],
@@ -23,7 +23,7 @@ export class ContactComponent implements OnInit, OnDestroy {
     attachments: this.createAttachmentsArray(),
   });
 
-  public attachmentFields!: FormArray;
+  public attachmentFields!: UntypedFormArray;
 
   public sending = false;
 
@@ -36,7 +36,7 @@ export class ContactComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
 
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private store: Store,
     private contactFormService: ContactFormService,
   ) { }
@@ -62,7 +62,7 @@ export class ContactComponent implements OnInit, OnDestroy {
     this.destroy$.unsubscribe();
   }
 
-  private createAttachmentsArray(): FormArray {
+  private createAttachmentsArray(): UntypedFormArray {
     this.attachmentFields = this.fb.array([
       [null],
     ]);

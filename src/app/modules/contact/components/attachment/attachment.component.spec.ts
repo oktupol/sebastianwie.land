@@ -1,6 +1,6 @@
 import { DebugElement, Injectable } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { UntypedFormControl, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { EncodingService } from '../../services/encoding.service';
 
@@ -36,7 +36,7 @@ describe('AttachmentComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(AttachmentComponent);
     component = fixture.componentInstance;
-    component.control = new FormControl();
+    component.control = new UntypedFormControl();
 
     el = fixture.debugElement;
 
