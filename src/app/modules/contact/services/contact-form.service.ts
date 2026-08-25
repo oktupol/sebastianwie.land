@@ -42,7 +42,7 @@ export class ContactFormService {
       .pipe(
         mergeMap(doc => this.openPgpService.encrypt(doc.toString())),
         mergeMap(encrypted => {
-          if ((encrypted as string).length <= environment.contact.maxEncryptedMessageSize) {
+          if (encrypted.length <= environment.contact.maxEncryptedMessageSize) {
             return of(encrypted);
           } else {
             this.gm.add({
@@ -54,7 +54,7 @@ export class ContactFormService {
         })
       )
       .subscribe((encrypted) => {
-        this.store.dispatch(send({ encryptedMsg: encrypted as string, messageId }))
+        this.store.dispatch(send({ encryptedMsg: encrypted, messageId }))
       });
   }
 

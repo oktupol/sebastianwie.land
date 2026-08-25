@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { createMessage, encrypt, NodeStream, readKey, readSignature, verify, VerifyMessageResult, WebStream } from 'openpgp';
+import { createMessage, encrypt, readKey, readSignature, verify, VerifyMessageResult } from 'openpgp';
 import { EMPTY, filter, from,  mergeMap, Observable, of, take, takeUntil, withLatestFrom, } from 'rxjs';
 import { loadPublicKey } from '../store/actions/openpgp.actions';
 import { getError, getPublicKey } from '../store/selectors/openpgp.selectors';
@@ -25,7 +25,7 @@ export class OpenpgpService {
       );
   }
 
-  public encrypt(text: string): Observable<string | WebStream<string> | NodeStream<string>> {
+  public encrypt(text: string): Observable<string> {
     return this.getOpenpgpKey().pipe(
       mergeMap(key => from(readKey({ armoredKey: key }))),
       withLatestFrom(from(createMessage({ text: text }))),

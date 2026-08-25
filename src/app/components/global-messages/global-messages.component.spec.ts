@@ -1,25 +1,27 @@
 import { DebugElement, Injectable } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { EMPTY, of, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { GlobalMessage } from 'src/app/shared/interfaces/global-message';
 import { GlobalMessagesService } from '../../shared/services/global-messages.service';
 
 import { GlobalMessagesComponent } from './global-messages.component';
 
-const getAllSubject$ = new Subject<GlobalMessage[]>();
 @Injectable()
 class MockGlobalMessagesService {
-  add() {
+  // Per-instance so state cannot leak between tests.
+  public readonly messages$ = new Subject<GlobalMessage[]>();
+
+  add(message: GlobalMessage) {
 
   }
 
-  remove() {
+  remove(index: number) {
 
   }
 
   getAll() {
-    return getAllSubject$;
+    return this.messages$;
   }
 }
 
@@ -27,7 +29,7 @@ describe('GlobalMessagesComponent', () => {
   let component: GlobalMessagesComponent;
   let fixture: ComponentFixture<GlobalMessagesComponent>;
 
-  let gm: GlobalMessagesService;
+  let gm: MockGlobalMessagesService;
   let el: DebugElement;
 
   beforeEach(async () => {
@@ -46,7 +48,11 @@ describe('GlobalMessagesComponent', () => {
     fixture.detectChanges();
     el = fixture.debugElement;
 
-    gm = TestBed.inject(GlobalMessagesService);
+    gm = TestBed.inject(GlobalMessagesService) as unknown as MockGlobalMessagesService;
+  });
+
+  afterEach(() => {
+    fixture.destroy();
   });
 
   it('should create', () => {
@@ -67,7 +73,7 @@ describe('GlobalMessagesComponent', () => {
         { message: 'Test Message 3', type: 'success' },
       ];
 
-      getAllSubject$.next(messages);
+      gm.messages$.next(messages);
       fixture.detectChanges();
 
       const boxes = el.queryAll(By.css('.gm-container > div'));
@@ -86,7 +92,7 @@ describe('GlobalMessagesComponent', () => {
         { message: 'Test Message 3', type: 'success' },
       ];
 
-      getAllSubject$.next(messages);
+      gm.messages$.next(messages);
       fixture.detectChanges();
 
       component.remove(0);
