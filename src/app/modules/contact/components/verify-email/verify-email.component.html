@@ -50,120 +50,120 @@
     </label>
   </form>
 
-  <div class="verification-response warn" *ngIf="verificationResponse === 'not-an-eml-file'">
-    <h3>Not an .eml File</h3>
-    <p>
-      The file you uploaded does not appear to be an .eml file.
-    </p>
-  </div>
+  @if (verificationResponse === 'not-an-eml-file') {
+    <div class="verification-response warn">
+      <h3>Not an .eml File</h3>
+      <p>
+        The file you uploaded does not appear to be an .eml file.
+      </p>
+    </div>
+  }
 
-  <div class="verification-response info" *ngIf="verificationResponse === 'not-from-me'">
-    <h3>Not from me</h3>
-    <p>
-      This tool can only check the legitimacy of e-mails sent by me.
-    </p>
-  </div>
+  @if (verificationResponse === 'not-from-me') {
+    <div class="verification-response info">
+      <h3>Not from me</h3>
+      <p>
+        This tool can only check the legitimacy of e-mails sent by me.
+      </p>
+    </div>
+  }
 
-  <div class="verification-response error" *ngIf="verificationResponse === 'not-a-multipart-file' || verificationResponse === 'no-signature-present'">
-    <h3>Could not verify legitimacy!</h3>
-
-    <p>
-      The e-mail appears to be sent by me, but it is not signed. There is no
-      certainty about its legitimacy!
-    </p>
-
-    <p>
-      This could mean one or multiple of following things:
-    </p>
-
-    <ul>
-      <li>I am the author, but I chose not to sign this e-mail.</li>
-      <li>I am the author, but a third party between me and you removed the
+  @if (verificationResponse === 'not-a-multipart-file' || verificationResponse === 'no-signature-present') {
+    <div class="verification-response error">
+      <h3>Could not verify legitimacy!</h3>
+      <p>
+        The e-mail appears to be sent by me, but it is not signed. There is no
+        certainty about its legitimacy!
+      </p>
+      <p>
+        This could mean one or multiple of following things:
+      </p>
+      <ul>
+        <li>I am the author, but I chose not to sign this e-mail.</li>
+        <li>I am the author, but a third party between me and you removed the
         signature from the original e-mail.</li>
-      <li>I am the author, but <strong>a third party altered the contents of
-          the e-mail</strong>.</li>
-      <li>I am <strong>not</strong> the author, and <strong>a third party sent
-          you this e-mail pretending to be me</strong>.</li>
+        <li>I am the author, but <strong>a third party altered the contents of
+        the e-mail</strong>.</li>
+        <li>I am <strong>not</strong> the author, and <strong>a third party sent
+      you this e-mail pretending to be me</strong>.</li>
     </ul>
-
     <p>
       When in doubt: <strong>ignore this e-mail!</strong> If the legitimacy of
       the e-mail is crucial to you, contact me using <a
-      routerLink="/contact">the end-to-end encrypted contact form</a> and
-      request an end-to-end encrypted reply.
-    </p>
-  </div>
+    routerLink="/contact">the end-to-end encrypted contact form</a> and
+    request an end-to-end encrypted reply.
+  </p>
+</div>
+}
 
-  <div class="verification-response info" *ngIf="verificationResponse === 'encrypted'">
+@if (verificationResponse === 'encrypted') {
+  <div class="verification-response info">
     <h3>Encrypted message</h3>
     <p>
       This message is encrypted and can only be opened by the recipient. If you
       are the recipient, use your decryption software to verify its legitimacy.
     </p>
   </div>
+}
 
-  <div class="verification-response error" *ngIf="verificationResponse === 'bad-signature'">
+@if (verificationResponse === 'bad-signature') {
+  <div class="verification-response error">
     <h3>Could not verify legitimacy!</h3>
-
     <p>
       The e-mail appears to be sent by me, but the signature doesn't match.
       There is no certainty about its legitimacy!
     </p>
-
     <p>
       This could mean one or multiple of following things:
     </p>
-
     <ul>
       <li>I am the author, but <strong>a third party altered the contents of
-          the e-mail</strong>.</li>
+      the e-mail</strong>.</li>
       <li>I am <strong>not</strong> the author, and <strong>a third party sent
-          you this e-mail pretending to be me</strong>.</li>
-    </ul>
+    you this e-mail pretending to be me</strong>.</li>
+  </ul>
+  <p>
+    When in doubt: <strong>ignore this e-mail!</strong> If the legitimacy of
+    the e-mail is crucial to you, contact me using <a
+  routerLink="/contact">the end-to-end encrypted contact form</a> and
+  request an end-to-end encrypted reply.
+</p>
+</div>
+}
 
-    <p>
-      When in doubt: <strong>ignore this e-mail!</strong> If the legitimacy of
-      the e-mail is crucial to you, contact me using <a
-      routerLink="/contact">the end-to-end encrypted contact form</a> and
-      request an end-to-end encrypted reply.
-    </p>
-  </div>
-
-  <div class="verification-response success" *ngIf="verificationResponse === 'good-signature'">
+@if (verificationResponse === 'good-signature') {
+  <div class="verification-response success">
     <h3>Legitimacy verified.</h3>
-
     <p>
       Please check following things:
     </p>
-
     <ul>
       <li>Are you currently accessing this site via HTTPS?</li>
       <li>Were you able to enter this website without having to accept any
-        warnings about an insecure connection?</li>
+      warnings about an insecure connection?</li>
       <li>Do you own the device you're currently using?</li>
     </ul>
-
     <p>
       If you were able to answer all of these questions with "yes", it is almost
       guaranteed that this e-mail is legitimate.
     </p>
-
     <p>
       If you had to answer any of these questions with "no", it is possible
       that someone tampered with this tool to present you a wrong result.
     </p>
   </div>
+}
 
-  <div class="verification-response info" *ngIf="verificationResponse === 'protonmail'">
+@if (verificationResponse === 'protonmail') {
+  <div class="verification-response info">
     <h3>Legitimacy verified by Protonmail.</h3>
-
     <p>
       Protonmail indicates the legitimacy of e-mails using the blue lock-symbol
       next to the date.
     </p>
-
     <p>
       <img src="/assets/content/images/protonmail-encryption.png" alt="Protonmail"/>
     </p>
   </div>
+}
 </nwie-content-page>

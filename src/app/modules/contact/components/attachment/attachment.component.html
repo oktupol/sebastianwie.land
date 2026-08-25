@@ -1,9 +1,13 @@
 <input type="file" [id]="inputId" (change)="onChange($event)">
 
-<label [for]="inputId" *ngIf="!control.value">+ attachment</label>
+@if (!control.value) {
+  <label [for]="inputId">+ attachment</label>
+}
 
-<ng-container *ngIf="control.value">
+@if (control.value) {
   <div class="fileinfo">{{ file.name }}</div>
   <div class="spacer"></div>
-  <button type="button" *ngIf="control.value" (click)="onDelete()">&times; delete</button>
-</ng-container>
+  @if (control.value) {
+    <button type="button" (click)="onDelete()">&times; delete</button>
+  }
+}
