@@ -5,9 +5,10 @@ import 'hammerjs';
 import * as titleActions from '../../store/actions/title.actions';
 
 @Component({
-  selector: 'nwie-title-listener',
-  templateUrl: './title-listener.component.html',
-  styleUrls: ['./title-listener.component.scss'],
+    selector: 'nwie-title-listener',
+    templateUrl: './title-listener.component.html',
+    styleUrls: ['./title-listener.component.scss'],
+    standalone: false
 })
 export class TitleListenerComponent implements OnInit, OnDestroy {
 

@@ -4,9 +4,10 @@ import { VerificationResponse } from 'src/app/util/types';
 import { VerificationService } from '../../services/verification.service';
 
 @Component({
-  selector: 'nwie-verify-email',
-  templateUrl: './verify-email.component.html',
-  styleUrls: ['./verify-email.component.scss']
+    selector: 'nwie-verify-email',
+    templateUrl: './verify-email.component.html',
+    styleUrls: ['./verify-email.component.scss'],
+    standalone: false
 })
 export class VerifyEmailComponent implements OnInit, AfterViewInit, OnDestroy {
 

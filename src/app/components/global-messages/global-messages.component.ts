@@ -4,9 +4,10 @@ import { GlobalMessage } from 'src/app/shared/interfaces/global-message';
 import { GlobalMessagesService } from 'src/app/shared/services/global-messages.service';
 
 @Component({
-  selector: 'nwie-global-messages',
-  templateUrl: './global-messages.component.html',
-  styleUrls: ['./global-messages.component.scss']
+    selector: 'nwie-global-messages',
+    templateUrl: './global-messages.component.html',
+    styleUrls: ['./global-messages.component.scss'],
+    standalone: false
 })
 export class GlobalMessagesComponent implements OnInit, OnDestroy {
 

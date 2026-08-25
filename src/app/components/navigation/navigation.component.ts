@@ -6,9 +6,10 @@ import * as navigationSelectors from '../../store/selectors/navigation.selectors
 import * as navigationActions from '../../store/actions/navigation.actions';
 
 @Component({
-  selector: 'nwie-navigation',
-  templateUrl: './navigation.component.html',
-  styleUrls: ['./navigation.component.scss']
+    selector: 'nwie-navigation',
+    templateUrl: './navigation.component.html',
+    styleUrls: ['./navigation.component.scss'],
+    standalone: false
 })
 export class NavigationComponent implements OnInit, OnDestroy {
 

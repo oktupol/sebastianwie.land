@@ -10,11 +10,17 @@ const activatedRouteMock = {
   data: activatedRouteData,
 }
 
-@Component({ selector: 'markdown', template: 'markdown mock' })
+@Component({
+    selector: 'markdown', template: 'markdown mock',
+    standalone: false
+})
 class MockMarkdownComponent {
   @Input() public src!: string;
 }
-@Component({ selector: 'nwie-content-page', template: '<p><ng-content></ng-content></p>' })
+@Component({
+    selector: 'nwie-content-page', template: '<p><ng-content></ng-content></p>',
+    standalone: false
+})
 class MockContentPageComponent {
 }
 describe('MarkdownComponent', () => {

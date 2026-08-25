@@ -5,9 +5,10 @@ import { Position } from 'src/app/util/types';
 import * as titleActions from '../../store/actions/title.actions';
 
 @Component({
-  selector: 'nwie-title',
-  templateUrl: './title.component.html',
-  styleUrls: ['./title.component.scss']
+    selector: 'nwie-title',
+    templateUrl: './title.component.html',
+    styleUrls: ['./title.component.scss'],
+    standalone: false
 })
 export class TitleComponent implements OnInit {
 

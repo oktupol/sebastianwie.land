@@ -8,9 +8,10 @@ import { storeInputs } from '../../store/actions/contact-form.actions';
 import { getContactFormInputs, isSending } from '../../store/selectors/contact-form.selectors';
 
 @Component({
-  selector: 'nwie-contact',
-  templateUrl: './contact.component.html',
-  styleUrls: ['./contact.component.scss']
+    selector: 'nwie-contact',
+    templateUrl: './contact.component.html',
+    styleUrls: ['./contact.component.scss'],
+    standalone: false
 })
 export class ContactComponent implements OnInit, OnDestroy {
   public contactForm: UntypedFormGroup = this.fb.group({

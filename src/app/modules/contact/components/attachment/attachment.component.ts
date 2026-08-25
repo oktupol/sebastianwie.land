@@ -3,9 +3,10 @@ import { AbstractControl } from '@angular/forms';
 import { EncodingService } from '../../services/encoding.service';
 
 @Component({
-  selector: 'nwie-attachment',
-  templateUrl: './attachment.component.html',
-  styleUrls: ['./attachment.component.scss']
+    selector: 'nwie-attachment',
+    templateUrl: './attachment.component.html',
+    styleUrls: ['./attachment.component.scss'],
+    standalone: false
 })
 export class AttachmentComponent implements OnInit {
   @Input() public control!: AbstractControl;

@@ -34,13 +34,22 @@ class MockContactFormService {
   }
 }
 
-@Component({ selector: 'nwie-content-page', template: '<p><ng-content></ng-content></p>' })
+@Component({
+    selector: 'nwie-content-page', template: '<p><ng-content></ng-content></p>',
+    standalone: false
+})
 class MockContentPageComponent {
 }
-@Component({ selector: 'nwie-loader', template: 'loading...' })
+@Component({
+    selector: 'nwie-loader', template: 'loading...',
+    standalone: false
+})
 class MockLoaderComponent {
 }
-@Component({ selector: 'nwie-attachment', template: '<div>attachment</div>' })
+@Component({
+    selector: 'nwie-attachment', template: '<div>attachment</div>',
+    standalone: false
+})
 class MockAttachmentComponent {
   @Input() public control!: UntypedFormControl;
   @Output() public addAttachment = new EventEmitter<void>();

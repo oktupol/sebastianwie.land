@@ -11,7 +11,10 @@ const mockStore = {
   }
 }
 
-@Component({ selector: 'nwie-title', template: 'title component' })
+@Component({
+    selector: 'nwie-title', template: 'title component',
+    standalone: false
+})
 class MockTitleComponent {
   @Input() public position!: string;
 }

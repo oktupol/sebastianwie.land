@@ -4,9 +4,10 @@ import { Subject, takeUntil } from 'rxjs';
 import * as navigationSelectors from '../../../store/selectors/navigation.selectors';
 
 @Component({
-  selector: 'nwie-content-page',
-  templateUrl: './content-page.component.html',
-  styleUrls: ['./content-page.component.scss']
+    selector: 'nwie-content-page',
+    templateUrl: './content-page.component.html',
+    styleUrls: ['./content-page.component.scss'],
+    standalone: false
 })
 export class ContentPageComponent implements OnInit, OnDestroy {
 

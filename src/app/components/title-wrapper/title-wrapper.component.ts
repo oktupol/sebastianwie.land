@@ -5,9 +5,10 @@ import { Position } from 'src/app/util/types';
 import * as titleSelectors from '../../store/selectors/title.selectors';
 
 @Component({
-  selector: 'nwie-title-wrapper',
-  templateUrl: './title-wrapper.component.html',
-  styleUrls: ['./title-wrapper.component.scss']
+    selector: 'nwie-title-wrapper',
+    templateUrl: './title-wrapper.component.html',
+    styleUrls: ['./title-wrapper.component.scss'],
+    standalone: false
 })
 export class TitleWrapperComponent implements OnInit, OnDestroy {
 

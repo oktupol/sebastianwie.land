@@ -3,13 +3,22 @@ import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 
-@Component({ selector: 'nwie-title-wrapper', template: 'title wrapper' })
+@Component({
+    selector: 'nwie-title-wrapper', template: 'title wrapper',
+    standalone: false
+})
 class MockTitleWrapper {}
 
-@Component({ selector: 'nwie-navigation', template: 'navigation' })
+@Component({
+    selector: 'nwie-navigation', template: 'navigation',
+    standalone: false
+})
 class MockNavigation {}
 
-@Component({ selector: 'nwie-global-messages', template: 'global messages' })
+@Component({
+    selector: 'nwie-global-messages', template: 'global messages',
+    standalone: false
+})
 class MockGlobalMessages {}
 
 describe('AppComponent', () => {
