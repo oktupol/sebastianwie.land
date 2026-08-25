@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Service } from '@angular/core';
 
 
 export enum Base32Charset {
@@ -12,7 +12,7 @@ export enum Base64Charset {
   DEFAULT = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/',
 }
 
-@Injectable()
+@Service({ autoProvided: false })
 export class EncodingService {
   base32(buffer: ArrayBuffer | Uint8Array, chars: Base32Charset = Base32Charset.DEFAULT): string {
     const bytes = (buffer instanceof ArrayBuffer) ? new Uint8Array(buffer) : buffer;

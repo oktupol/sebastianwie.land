@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
+import { Service } from '@angular/core';
 import { Observable } from 'rxjs';
 
-@Injectable()
+@Service({ autoProvided: false })
 export class FileService {
   public readFileContentsAsArrayBuffer(file: File): Observable<ArrayBuffer> {
     return this.readFileContents(file, 'arraybuffer') as Observable<ArrayBuffer>;

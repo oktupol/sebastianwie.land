@@ -1,4 +1,4 @@
-import { Injectable, inject } from '@angular/core';
+import { inject, Service } from '@angular/core';
 import { from, last, map, mergeMap, Observable, of, take, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { AbstractDocument, MultipartDocument } from '../entities/multipart-document.entity';
@@ -7,7 +7,7 @@ import { Message } from '../interfaces/message';
 import { EncodingService } from './encoding.service';
 import { FileService } from './file.service';
 
-@Injectable()
+@Service({ autoProvided: false })
 export class MultipartDocumentService {
   private encodingService = inject(EncodingService);
   private fileService = inject(FileService);

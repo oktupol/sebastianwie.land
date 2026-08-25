@@ -1,4 +1,4 @@
-import { Injectable, inject } from '@angular/core';
+import { inject, Service } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
@@ -6,7 +6,7 @@ import { map, mergeMap, take } from 'rxjs';
 import * as titleActions from '../actions/title.actions';
 import * as titleSelectors from '../selectors/title.selectors';
 
-@Injectable()
+@Service({ autoProvided: false })
 export class TitleEffects {
   private actions$ = inject(Actions);
   private store = inject(Store);

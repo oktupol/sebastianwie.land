@@ -1,4 +1,4 @@
-import { Component, DebugElement, Injectable, ChangeDetectionStrategy, input, output } from '@angular/core';
+import { Component, DebugElement, ChangeDetectionStrategy, input, output, Service } from '@angular/core';
 import { ComponentFixture, TestBed, } from '@angular/core/testing';
 import { UntypedFormArray, UntypedFormBuilder, UntypedFormControl, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
@@ -10,7 +10,7 @@ import { getContactFormInputs } from '../../store/selectors/contact-form.selecto
 
 import { ContactComponent } from './contact.component';
 
-@Injectable()
+@Service({ autoProvided: false })
 class MockStore {
   select(selector: any) {
     if (selector === getContactFormInputs) {
@@ -28,7 +28,7 @@ class MockStore {
   }
 }
 
-@Injectable()
+@Service({ autoProvided: false })
 class MockContactFormService {
   send() {
 
@@ -36,7 +36,7 @@ class MockContactFormService {
 }
 
 @Component({
-    selector: 'nwie-content-page', template: '<p><ng-content></ng-content></p>',
+    selector: 'nwie-content-page', template: '<p><ng-content /></p>',
     changeDetection: ChangeDetectionStrategy.Eager,
     imports: [ReactiveFormsModule]
 })

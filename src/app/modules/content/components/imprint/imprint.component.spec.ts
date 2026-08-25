@@ -5,7 +5,7 @@ import { ImprintComponent } from './imprint.component';
 import { provideMockStore } from '@ngrx/store/testing';
 
 @Component({
-    selector: 'nwie-content-page', template: '<p><ng-content></ng-content></p>',
+    selector: 'nwie-content-page', template: '<p><ng-content /></p>',
     changeDetection: ChangeDetectionStrategy.Eager
 })
 class MockContentPageComponent {

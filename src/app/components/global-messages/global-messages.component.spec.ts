@@ -1,4 +1,4 @@
-import { DebugElement, Injectable } from '@angular/core';
+import { DebugElement, Service } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { Subject } from 'rxjs';
@@ -7,7 +7,7 @@ import { GlobalMessagesService } from '../../shared/services/global-messages.ser
 
 import { GlobalMessagesComponent } from './global-messages.component';
 
-@Injectable()
+@Service({ autoProvided: false })
 class MockGlobalMessagesService {
   // Per-instance so state cannot leak between tests.
   public readonly messages$ = new Subject<GlobalMessage[]>();

@@ -6,7 +6,7 @@ import { provideMockStore } from '@ngrx/store/testing';
 import { provideRouter } from '@angular/router';
 
 @Component({
-    selector: 'nwie-content-page', template: '<p><ng-content></ng-content></p>',
+    selector: 'nwie-content-page', template: '<p><ng-content /></p>',
     changeDetection: ChangeDetectionStrategy.Eager
 })
 class MockContentPageComponent {

@@ -80,10 +80,9 @@
 
     <div class="attachments">
       @for (attachment of attachmentFields.controls; track attachment; let i = $index) {
-        <nwie-attachment
-          [control]="attachment"
+        <nwie-attachment [control]="attachment"
           (addAttachment)="addAttachmentField()"
-        (delete)="deleteAttachment(i)"></nwie-attachment>
+        (delete)="deleteAttachment(i)" />
       }
     </div>
 

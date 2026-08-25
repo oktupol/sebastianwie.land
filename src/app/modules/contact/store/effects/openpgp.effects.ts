@@ -1,11 +1,11 @@
-import { Injectable, inject } from '@angular/core';
+import { inject, Service } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, mergeMap, of } from 'rxjs';
 import { GlobalMessagesService } from 'src/app/shared/services/global-messages.service';
 import { OpenpgpAdapter } from '../../adapters/openpgp.adapter';
 import { loadPublicKey, loadPublicKeyFailure, loadPublicKeySuccess } from '../actions/openpgp.actions';
 
-@Injectable()
+@Service({ autoProvided: false })
 export class OpenpgpEffects {
   private actions$ = inject(Actions);
   private openpgpAdapter = inject(OpenpgpAdapter);

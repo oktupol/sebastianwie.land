@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, inject } from '@angular/core';
+import { inject, Service } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
-@Injectable()
+@Service({ autoProvided: false })
 export class MailAdapter {
   private http = inject(HttpClient);
 

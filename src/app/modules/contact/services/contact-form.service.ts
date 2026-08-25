@@ -1,4 +1,4 @@
-import { Injectable, inject } from '@angular/core';
+import { inject, Service } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { readKey } from 'openpgp';
 import { catchError, count, EMPTY, filter, from, map, mergeMap, Observable, of, throwError } from 'rxjs';
@@ -12,7 +12,7 @@ import { MultipartDocumentService } from './multipart-document.service';
 import { OpenpgpService } from './openpgp.service';
 
 type SendOptions = { hasSuitablePublicKey?: boolean };
-@Injectable()
+@Service({ autoProvided: false })
 export class ContactFormService {
   private openPgpService = inject(OpenpgpService);
   private multipartDocumentService = inject(MultipartDocumentService);

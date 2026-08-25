@@ -1,4 +1,4 @@
-import { DebugElement, Injectable } from '@angular/core';
+import { DebugElement, Service } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { UntypedFormControl, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
@@ -6,7 +6,7 @@ import { EncodingService } from '../../services/encoding.service';
 
 import { AttachmentComponent } from './attachment.component';
 
-@Injectable()
+@Service({ autoProvided: false })
 class MockEncodingService {
   private counter = 0;
 

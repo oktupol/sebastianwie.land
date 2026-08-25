@@ -4,7 +4,7 @@
   <div class="backdrop" (click)="closeHelp($event)">
     <div class="help-modal" (click)="preventDefault($event)">
       <div class="content">
-        <ng-content></ng-content>
+        <ng-content />
       </div>
       <button type="button" (click)="closeHelp($event)">
         Close

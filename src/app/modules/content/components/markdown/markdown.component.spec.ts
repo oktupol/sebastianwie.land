@@ -22,7 +22,7 @@ class MockMarkdownComponent {
   public readonly src = input.required<string>();
 }
 @Component({
-    selector: 'nwie-content-page', template: '<p><ng-content></ng-content></p>',
+    selector: 'nwie-content-page', template: '<p><ng-content /></p>',
     changeDetection: ChangeDetectionStrategy.Eager
 })
 class MockContentPageComponent {
