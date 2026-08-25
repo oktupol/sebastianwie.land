@@ -40,7 +40,7 @@ import { WINDOW } from './util/injection-tokens';
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,
-    }),
+    connectInZone: true}),
     ContentPageModule,
   ],
   providers: [

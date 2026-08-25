@@ -79,10 +79,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "sebastianwie-land:build:production"
+              "buildTarget": "sebastianwie-land:build:production"
             },
             "development": {
-              "browserTarget": "sebastianwie-land:build:development"
+              "buildTarget": "sebastianwie-land:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -90,7 +90,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "sebastianwie-land:build"
+            "buildTarget": "sebastianwie-land:build"
           }
         },
         "test": {
