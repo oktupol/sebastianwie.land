@@ -12,7 +12,6 @@ import { reducers, metaReducers } from './store/reducers';
 import { environment } from 'src/environments/environment';
 import { ContentPageModule } from './shared/components/content-page/content-page.module';
 import { NotFoundComponent } from './components/not-found/not-found.component';
-import { ScullyLibModule } from '@scullyio/ng-lib';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { TitleEffects } from './store/effects/title.effects';
 import { EffectsModule } from '@ngrx/effects';
@@ -43,7 +42,6 @@ import { WINDOW } from './util/injection-tokens';
       logOnly: environment.production,
     }),
     ContentPageModule,
-    ScullyLibModule
   ],
   providers: [
     { provide: WINDOW, useValue: window },
