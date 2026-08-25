@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Inject, OnDestroy, OnInit, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 import { VerificationResponse } from 'src/app/util/types';
 import { VerificationService } from '../../services/verification.service';
@@ -7,6 +7,7 @@ import { VerificationService } from '../../services/verification.service';
     selector: 'nwie-verify-email',
     templateUrl: './verify-email.component.html',
     styleUrls: ['./verify-email.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class VerifyEmailComponent implements OnInit, AfterViewInit, OnDestroy {

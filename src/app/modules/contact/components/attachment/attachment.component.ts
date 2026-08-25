@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ChangeDetectionStrategy } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 import { EncodingService } from '../../services/encoding.service';
 
@@ -6,6 +6,7 @@ import { EncodingService } from '../../services/encoding.service';
     selector: 'nwie-attachment',
     templateUrl: './attachment.component.html',
     styleUrls: ['./attachment.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class AttachmentComponent implements OnInit {

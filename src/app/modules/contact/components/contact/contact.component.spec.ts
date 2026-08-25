@@ -1,4 +1,4 @@
-import { Component, DebugElement, EventEmitter, Injectable, Input, Output } from '@angular/core';
+import { Component, DebugElement, EventEmitter, Injectable, Input, Output, ChangeDetectionStrategy } from '@angular/core';
 import { ComponentFixture, TestBed, } from '@angular/core/testing';
 import { UntypedFormArray, UntypedFormBuilder, UntypedFormControl, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
@@ -36,18 +36,21 @@ class MockContactFormService {
 
 @Component({
     selector: 'nwie-content-page', template: '<p><ng-content></ng-content></p>',
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 class MockContentPageComponent {
 }
 @Component({
     selector: 'nwie-loader', template: 'loading...',
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 class MockLoaderComponent {
 }
 @Component({
     selector: 'nwie-attachment', template: '<div>attachment</div>',
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 class MockAttachmentComponent {

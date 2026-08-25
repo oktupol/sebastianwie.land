@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute, Data } from '@angular/router';
 import { Subject } from 'rxjs';
@@ -12,6 +12,7 @@ const activatedRouteMock = {
 
 @Component({
     selector: 'markdown', template: 'markdown mock',
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 class MockMarkdownComponent {
@@ -19,6 +20,7 @@ class MockMarkdownComponent {
 }
 @Component({
     selector: 'nwie-content-page', template: '<p><ng-content></ng-content></p>',
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 class MockContentPageComponent {

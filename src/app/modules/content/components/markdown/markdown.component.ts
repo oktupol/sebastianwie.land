@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { map, Observable, Subject, takeUntil } from 'rxjs';
 
@@ -6,6 +6,7 @@ import { map, Observable, Subject, takeUntil } from 'rxjs';
     selector: 'nwie-markdown',
     templateUrl: './markdown.component.html',
     styleUrls: ['./markdown.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class MarkdownComponent implements OnInit, OnDestroy {

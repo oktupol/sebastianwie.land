@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, of, Subject, takeUntil } from 'rxjs';
 import { Position } from 'src/app/util/types';
@@ -8,6 +8,7 @@ import * as titleSelectors from '../../store/selectors/title.selectors';
     selector: 'nwie-title-wrapper',
     templateUrl: './title-wrapper.component.html',
     styleUrls: ['./title-wrapper.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class TitleWrapperComponent implements OnInit, OnDestroy {

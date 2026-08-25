@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
@@ -13,6 +13,7 @@ const mockStore = {
 
 @Component({
     selector: 'nwie-title', template: 'title component',
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 class MockTitleComponent {

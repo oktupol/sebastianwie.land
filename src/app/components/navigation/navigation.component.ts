@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { filter, Subject, takeUntil } from 'rxjs';
@@ -9,6 +9,7 @@ import * as navigationActions from '../../store/actions/navigation.actions';
     selector: 'nwie-navigation',
     templateUrl: './navigation.component.html',
     styleUrls: ['./navigation.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class NavigationComponent implements OnInit, OnDestroy {

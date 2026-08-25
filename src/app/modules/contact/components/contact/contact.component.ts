@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, Predicate } from '@angular/core';
+import { Component, OnDestroy, OnInit, Predicate, ChangeDetectionStrategy } from '@angular/core';
 import { AbstractControl, UntypedFormArray, UntypedFormBuilder, UntypedFormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { debounceTime, Subject, take, takeUntil } from 'rxjs';
@@ -11,6 +11,7 @@ import { getContactFormInputs, isSending } from '../../store/selectors/contact-f
     selector: 'nwie-contact',
     templateUrl: './contact.component.html',
     styleUrls: ['./contact.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class ContactComponent implements OnInit, OnDestroy {

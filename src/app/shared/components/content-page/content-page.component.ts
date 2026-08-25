@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Subject, takeUntil } from 'rxjs';
 import * as navigationSelectors from '../../../store/selectors/navigation.selectors';
@@ -7,6 +7,7 @@ import * as navigationSelectors from '../../../store/selectors/navigation.select
     selector: 'nwie-content-page',
     templateUrl: './content-page.component.html',
     styleUrls: ['./content-page.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class ContentPageComponent implements OnInit, OnDestroy {

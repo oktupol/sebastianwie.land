@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ImprintComponent } from './imprint.component';
 
 @Component({
     selector: 'nwie-content-page', template: '<p><ng-content></ng-content></p>',
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 class MockContentPageComponent {

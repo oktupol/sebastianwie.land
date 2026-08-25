@@ -1,5 +1,5 @@
 
-import { Component, Inject, OnDestroy, OnInit, DOCUMENT } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit, DOCUMENT, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import 'hammerjs';
 import * as titleActions from '../../store/actions/title.actions';
@@ -8,6 +8,7 @@ import * as titleActions from '../../store/actions/title.actions';
     selector: 'nwie-title-listener',
     templateUrl: './title-listener.component.html',
     styleUrls: ['./title-listener.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class TitleListenerComponent implements OnInit, OnDestroy {

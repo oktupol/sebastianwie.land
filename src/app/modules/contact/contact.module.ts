@@ -10,7 +10,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { EffectsModule } from '@ngrx/effects';
 import { OpenpgpEffects } from './store/effects/openpgp.effects';
 import { OpenpgpAdapter } from './adapters/openpgp.adapter';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi, withXhr } from '@angular/common/http';
 import { OpenpgpService } from './services/openpgp.service';
 import { EncodingService } from './services/encoding.service';
 import { MultipartDocumentService } from './services/multipart-document.service';
@@ -44,6 +44,6 @@ import { HelpModule } from 'src/app/shared/components/help/help.module';
         ContactFormService,
         FileService,
         VerificationService,
-        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClient(withXhr(), withInterceptorsFromDi()),
     ] })
 export class ContactModule { }
