@@ -1,4 +1,4 @@
-import { ApplicationConfig, DOCUMENT, provideZoneChangeDetection } from '@angular/core';
+import { ApplicationConfig, DOCUMENT, provideZonelessChangeDetection } from '@angular/core';
 import { provideHttpClient } from '@angular/common/http';
 import { provideClientHydration } from '@angular/platform-browser';
 import { provideRouter } from '@angular/router';
@@ -14,7 +14,7 @@ import { WINDOW } from './util/injection-tokens';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideZoneChangeDetection(),
+    provideZonelessChangeDetection(),
     provideRouter(routes),
     provideHttpClient(),
     provideClientHydration(),
@@ -23,7 +23,6 @@ export const appConfig: ApplicationConfig = {
     provideStoreDevtools({
       maxAge: 25,
       logOnly: environment.production,
-      connectInZone: true,
     }),
     // Resolved via DOCUMENT so the app can also be bootstrapped while
     // prerendering, where `window` does not exist.

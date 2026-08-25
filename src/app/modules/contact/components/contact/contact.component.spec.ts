@@ -61,6 +61,10 @@ describe('ContactComponent', () => {
                     fromName: 'Someone',
                     fromEmail: 'name@email.com',
                     message: 'Message',
+                    // setValue() requires every control, so the mock must cover
+                    // the full selector shape.
+                    requestEncryptedReply: false,
+                    encryptionPassphrase: null,
                 } },
                 { selector: isSending, value: false },
             ],
