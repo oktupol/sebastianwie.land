@@ -2,13 +2,16 @@ import { AfterViewInit, Component, ElementRef, Inject, OnDestroy, OnInit, ViewCh
 import { Subject, takeUntil } from 'rxjs';
 import { VerificationResponse } from 'src/app/util/types';
 import { VerificationService } from '../../services/verification.service';
+import { ContentPageComponent } from '../../../../shared/components/content-page/content-page.component';
+import { RouterLink } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
     selector: 'nwie-verify-email',
     templateUrl: './verify-email.component.html',
     styleUrls: ['./verify-email.component.scss'],
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [ContentPageComponent, RouterLink, ReactiveFormsModule]
 })
 export class VerifyEmailComponent implements OnInit, AfterViewInit, OnDestroy {
 

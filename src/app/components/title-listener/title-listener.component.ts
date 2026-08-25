@@ -8,8 +8,7 @@ import * as titleActions from '../../store/actions/title.actions';
     selector: 'nwie-title-listener',
     templateUrl: './title-listener.component.html',
     styleUrls: ['./title-listener.component.scss'],
-    changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    changeDetection: ChangeDetectionStrategy.Eager
 })
 export class TitleListenerComponent implements OnInit, OnDestroy {
 

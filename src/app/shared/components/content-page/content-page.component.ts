@@ -7,8 +7,7 @@ import * as navigationSelectors from '../../../store/selectors/navigation.select
     selector: 'nwie-content-page',
     templateUrl: './content-page.component.html',
     styleUrls: ['./content-page.component.scss'],
-    changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    changeDetection: ChangeDetectionStrategy.Eager
 })
 export class ContentPageComponent implements OnInit, OnDestroy {
 

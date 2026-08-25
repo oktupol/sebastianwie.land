@@ -2,11 +2,12 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NotFoundComponent } from './not-found.component';
+import { provideMockStore } from '@ngrx/store/testing';
+import { provideRouter } from '@angular/router';
 
 @Component({
     selector: 'nwie-content-page', template: '<p><ng-content></ng-content></p>',
-    changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    changeDetection: ChangeDetectionStrategy.Eager
 })
 class MockContentPageComponent {
 }
@@ -16,8 +17,10 @@ describe('NotFoundComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NotFoundComponent, MockContentPageComponent ]
-    })
+    imports: [NotFoundComponent, MockContentPageComponent],
+    providers: [
+        provideRouter([]),provideMockStore()]
+})
     .compileComponents();
   });
 

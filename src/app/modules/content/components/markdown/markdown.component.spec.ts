@@ -4,6 +4,10 @@ import { ActivatedRoute, Data } from '@angular/router';
 import { Subject } from 'rxjs';
 
 import { MarkdownComponent } from './markdown.component';
+import { provideMockStore } from '@ngrx/store/testing';
+import { HttpClient, provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideMarkdown } from 'ngx-markdown';
 
 const activatedRouteData = new Subject<Data>();
 const activatedRouteMock = {
@@ -12,16 +16,14 @@ const activatedRouteMock = {
 
 @Component({
     selector: 'markdown', template: 'markdown mock',
-    changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    changeDetection: ChangeDetectionStrategy.Eager
 })
 class MockMarkdownComponent {
   @Input() public src!: string;
 }
 @Component({
     selector: 'nwie-content-page', template: '<p><ng-content></ng-content></p>',
-    changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    changeDetection: ChangeDetectionStrategy.Eager
 })
 class MockContentPageComponent {
 }
@@ -31,9 +33,13 @@ describe('MarkdownComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MarkdownComponent, MockMarkdownComponent, MockContentPageComponent ],
-      providers: [{ provide: ActivatedRoute, useValue: activatedRouteMock }]
-    })
+    imports: [MarkdownComponent, MockMarkdownComponent, MockContentPageComponent],
+    providers: [
+        provideMarkdown({ loader: HttpClient }),
+        provideHttpClient(),
+        provideHttpClientTesting(),
+        provideMockStore(),{ provide: ActivatedRoute, useValue: activatedRouteMock }]
+})
     .compileComponents();
   });
 

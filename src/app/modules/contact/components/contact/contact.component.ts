@@ -1,18 +1,22 @@
 import { Component, OnDestroy, OnInit, Predicate, ChangeDetectionStrategy } from '@angular/core';
-import { AbstractControl, UntypedFormArray, UntypedFormBuilder, UntypedFormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { AbstractControl, UntypedFormArray, UntypedFormBuilder, UntypedFormGroup, ValidatorFn, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { debounceTime, Subject, take, takeUntil } from 'rxjs';
 import { Message } from '../../interfaces/message';
 import { ContactFormService } from '../../services/contact-form.service';
 import { storeInputs } from '../../store/actions/contact-form.actions';
 import { getContactFormInputs, isSending } from '../../store/selectors/contact-form.selectors';
+import { ContentPageComponent } from '../../../../shared/components/content-page/content-page.component';
+import { HelpComponent } from '../../../../shared/components/help/help.component';
+import { AttachmentComponent } from '../attachment/attachment.component';
+import { LoaderComponent } from '../../../../shared/components/loader/loader.component';
 
 @Component({
     selector: 'nwie-contact',
     templateUrl: './contact.component.html',
     styleUrls: ['./contact.component.scss'],
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [ContentPageComponent, ReactiveFormsModule, HelpComponent, AttachmentComponent, LoaderComponent]
 })
 export class ContactComponent implements OnInit, OnDestroy {
   public contactForm: UntypedFormGroup = this.fb.group({
@@ -91,7 +95,9 @@ export class ContactComponent implements OnInit, OnDestroy {
             .subscribe(value => this.hasSuitablePublicKey = value);
         }
 
-        this.contactForm.get('encryptionPassphrase')?.updateValueAndValidity();
+        // emitEvent: false — this runs inside a valueChanges subscription, and
+        // re-emitting would retrigger it through the debounce indefinitely.
+        this.contactForm.get('encryptionPassphrase')?.updateValueAndValidity({ emitEvent: false });
 
         this.store.dispatch(storeInputs({
           subject: val.subject,

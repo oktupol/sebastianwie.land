@@ -22,14 +22,14 @@ describe('AttachmentComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AttachmentComponent ],
-      providers: [
+    providers: [
         { provide: EncodingService, useClass: MockEncodingService },
-      ],
-      imports: [
+    ],
+    imports: [
         ReactiveFormsModule,
-      ]
-    })
+        AttachmentComponent,
+    ]
+})
     .compileComponents();
   });
 

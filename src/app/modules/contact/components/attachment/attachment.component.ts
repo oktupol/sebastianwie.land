@@ -6,8 +6,7 @@ import { EncodingService } from '../../services/encoding.service';
     selector: 'nwie-attachment',
     templateUrl: './attachment.component.html',
     styleUrls: ['./attachment.component.scss'],
-    changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    changeDetection: ChangeDetectionStrategy.Eager
 })
 export class AttachmentComponent implements OnInit {
   @Input() public control!: AbstractControl;

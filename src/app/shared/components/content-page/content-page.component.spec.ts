@@ -16,9 +16,9 @@ describe('ContentPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ContentPageComponent ],
-      providers: [{ provide: Store, useValue: storeMock }]
-    })
+    imports: [ContentPageComponent],
+    providers: [{ provide: Store, useValue: storeMock }]
+})
     .compileComponents();
   });
 

@@ -2,11 +2,11 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ImprintComponent } from './imprint.component';
+import { provideMockStore } from '@ngrx/store/testing';
 
 @Component({
     selector: 'nwie-content-page', template: '<p><ng-content></ng-content></p>',
-    changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    changeDetection: ChangeDetectionStrategy.Eager
 })
 class MockContentPageComponent {
 }
@@ -16,8 +16,9 @@ describe('ImprintComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ImprintComponent, MockContentPageComponent ]
-    })
+    imports: [ImprintComponent, MockContentPageComponent],
+    providers: [provideMockStore()]
+})
     .compileComponents();
   });
 

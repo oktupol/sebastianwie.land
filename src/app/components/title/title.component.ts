@@ -3,13 +3,14 @@ import { Store } from '@ngrx/store';
 import { Position } from 'src/app/util/types';
 
 import * as titleActions from '../../store/actions/title.actions';
+import { RouterLink } from '@angular/router';
 
 @Component({
     selector: 'nwie-title',
     templateUrl: './title.component.html',
     styleUrls: ['./title.component.scss'],
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [RouterLink]
 })
 export class TitleComponent implements OnInit {
 

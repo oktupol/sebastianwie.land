@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
 
 import { TitleWrapperComponent } from './title-wrapper.component';
+import { provideRouter } from '@angular/router';
 
 const mockStore = {
   select() {
@@ -13,8 +14,7 @@ const mockStore = {
 
 @Component({
     selector: 'nwie-title', template: 'title component',
-    changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    changeDetection: ChangeDetectionStrategy.Eager
 })
 class MockTitleComponent {
   @Input() public position!: string;
@@ -25,11 +25,12 @@ describe('TitleWrapperComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TitleWrapperComponent, MockTitleComponent ],
-      providers: [
+    imports: [TitleWrapperComponent, MockTitleComponent],
+    providers: [
+        provideRouter([]),
         { provide: Store, useValue: mockStore }
-      ]
-    })
+    ]
+})
     .compileComponents();
   });
 

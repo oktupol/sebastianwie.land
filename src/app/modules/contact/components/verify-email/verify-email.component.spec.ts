@@ -5,6 +5,8 @@ import { VerificationResponse } from 'src/app/util/types';
 import { VerificationService } from '../../services/verification.service';
 
 import { VerifyEmailComponent } from './verify-email.component';
+import { provideMockStore } from '@ngrx/store/testing';
+import { provideRouter } from '@angular/router';
 
 @Injectable()
 class MockVerificationService {
@@ -18,11 +20,13 @@ describe('VerifyEmailComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ VerifyEmailComponent ],
-      providers: [
+    imports: [VerifyEmailComponent],
+    providers: [
+        provideMockStore(),
+        provideRouter([]),
         { provide: VerificationService, useClass: MockVerificationService },
-      ]
-    })
+    ]
+})
     .compileComponents();
   });
 

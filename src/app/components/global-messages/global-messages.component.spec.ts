@@ -34,11 +34,11 @@ describe('GlobalMessagesComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ GlobalMessagesComponent ],
-      providers: [
+    imports: [GlobalMessagesComponent],
+    providers: [
         { provide: GlobalMessagesService, useClass: MockGlobalMessagesService }
-      ]
-    })
+    ]
+})
     .compileComponents();
   });
 

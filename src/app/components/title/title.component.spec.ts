@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Store } from '@ngrx/store';
 
 import { TitleComponent } from './title.component';
+import { provideRouter } from '@angular/router';
 
 const mockStore = {
   dispatch: jasmine.createSpy('dispatch'),
@@ -13,11 +14,12 @@ describe('TitleComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [TitleComponent],
-      providers: [
+    imports: [TitleComponent],
+    providers: [
+        provideRouter([]),
         { provide: Store, useValue: mockStore }
-      ]
-    })
+    ]
+})
       .compileComponents();
   });
 

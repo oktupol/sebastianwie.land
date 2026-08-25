@@ -21,12 +21,12 @@ describe('NavigationComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NavigationComponent ],
-      providers: [
+    imports: [NavigationComponent],
+    providers: [
         { provide: Store, useValue: storeMock },
         { provide: Router, useValue: routerMock },
-      ]
-    })
+    ]
+})
     .compileComponents();
   });
 

@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { filter, Subject, takeUntil } from 'rxjs';
 import * as navigationSelectors from '../../store/selectors/navigation.selectors';
@@ -10,7 +10,7 @@ import * as navigationActions from '../../store/actions/navigation.actions';
     templateUrl: './navigation.component.html',
     styleUrls: ['./navigation.component.scss'],
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [RouterLink]
 })
 export class NavigationComponent implements OnInit, OnDestroy {
 

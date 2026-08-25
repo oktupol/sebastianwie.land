@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { EMPTY, of } from 'rxjs';
 import { Message } from '../../interfaces/message';
 import { ContactFormService } from '../../services/contact-form.service';
+import { EncodingService } from '../../services/encoding.service';
 import { getContactFormInputs } from '../../store/selectors/contact-form.selectors';
 
 import { ContactComponent } from './contact.component';
@@ -37,21 +38,21 @@ class MockContactFormService {
 @Component({
     selector: 'nwie-content-page', template: '<p><ng-content></ng-content></p>',
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [ReactiveFormsModule]
 })
 class MockContentPageComponent {
 }
 @Component({
     selector: 'nwie-loader', template: 'loading...',
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [ReactiveFormsModule]
 })
 class MockLoaderComponent {
 }
 @Component({
     selector: 'nwie-attachment', template: '<div>attachment</div>',
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [ReactiveFormsModule]
 })
 class MockAttachmentComponent {
   @Input() public control!: UntypedFormControl;
@@ -67,14 +68,14 @@ describe('ContactComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ContactComponent, MockContentPageComponent, MockLoaderComponent, MockAttachmentComponent],
-      imports: [ReactiveFormsModule],
-      providers: [
+    imports: [ReactiveFormsModule, ContactComponent, MockContentPageComponent, MockLoaderComponent, MockAttachmentComponent],
+    providers: [
+        EncodingService,
         UntypedFormBuilder,
         { provide: Store, useClass: MockStore },
         { provide: ContactFormService, useClass: MockContactFormService },
-      ]
-    })
+    ]
+})
       .compileComponents();
   });
 

@@ -7,8 +7,7 @@ import { GlobalMessagesService } from 'src/app/shared/services/global-messages.s
     selector: 'nwie-global-messages',
     templateUrl: './global-messages.component.html',
     styleUrls: ['./global-messages.component.scss'],
-    changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    changeDetection: ChangeDetectionStrategy.Eager
 })
 export class GlobalMessagesComponent implements OnInit, OnDestroy {
 
