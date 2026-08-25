@@ -1,0 +1,17 @@
+@use "sass:list";
+@use "sass:string";
+
+@mixin font-face($font-family, $base-path, $weight, $file-name, $style: null, $types: woff woff2 ttf otf) {
+    $src: null;
+
+    @each $type in $types {
+        $src: list.append($src, url(string.quote($base-path + "/" + $type + "/" + $file-name + "." + $type)) format(string.quote($type)), comma);
+    }
+
+    @font-face {
+        font-family: string.quote($font-family);
+        font-style: $style;
+        font-weight: $weight;
+        src: $src;
+    }
+}

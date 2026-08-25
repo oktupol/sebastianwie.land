@@ -1,8 +1,9 @@
-@import '../../../../styles/variables.scss';
+@use "sass:map";
+@use "../../../../styles/variables" as *;
 
 .backdrop {
   position: fixed;
-  z-index: map-get($z-index, 'loader');
+  z-index: map.get($z-index, 'loader');
   left: 0;
   top: 0;
   right: 0;

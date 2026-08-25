@@ -1,10 +1,11 @@
-@import '../../../../../styles/variables.scss';
+@use "sass:color";
+@use "../../../../../styles/variables" as *;
 
 .file-upload-box {
   width: 100%;
   border: 3px dashed $color;
   box-sizing: border-box;
-  background-color: darken($color: $content-background-color, $amount: 20);
+  background-color: color.adjust($content-background-color, $lightness: -20%);
   text-align: center;
 
 
@@ -32,7 +33,7 @@
   }
 
   &.is-dragged-over {
-    background-color: darken($color: $content-background-color, $amount: 5);
+    background-color: color.adjust($content-background-color, $lightness: -5%);
   }
 
   .mock-input {
@@ -78,19 +79,19 @@
   border: 3px solid;
   box-sizing: border-box;
   &.success {
-    border-color: darken($color: $success-color, $amount: 25);
-    background-color: lighten($color: $success-color, $amount: 10);
+    border-color: color.adjust($success-color, $lightness: -25%);
+    background-color: color.adjust($success-color, $lightness: 10%);
   }
   &.info {
-    border-color: darken($color: $info-color, $amount: 25);
-    background-color: lighten($color: $info-color, $amount: 10);
+    border-color: color.adjust($info-color, $lightness: -25%);
+    background-color: color.adjust($info-color, $lightness: 10%);
   }
   &.warn {
-    border-color: darken($color: $warn-color, $amount: 25);
-    background-color: lighten($color: $warn-color, $amount: 10);
+    border-color: color.adjust($warn-color, $lightness: -25%);
+    background-color: color.adjust($warn-color, $lightness: 10%);
   }
   &.error {
-    border-color: darken($color: $error-color, $amount: 25);
-    background-color: lighten($color: $error-color, $amount: 10);
+    border-color: color.adjust($error-color, $lightness: -25%);
+    background-color: color.adjust($error-color, $lightness: 10%);
   }
 }

@@ -1,5 +1,3 @@
-@import "./variables.scss";
-@import "./fonts/index.scss";
-
-@import "./globalStyles/document.scss";
-@import "./globalStyles/forms.scss";
+@use "./fonts";
+@use "./globalStyles/document";
+@use "./globalStyles/forms";

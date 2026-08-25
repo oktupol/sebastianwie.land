@@ -1,11 +1,12 @@
-@import "../../../styles/variables.scss";
+@use "sass:map";
+@use "../../../styles/variables" as *;
 
 :host {
   position: fixed;
   bottom: 0;
   right: 0;
   left: 0;
-  z-index: map-get($z-index, 'global-message') + 50;
+  z-index: map.get($z-index, 'global-message') + 50;
 
   display: flex;
   justify-content: center;

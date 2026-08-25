@@ -1,3 +1,5 @@
+@use "./font-face" as *;
+
 $fira-code-base-path: '/assets/fonts/fira-code/distr';
 @include font-face('Fira Code', $fira-code-base-path, 300, 'FiraCode-Light', normal);
 @include font-face('Fira Code', $fira-code-base-path, 400, 'FiraCode-Regular', normal);
