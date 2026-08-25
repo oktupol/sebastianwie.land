@@ -1,7 +1,8 @@
-import { Component, OnDestroy, OnInit, ChangeDetectionStrategy, inject } from '@angular/core';
+import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { filter, Subject, takeUntil } from 'rxjs';
+import { filter, map } from 'rxjs';
 import * as navigationSelectors from '../../store/selectors/navigation.selectors';
 import * as navigationActions from '../../store/actions/navigation.actions';
 
@@ -9,16 +10,22 @@ import * as navigationActions from '../../store/actions/navigation.actions';
     selector: 'nwie-navigation',
     templateUrl: './navigation.component.html',
     styleUrls: ['./navigation.component.scss'],
-    changeDetection: ChangeDetectionStrategy.Eager,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [RouterLink]
 })
-export class NavigationComponent implements OnInit, OnDestroy {
+export class NavigationComponent {
   private router = inject(Router);
   private store = inject(Store);
 
+  public readonly isHomepage = toSignal(
+    this.router.events.pipe(
+      filter((event): event is NavigationEnd => event instanceof NavigationEnd),
+      map(event => event.url === '/'),
+    ),
+    { initialValue: true },
+  );
 
-  public isHomepage = true;
-  public navOpen = false;
+  public readonly navOpen = this.store.selectSignal(navigationSelectors.isOpen);
 
   public readonly links = [
     { routerLink: '/', label: 'home' },
@@ -27,30 +34,6 @@ export class NavigationComponent implements OnInit, OnDestroy {
     { routerLink: '/sites/pgp', label: 'pgp' },
     { routerLink: '/contact/verify', label: 'verify e-mail signature' },
   ]
-
-  private destroy$ = new Subject<void>();
-
-  ngOnInit(): void {
-    this.router.events
-      .pipe(
-        filter((event): event is NavigationEnd => event instanceof NavigationEnd),
-        takeUntil(this.destroy$),
-      )
-      .subscribe((event: NavigationEnd) => {
-        this.isHomepage = event.url === '/';
-      });
-
-    this.store.select(navigationSelectors.isOpen)
-      .pipe(
-        takeUntil(this.destroy$),
-      )
-      .subscribe(o => this.navOpen = o);
-  }
-
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.unsubscribe();
-  }
 
   public close(): void {
     this.store.dispatch(navigationActions.close());

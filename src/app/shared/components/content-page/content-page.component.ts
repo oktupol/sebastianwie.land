@@ -1,32 +1,15 @@
-import { Component, OnDestroy, OnInit, ChangeDetectionStrategy, inject } from '@angular/core';
+import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Subject, takeUntil } from 'rxjs';
 import * as navigationSelectors from '../../../store/selectors/navigation.selectors';
 
 @Component({
     selector: 'nwie-content-page',
     templateUrl: './content-page.component.html',
     styleUrls: ['./content-page.component.scss'],
-    changeDetection: ChangeDetectionStrategy.Eager
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ContentPageComponent implements OnInit, OnDestroy {
+export class ContentPageComponent {
   private store = inject(Store);
 
-
-  public navOpen = false;
-
-  private destroy$ = new Subject<void>();
-
-  ngOnInit(): void {
-    this.store.select(navigationSelectors.isOpen)
-      .pipe(
-        takeUntil(this.destroy$)
-      )
-      .subscribe(o => this.navOpen = o);
-  }
-
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.unsubscribe();
-  }
+  public readonly navOpen = this.store.selectSignal(navigationSelectors.isOpen);
 }

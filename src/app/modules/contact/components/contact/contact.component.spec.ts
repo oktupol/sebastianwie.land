@@ -1,32 +1,13 @@
 import { Component, DebugElement, ChangeDetectionStrategy, input, output, Service } from '@angular/core';
 import { ComponentFixture, TestBed, } from '@angular/core/testing';
 import { UntypedFormArray, UntypedFormBuilder, UntypedFormControl, ReactiveFormsModule } from '@angular/forms';
-import { Store } from '@ngrx/store';
-import { EMPTY, of } from 'rxjs';
+import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { Message } from '../../interfaces/message';
 import { ContactFormService } from '../../services/contact-form.service';
 import { EncodingService } from '../../services/encoding.service';
-import { getContactFormInputs } from '../../store/selectors/contact-form.selectors';
+import { getContactFormInputs, isSending } from '../../store/selectors/contact-form.selectors';
 
 import { ContactComponent } from './contact.component';
-
-@Service({ autoProvided: false })
-class MockStore {
-  select(selector: any) {
-    if (selector === getContactFormInputs) {
-      return of({
-        subject: 'Subject',
-        fromName: 'Someone',
-        fromEmail: 'name@email.com',
-        message: 'Message'
-      } as Message);
-    }
-
-    return EMPTY;
-  }
-  dispatch() {
-  }
-}
 
 @Service({ autoProvided: false })
 class MockContactFormService {
@@ -37,21 +18,21 @@ class MockContactFormService {
 
 @Component({
     selector: 'nwie-content-page', template: '<p><ng-content /></p>',
-    changeDetection: ChangeDetectionStrategy.Eager,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [ReactiveFormsModule]
 })
 class MockContentPageComponent {
 }
 @Component({
     selector: 'nwie-loader', template: 'loading...',
-    changeDetection: ChangeDetectionStrategy.Eager,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [ReactiveFormsModule]
 })
 class MockLoaderComponent {
 }
 @Component({
     selector: 'nwie-attachment', template: '<div>attachment</div>',
-    changeDetection: ChangeDetectionStrategy.Eager,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [ReactiveFormsModule]
 })
 class MockAttachmentComponent {
@@ -64,7 +45,7 @@ describe('ContactComponent', () => {
   let fixture: ComponentFixture<ContactComponent>;
   let el: DebugElement;
   let contactFormService: ContactFormService;
-  let store: Store;
+  let store: MockStore;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -72,7 +53,18 @@ describe('ContactComponent', () => {
     providers: [
         EncodingService,
         UntypedFormBuilder,
-        { provide: Store, useClass: MockStore },
+        provideMockStore({
+            initialState: { navigation: { open: false } },
+            selectors: [
+                { selector: getContactFormInputs, value: {
+                    subject: 'Subject',
+                    fromName: 'Someone',
+                    fromEmail: 'name@email.com',
+                    message: 'Message',
+                } },
+                { selector: isSending, value: false },
+            ],
+        }),
         { provide: ContactFormService, useClass: MockContactFormService },
     ]
 })
@@ -85,7 +77,7 @@ describe('ContactComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
 
-    store = TestBed.inject(Store);
+    store = TestBed.inject(MockStore);
     contactFormService = TestBed.inject(ContactFormService);
   });
 

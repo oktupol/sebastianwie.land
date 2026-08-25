@@ -5,7 +5,7 @@ import { ContentPageComponent } from '../../../../shared/components/content-page
     selector: 'nwie-imprint',
     templateUrl: './imprint.component.html',
     styleUrls: ['./imprint.component.scss'],
-    changeDetection: ChangeDetectionStrategy.Eager,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [ContentPageComponent]
 })
 export class ImprintComponent implements OnInit {

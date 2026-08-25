@@ -1,6 +1,6 @@
-@if (globalMessages.length) {
+@if (globalMessages().length) {
   <div class="gm-container">
-    @for (message of globalMessages; track message; let i = $index) {
+    @for (message of globalMessages(); track message; let i = $index) {
       <div [class]="message.type">
         <div>
           {{ message.message }}

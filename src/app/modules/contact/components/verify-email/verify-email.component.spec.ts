@@ -22,7 +22,7 @@ describe('VerifyEmailComponent', () => {
     await TestBed.configureTestingModule({
     imports: [VerifyEmailComponent],
     providers: [
-        provideMockStore(),
+        provideMockStore({ initialState: { navigation: { open: false } } }),
         provideRouter([]),
         { provide: VerificationService, useClass: MockVerificationService },
     ]

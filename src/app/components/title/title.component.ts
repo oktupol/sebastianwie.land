@@ -9,7 +9,7 @@ import { RouterLink } from '@angular/router';
     selector: 'nwie-title',
     templateUrl: './title.component.html',
     styleUrls: ['./title.component.scss'],
-    changeDetection: ChangeDetectionStrategy.Eager,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [RouterLink]
 })
 export class TitleComponent implements OnInit {

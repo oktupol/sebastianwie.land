@@ -1,5 +1,5 @@
-import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ChangeDetectionStrategy, inject, viewChild } from '@angular/core';
-import { Subject, takeUntil } from 'rxjs';
+import { AfterViewInit, Component, DestroyRef, ElementRef, ChangeDetectionStrategy, inject, signal, viewChild } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { VerificationResponse } from 'src/app/util/types';
 import { VerificationService } from '../../services/verification.service';
 import { ContentPageComponent } from '../../../../shared/components/content-page/content-page.component';
@@ -10,30 +10,18 @@ import { ReactiveFormsModule } from '@angular/forms';
     selector: 'nwie-verify-email',
     templateUrl: './verify-email.component.html',
     styleUrls: ['./verify-email.component.scss'],
-    changeDetection: ChangeDetectionStrategy.Eager,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [ContentPageComponent, RouterLink, ReactiveFormsModule]
 })
-export class VerifyEmailComponent implements OnInit, AfterViewInit, OnDestroy {
+export class VerifyEmailComponent implements AfterViewInit {
   private verificationService = inject(VerificationService);
+  private destroyRef = inject(DestroyRef);
 
-
-  public emailFile?: File;
-  public emailFileName: string = '';
-  public isDraggedOver: boolean = false;
-
-  public verificationResponse?: VerificationResponse;
-
-  private destroy$ = new Subject<void>();
+  public readonly emailFileName = signal('');
+  public readonly isDraggedOver = signal(false);
+  public readonly verificationResponse = signal<VerificationResponse | undefined>(undefined);
 
   private readonly fileUploadBox = viewChild.required<ElementRef>('fileUploadBox');
-
-  ngOnInit(): void {
-  }
-
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.unsubscribe();
-  }
 
   ngAfterViewInit(): void {
     const box = this.fileUploadBox().nativeElement as HTMLFormElement;
@@ -49,16 +37,14 @@ export class VerifyEmailComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   selectFile(file: File) {
-    this.emailFile = file;
-    this.emailFileName = file.name;
-
+    this.emailFileName.set(file.name);
 
     this.verificationService.verify(file)
       .pipe(
-        takeUntil(this.destroy$)
+        takeUntilDestroyed(this.destroyRef)
       )
       .subscribe(result => {
-        this.verificationResponse = result;
+        this.verificationResponse.set(result);
       });
   }
 

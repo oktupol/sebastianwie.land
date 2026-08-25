@@ -1,7 +1,8 @@
-import { Component, OnDestroy, OnInit, Predicate, ChangeDetectionStrategy, inject } from '@angular/core';
+import { Component, DestroyRef, OnInit, Predicate, ChangeDetectionStrategy, inject, signal } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AbstractControl, UntypedFormArray, UntypedFormBuilder, UntypedFormGroup, ValidatorFn, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { debounceTime, Subject, take, takeUntil } from 'rxjs';
+import { debounceTime, take } from 'rxjs';
 import { Message } from '../../interfaces/message';
 import { ContactFormService } from '../../services/contact-form.service';
 import { storeInputs } from '../../store/actions/contact-form.actions';
@@ -15,35 +16,34 @@ import { LoaderComponent } from '../../../../shared/components/loader/loader.com
     selector: 'nwie-contact',
     templateUrl: './contact.component.html',
     styleUrls: ['./contact.component.scss'],
-    changeDetection: ChangeDetectionStrategy.Eager,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [ContentPageComponent, ReactiveFormsModule, HelpComponent, AttachmentComponent, LoaderComponent]
 })
-export class ContactComponent implements OnInit, OnDestroy {
+export class ContactComponent implements OnInit {
   private fb = inject(UntypedFormBuilder);
   private store = inject(Store);
   private contactFormService = inject(ContactFormService);
+  private destroyRef = inject(DestroyRef);
 
   public contactForm: UntypedFormGroup = this.fb.group({
     subject: ['', Validators.required],
     fromName: ['', Validators.required],
     fromEmail: ['', [Validators.email, Validators.required]],
     requestEncryptedReply: [false, []],
-    encryptionPassphrase: ['', [this.requiredIf(() => this.contactForm?.get('requestEncryptedReply')?.value && !this.hasSuitablePublicKey), Validators.minLength(8)]],
+    encryptionPassphrase: ['', [this.requiredIf(() => this.contactForm?.get('requestEncryptedReply')?.value && !this.hasSuitablePublicKey()), Validators.minLength(8)]],
     message: ['', Validators.required],
     attachments: this.createAttachmentsArray(),
   });
 
   public attachmentFields!: UntypedFormArray;
 
-  public sending = false;
+  public readonly sending = this.store.selectSignal(isSending);
 
   public get requestEncryptedReply(): boolean {
     return this.contactForm.get('requestEncryptedReply')?.value ?? false;
   }
 
-  public hasSuitablePublicKey = false;
-
-  private destroy$ = new Subject<void>();
+  public readonly hasSuitablePublicKey = signal(false);
 
   ngOnInit(): void {
     this.listenToChanges();
@@ -56,14 +56,6 @@ export class ContactComponent implements OnInit, OnDestroy {
         this.contactForm.setValue({ ...values, attachments: [null] });
       });
 
-    this.store.select(isSending).pipe(
-      takeUntil(this.destroy$)
-    ).subscribe(s => this.sending = s);
-  }
-
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.unsubscribe();
   }
 
   private createAttachmentsArray(): UntypedFormArray {
@@ -85,12 +77,12 @@ export class ContactComponent implements OnInit, OnDestroy {
     this.contactForm.valueChanges
       .pipe(
         debounceTime(300),
-        takeUntil(this.destroy$),
+        takeUntilDestroyed(this.destroyRef),
       )
       .subscribe((val: Message) => {
         if (val.fromEmail && val.attachments) {
           this.contactFormService.checkForPublicKey(val.fromEmail, val.attachments)
-            .subscribe(value => this.hasSuitablePublicKey = value);
+            .subscribe(value => this.hasSuitablePublicKey.set(value));
         }
 
         // emitEvent: false — this runs inside a valueChanges subscription, and
@@ -114,7 +106,7 @@ export class ContactComponent implements OnInit, OnDestroy {
 
   public onSubmit(): void {
     this.contactFormService.send(this.contactForm.value, {
-      hasSuitablePublicKey: this.hasSuitablePublicKey
+      hasSuitablePublicKey: this.hasSuitablePublicKey()
     });
   }
 

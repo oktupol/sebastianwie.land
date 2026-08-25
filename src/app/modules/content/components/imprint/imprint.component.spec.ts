@@ -6,7 +6,7 @@ import { provideMockStore } from '@ngrx/store/testing';
 
 @Component({
     selector: 'nwie-content-page', template: '<p><ng-content /></p>',
-    changeDetection: ChangeDetectionStrategy.Eager
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 class MockContentPageComponent {
 }
@@ -17,7 +17,7 @@ describe('ImprintComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
     imports: [ImprintComponent, MockContentPageComponent],
-    providers: [provideMockStore()]
+    providers: [provideMockStore({ initialState: { navigation: { open: false } } })]
 })
     .compileComponents();
   });

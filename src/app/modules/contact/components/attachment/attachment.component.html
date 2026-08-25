@@ -1,13 +1,11 @@
 <input type="file" [id]="inputId" (change)="onChange($event)">
 
-@if (!control().value) {
+@if (!file()) {
   <label [for]="inputId">+ attachment</label>
 }
 
-@if (control().value) {
-  <div class="fileinfo">{{ file.name }}</div>
+@if (file(); as selected) {
+  <div class="fileinfo">{{ selected.name }}</div>
   <div class="spacer"></div>
-  @if (control().value) {
-    <button type="button" (click)="onDelete()">&times; delete</button>
-  }
+  <button type="button" (click)="onDelete()">&times; delete</button>
 }

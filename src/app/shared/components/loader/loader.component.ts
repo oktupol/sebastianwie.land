@@ -5,7 +5,7 @@ import { from, interval, map, mergeMap, Subject, takeUntil, timer, zipWith } fro
     selector: 'nwie-loader',
     templateUrl: './loader.component.html',
     styleUrls: ['./loader.component.scss'],
-    changeDetection: ChangeDetectionStrategy.Eager
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoaderComponent implements OnInit {
 

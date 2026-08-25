@@ -1,31 +1,17 @@
-import { Component, OnDestroy, OnInit, ChangeDetectionStrategy, inject } from '@angular/core';
-import { Subject, takeUntil } from 'rxjs';
-import { GlobalMessage } from 'src/app/shared/interfaces/global-message';
+import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { GlobalMessagesService } from 'src/app/shared/services/global-messages.service';
 
 @Component({
     selector: 'nwie-global-messages',
     templateUrl: './global-messages.component.html',
     styleUrls: ['./global-messages.component.scss'],
-    changeDetection: ChangeDetectionStrategy.Eager
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class GlobalMessagesComponent implements OnInit, OnDestroy {
+export class GlobalMessagesComponent {
   private globalMessagesService = inject(GlobalMessagesService);
 
-
-  public globalMessages: GlobalMessage[] = [];
-  private destroy$ = new Subject<void>();
-
-  ngOnInit(): void {
-    this.globalMessagesService.getAll().pipe(
-      takeUntil(this.destroy$)
-    ).subscribe(gm => this.globalMessages = gm);
-  }
-
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.unsubscribe();
-  }
+  public readonly globalMessages = toSignal(this.globalMessagesService.getAll(), { initialValue: [] });
 
   remove(index: number) {
     this.globalMessagesService.remove(index);

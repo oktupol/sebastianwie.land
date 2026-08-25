@@ -30,12 +30,12 @@
   </ul>
 
   <form class="file-upload-box"
-    (dragover)="isDraggedOver = true"
-    (dragenter)="isDraggedOver = true"
-    (dragleave)="isDraggedOver = false"
-    (dragend)="isDraggedOver = false"
-    (drop)="isDraggedOver = false; onDrop($event)"
-    [class.is-dragged-over]="isDraggedOver"
+    (dragover)="isDraggedOver.set(true)"
+    (dragenter)="isDraggedOver.set(true)"
+    (dragleave)="isDraggedOver.set(false)"
+    (dragend)="isDraggedOver.set(false)"
+    (drop)="isDraggedOver.set(false); onDrop($event)"
+    [class.is-dragged-over]="isDraggedOver()"
     #fileUploadBox>
 
     <input type="file" id="email-file" accept="message/rfc822" (change)="onInputChange($event)"/>
@@ -43,14 +43,14 @@
     <label for="email-file">
       <p>Open an e-mail file ...</p>
       <div class="mock-input">
-        <div class="text-field">{{ emailFileName }}</div>
+        <div class="text-field">{{ emailFileName() }}</div>
         <div class="button">Open</div>
       </div>
       <p>... or drop it here.</p>
     </label>
   </form>
 
-  @if (verificationResponse === 'not-an-eml-file') {
+  @if (verificationResponse() === 'not-an-eml-file') {
     <div class="verification-response warn">
       <h3>Not an .eml File</h3>
       <p>
@@ -59,7 +59,7 @@
     </div>
   }
 
-  @if (verificationResponse === 'not-from-me') {
+  @if (verificationResponse() === 'not-from-me') {
     <div class="verification-response info">
       <h3>Not from me</h3>
       <p>
@@ -68,7 +68,7 @@
     </div>
   }
 
-  @if (verificationResponse === 'not-a-multipart-file' || verificationResponse === 'no-signature-present') {
+  @if (verificationResponse() === 'not-a-multipart-file' || verificationResponse() === 'no-signature-present') {
     <div class="verification-response error">
       <h3>Could not verify legitimacy!</h3>
       <p>
@@ -96,7 +96,7 @@
 </div>
 }
 
-@if (verificationResponse === 'encrypted') {
+@if (verificationResponse() === 'encrypted') {
   <div class="verification-response info">
     <h3>Encrypted message</h3>
     <p>
@@ -106,7 +106,7 @@
   </div>
 }
 
-@if (verificationResponse === 'bad-signature') {
+@if (verificationResponse() === 'bad-signature') {
   <div class="verification-response error">
     <h3>Could not verify legitimacy!</h3>
     <p>
@@ -131,7 +131,7 @@
 </div>
 }
 
-@if (verificationResponse === 'good-signature') {
+@if (verificationResponse() === 'good-signature') {
   <div class="verification-response success">
     <h3>Legitimacy verified.</h3>
     <p>
@@ -154,7 +154,7 @@
   </div>
 }
 
-@if (verificationResponse === 'protonmail') {
+@if (verificationResponse() === 'protonmail') {
   <div class="verification-response info">
     <h3>Legitimacy verified by Protonmail.</h3>
     <p>

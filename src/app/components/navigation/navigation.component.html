@@ -1,12 +1,12 @@
 <div class="navigation-wrapper">
   <div class="button-row">
-    <button class="menu-link" [class.homepage]="isHomepage" [class.open]="navOpen" (click)="toggle()">{{ navOpen ? 'close' : 'nav' }}</button>
-    @if (!isHomepage) {
+    <button class="menu-link" [class.homepage]="isHomepage()" [class.open]="navOpen()" (click)="toggle()">{{ navOpen() ? 'close' : 'nav' }}</button>
+    @if (!isHomepage()) {
       <a class="menu-link" routerLink="/">home</a>
     }
   </div>
 
-  @if (navOpen) {
+  @if (navOpen()) {
     <nav>
       <div class="navigation-backdrop" (click)="close()"></div>
       <ul>

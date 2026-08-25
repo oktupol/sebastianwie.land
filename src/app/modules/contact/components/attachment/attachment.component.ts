@@ -1,12 +1,14 @@
 import { Component, ChangeDetectionStrategy, inject, input, output } from '@angular/core';
+import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { AbstractControl } from '@angular/forms';
+import { startWith, switchMap } from 'rxjs';
 import { EncodingService } from '../../services/encoding.service';
 
 @Component({
     selector: 'nwie-attachment',
     templateUrl: './attachment.component.html',
     styleUrls: ['./attachment.component.scss'],
-    changeDetection: ChangeDetectionStrategy.Eager
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AttachmentComponent {
   private encodingService = inject(EncodingService);
@@ -18,6 +20,17 @@ export class AttachmentComponent {
   public readonly delete = output<void>();
 
   public inputId = this.generateRandomId();
+
+  /**
+   * A FormControl's value is not reactive on its own, so it is tracked through
+   * valueChanges; otherwise the view would not update under OnPush.
+   */
+  public readonly file = toSignal<File | null>(
+    toObservable(this.control).pipe(
+      switchMap(control => control.valueChanges.pipe(startWith(control.value))),
+    ),
+    { initialValue: null },
+  );
 
   private generateRandomId(): string {
     const randomBytes = new Uint8Array(5);
@@ -31,10 +44,6 @@ export class AttachmentComponent {
       this.addAttachment.emit(file);
       this.control().setValue(file);
     }
-  }
-
-  public get file(): File {
-    return this.control().value;
   }
 
   public onDelete(): void {

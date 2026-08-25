@@ -16,14 +16,14 @@ const activatedRouteMock = {
 
 @Component({
     selector: 'markdown', template: 'markdown mock',
-    changeDetection: ChangeDetectionStrategy.Eager
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 class MockMarkdownComponent {
   public readonly src = input.required<string>();
 }
 @Component({
     selector: 'nwie-content-page', template: '<p><ng-content /></p>',
-    changeDetection: ChangeDetectionStrategy.Eager
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 class MockContentPageComponent {
 }
@@ -38,7 +38,7 @@ describe('MarkdownComponent', () => {
         provideMarkdown({ loader: HttpClient }),
         provideHttpClient(),
         provideHttpClientTesting(),
-        provideMockStore(),{ provide: ActivatedRoute, useValue: activatedRouteMock }]
+        provideMockStore({ initialState: { navigation: { open: false } } }),{ provide: ActivatedRoute, useValue: activatedRouteMock }]
 })
     .compileComponents();
   });
@@ -59,7 +59,7 @@ describe('MarkdownComponent', () => {
         markdownFile: '/path/to/some-file.md'
       });
 
-      expect(component.markdownFile).toEqual('/path/to/some-file.md');
+      expect(component.markdownFile()).toEqual('/path/to/some-file.md');
     });
   })
 });

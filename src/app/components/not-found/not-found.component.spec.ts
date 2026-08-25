@@ -7,7 +7,7 @@ import { provideRouter } from '@angular/router';
 
 @Component({
     selector: 'nwie-content-page', template: '<p><ng-content /></p>',
-    changeDetection: ChangeDetectionStrategy.Eager
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 class MockContentPageComponent {
 }
@@ -19,7 +19,7 @@ describe('NotFoundComponent', () => {
     await TestBed.configureTestingModule({
     imports: [NotFoundComponent, MockContentPageComponent],
     providers: [
-        provideRouter([]),provideMockStore()]
+        provideRouter([]),provideMockStore({ initialState: { navigation: { open: false } } })]
 })
     .compileComponents();
   });

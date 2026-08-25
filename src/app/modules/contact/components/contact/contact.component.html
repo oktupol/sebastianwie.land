@@ -25,7 +25,7 @@
       </div>
     </div>
 
-    @if (!hasSuitablePublicKey) {
+    @if (!hasSuitablePublicKey()) {
       <div class="input-row">
         <div class="checkbox-group">
           <input type="checkbox" id="requestEncryptedReply" formControlName="requestEncryptedReply"/>
@@ -65,7 +65,7 @@
       </div>
     }
 
-    @if (hasSuitablePublicKey) {
+    @if (hasSuitablePublicKey()) {
       <div class="message-row">
         <div>My reply will be encrypted using your attached public key.</div>
       </div>
@@ -93,6 +93,6 @@
   </form>
 </nwie-content-page>
 
-@if (sending) {
+@if (sending()) {
   <nwie-loader>sending</nwie-loader>
 }

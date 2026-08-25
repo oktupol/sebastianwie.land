@@ -12,7 +12,7 @@ describe('AppComponent', () => {
       imports: [AppComponent],
       providers: [
         provideRouter([]),
-        provideMockStore(),
+        provideMockStore({ initialState: { navigation: { open: false } } }),
         GlobalMessagesService,
       ],
     }).compileComponents();

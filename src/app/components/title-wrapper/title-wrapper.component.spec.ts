@@ -1,36 +1,21 @@
-import { Component, ChangeDetectionStrategy, input } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Store } from '@ngrx/store';
-import { of } from 'rxjs';
+import { provideRouter } from '@angular/router';
+import { provideMockStore } from '@ngrx/store/testing';
 
 import { TitleWrapperComponent } from './title-wrapper.component';
-import { provideRouter } from '@angular/router';
 
-const mockStore = {
-  select() {
-    return of('up');
-  }
-}
-
-@Component({
-    selector: 'nwie-title', template: 'title component',
-    changeDetection: ChangeDetectionStrategy.Eager
-})
-class MockTitleComponent {
-  public readonly position = input.required<string>();
-}
 describe('TitleWrapperComponent', () => {
   let component: TitleWrapperComponent;
   let fixture: ComponentFixture<TitleWrapperComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    imports: [TitleWrapperComponent, MockTitleComponent],
-    providers: [
+      imports: [TitleWrapperComponent],
+      providers: [
         provideRouter([]),
-        { provide: Store, useValue: mockStore }
-    ]
-})
+        provideMockStore({ initialState: { title: { position: 'up' } } }),
+      ],
+    })
     .compileComponents();
   });
 
@@ -46,7 +31,7 @@ describe('TitleWrapperComponent', () => {
 
   describe('position', () => {
     it('should be set', () => {
-      expect(component.position).toEqual('up');
+      expect(component.position()).toEqual('up');
     });
   });
 });

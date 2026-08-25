@@ -8,7 +8,7 @@ import { GlobalMessagesComponent } from './components/global-messages/global-mes
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss'],
-    changeDetection: ChangeDetectionStrategy.Eager,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [TitleWrapperComponent, NavigationComponent, RouterOutlet, GlobalMessagesComponent, RouterLink]
 })
 export class AppComponent {
