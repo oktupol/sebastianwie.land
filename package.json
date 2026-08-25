@@ -25,7 +25,6 @@
     "@ngrx/operators": "^22.0.0",
     "@ngrx/store": "^22.0.0",
     "@ngrx/store-devtools": "^22.0.0",
-    "express": "^5.1.0",
     "hammerjs": "^2.0.8",
     "katex": "^0.16.47",
     "marked": "^18.0.11",
