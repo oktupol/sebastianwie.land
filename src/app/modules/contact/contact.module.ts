@@ -10,7 +10,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { EffectsModule } from '@ngrx/effects';
 import { OpenpgpEffects } from './store/effects/openpgp.effects';
 import { OpenpgpAdapter } from './adapters/openpgp.adapter';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { OpenpgpService } from './services/openpgp.service';
 import { EncodingService } from './services/encoding.service';
 import { MultipartDocumentService } from './services/multipart-document.service';
@@ -24,32 +24,26 @@ import { FileService } from './services/file.service';
 import { VerificationService } from './services/verification.service';
 import { HelpModule } from 'src/app/shared/components/help/help.module';
 
-@NgModule({
-  declarations: [
-    ContactComponent,
-    AttachmentComponent,
-    VerifyEmailComponent
-  ],
-  imports: [
-    CommonModule,
-    ContactRoutingModule,
-    ContentPageModule,
-    StoreModule.forFeature(FEATURE_MODULE, reducers),
-    EffectsModule.forFeature([ OpenpgpEffects, ContactFormEffects ]),
-    ReactiveFormsModule,
-    HttpClientModule,
-    LoaderModule,
-    HelpModule,
-  ],
-  providers: [
-    OpenpgpAdapter,
-    MailAdapter,
-    OpenpgpService,
-    EncodingService,
-    MultipartDocumentService,
-    ContactFormService,
-    FileService,
-    VerificationService,
-  ]
-})
+@NgModule({ declarations: [
+        ContactComponent,
+        AttachmentComponent,
+        VerifyEmailComponent
+    ], imports: [CommonModule,
+        ContactRoutingModule,
+        ContentPageModule,
+        StoreModule.forFeature(FEATURE_MODULE, reducers),
+        EffectsModule.forFeature([OpenpgpEffects, ContactFormEffects]),
+        ReactiveFormsModule,
+        LoaderModule,
+        HelpModule], providers: [
+        OpenpgpAdapter,
+        MailAdapter,
+        OpenpgpService,
+        EncodingService,
+        MultipartDocumentService,
+        ContactFormService,
+        FileService,
+        VerificationService,
+        provideHttpClient(withInterceptorsFromDi()),
+    ] })
 export class ContactModule { }
